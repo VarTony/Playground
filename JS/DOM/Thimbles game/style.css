@@ -1,0 +1,51 @@
+
+
+body {
+	background: url(./img.jpg);
+}
+
+
+#hf {
+	font-size: 85px;
+	color: red;
+}
+
+
+#ht {
+	font-size: 85px;
+	color: green;
+
+}
+
+
+#block1 {
+	position: absolute;
+	left: 1069px;
+	top: 473px;
+}
+
+
+#block2 {
+	position: absolute;
+	left: 501px;
+	top: 473px;
+}
+
+#block3 {
+	position: absolute;
+	left: 802px;
+	top: 243px;
+}
+
+
+.blocks {
+	border-color: black;
+	border: 5px;
+	border-radius: 55%;
+	padding: 5px;
+	margin: 5px;
+	height: 200px;
+	width: 200px;
+	display: block;
+	background-color: orange;
+} 
