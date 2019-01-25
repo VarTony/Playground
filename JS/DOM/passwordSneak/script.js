@@ -19,8 +19,11 @@ submit.onclick = () => {
 	email = emailField.value;
 	console.log(`email : ${email}`);
 	console.log(`password : ${password}`);
-	emailField.value = '';
-	passwordField.value = '';
+	setTimeout(() =>{ 
+		emailField.value = '';
+		passwordField.value = '';
+	},0)
+	
 }
 
 
