@@ -1,7 +1,7 @@
 const fs = require('fs');
 // const Promise = require('promise');
 
-function reverse (pathFile, callback) {
+function reverse (pathFile, callback = console.log) {
 	fs.readFile(pathFile, 'utf-8',  (err, data) => {
 
 		if(err){

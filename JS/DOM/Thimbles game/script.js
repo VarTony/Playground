@@ -38,7 +38,6 @@ function checkChose () {
   ht.id = 'ht';
   hf.id = 'hf';
 
-
   (rand + '') === id ? !this.block.children[0] && this.block.append(ht): 
       !this.block.children[0] && this.block.append(hf);
 }
