@@ -22,6 +22,7 @@ const num5s = {
               "5-5": num55
             };
 
+//..............................Обработка значений массива для визуализации ->
 
 const ICanSeeForever = (list) => {  
  result = list.reduce((acc, value, i = 0) => {
@@ -52,10 +53,10 @@ console.log("5-3","_______________", "\n", ICanSeeForever(num53), "\n");
 console.log("5-4","_______________", "\n", ICanSeeForever(num54), "\n");
 console.log("5-5","_______________", "\n", ICanSeeForever(num55), "\n", "_______________", "\n");
 
+//......................................//
 
 
-
-
+//......................Подготавительные данные ->
 
 const nums = [num0, num1, num2, num3, num4, num5, num6, num7, num8, num9];
 
@@ -73,7 +74,7 @@ const weights =  num0.reduce((acc, value, i = 0) => {
   return acc;
   }, []);
 
-console.log(weights); 
+// console.log(weights);
 
 
 //Пороговая сумма;
@@ -86,13 +87,11 @@ const proceed = (num, net = 0) => {         //Больше ли значение
     acc += value * weights[i]; 
     i++;
     return acc;
-  } , 0);
+  }, 0);
 
   return bias <= net;
 
 }
-
-// proceed(num53);
 
 
 const decrease = (num, i = 0) => {
@@ -107,15 +106,14 @@ const decrease = (num, i = 0) => {
 const increase = (num, i = 0) =>{
 
   while(i <= num.length - 1) {
-
-      if(num[i] === 1) weights[i] += 1;
+      if(num[i] === 1) weights[i] += 1; //     num[1,1,1,1,0,1,1,1,1,1...][i] === 1 ? weights[0,0,0,0,0,0,0...][i] += 1 : weights[0,0,0,0,0,0,0...][i];
       i++;
   }
      return weights;
 }
 
 
-const train = (num, n, i = 0) => {
+const train = (num, i = 0) => {
 
   while(i <= 500){ 
 
@@ -125,7 +123,7 @@ const train = (num, n, i = 0) => {
   }
 
     else {
-      if(!proceed(num[n])) increase(num[n]);
+      if(!proceed(num[option])) increase(num[option]);
   }
     i++;
   }
@@ -138,8 +136,8 @@ const train = (num, n, i = 0) => {
 
 train(nums);
 
-console.log(weights); 
-console.log(ICanSeeForever(weights));
+// console.log(weights); 
+console.log(`\n  Эталон пяти для сети : \n  ${ICanSeeForever(weights)}`);
 
 
 const choice = +prompt("Введите число от 0 до 9 :", "");
