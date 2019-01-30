@@ -2,9 +2,6 @@ const path = require('path');
 const fs = require('promise-fs');
 const dirpath = process.argv[2];
 
-
-
-
 const ls = (dirpath = __dirname, NameOfFile = []) => 
   fs.readdir(dirpath)
   .then(filenames => filenames
@@ -26,3 +23,5 @@ const ls = (dirpath = __dirname, NameOfFile = []) =>
 
 
 ls(dirpath);
+
+module.exports = ls;
