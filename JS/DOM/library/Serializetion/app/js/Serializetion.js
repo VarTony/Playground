@@ -38,15 +38,14 @@ class Serializetion {
 		}
 
 		methodForSelect(element) {
-			  if(element.type === 'select-one')
-                	this.q.push(`${element.name}=${encodeURIComponent(element.value)}`);
-              if(element.type === 'select-multiple') { 
-                        for (let j = element.options.length - 1; j >= 0; j--) {
-                            if (element.options[j].selected) 
-                                this.q.push(`${element.name}=${encodeURIComponent(element.options[j].value)}`);
-
-                		}	
-					}
+			if(element.type === 'select-one')
+                this.q.push(`${element.name}=${encodeURIComponent(element.value)}`);
+  			if(element.type === 'select-multiple') { 
+				for (let j = element.options.length - 1; j >= 0; j--) {
+					if (element.options[j].selected) 
+						this.q.push(`${element.name}=${encodeURIComponent(element.options[j].value)}`);
+                }	
+			}
 		}	
 
 }
