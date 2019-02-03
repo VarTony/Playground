@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs'); 
 
 
 function UserException(message) {
@@ -8,7 +8,7 @@ function UserException(message) {
 
 const buffers = new Array();
 const readerStream = fs.createReadStream('./file', 'utf-8'); //По сути операция асинхронна, но ...
-const writeStream = fs.createWriteStream('./copyFile');
+const writeStream = fs.createWriteStream('./copyFile'); // Вызывает функцию метод из класса fs на  c++.
 
 
 readerStream.on('data', (chunk) => { 
