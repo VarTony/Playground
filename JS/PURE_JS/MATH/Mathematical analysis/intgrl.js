@@ -20,7 +20,7 @@ intgrl(5, 7);
 //   while(i <= lim) {
 //     i++;
 //     dxxx += dx;
-//     output +=  dx * def(xs + dxxx);
+//     output +=  dx * diff(xs + dxxx);
 //   }
 //   return output;
 // }
