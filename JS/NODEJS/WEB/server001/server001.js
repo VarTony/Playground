@@ -13,6 +13,7 @@ fs.readFile(dirpath, 'utf-8')
 
 
 const server = http.createServer((req, res) => {
+	console.log(req.url);
 	res.write(filedata);
 	res.end('Message complete');
 

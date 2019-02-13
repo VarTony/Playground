@@ -1,0 +1,15 @@
+{
+  "name": "server002",
+  "version": "0.0.1",
+  "description": "__",
+  "main": "server002.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "VarTony",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}

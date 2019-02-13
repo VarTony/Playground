@@ -1,0 +1,21 @@
+
+
+
+
+body {
+	background-color: #a07b68;
+}
+
+p {
+	font-size: 18px;
+	font-family: serif;
+}
+
+#usual{
+	background-color: #e8e3cf;
+	display: block;
+}
+
+#unusual {
+	display: none;
+}

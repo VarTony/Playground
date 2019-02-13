@@ -1,0 +1,70 @@
+<h1>TRANSMISSION CONTROL PROTOCOL</h1>
+
+                         <h2>DARPA INTERNET PROGRAM <br/>
+                         PROTOCOL SPECIFICATION</h2>
+
+
+
+                            <h3>1.  INTRODUCTION</h3>
+<p>
+The Transmission Control Protocol (TCP) is intended for use as a highly
+reliable host-to-host protocol between hosts in packet-switched computer
+communication networks, and in interconnected systems of such networks.
+</p>
+<p>
+This document describes the functions to be performed by the
+Transmission Control Protocol, the program that implements it, and its
+interface to programs or users that require its services.
+</p>
+<h3>1.1.  Motivation</h3>
+  <p>
+  Computer communication systems are playing an increasingly important
+  role in military, government, and civilian environments.  This
+  document focuses its attention primarily on military computer
+  communication requirements, especially robustness in the presence of
+  communication unreliability and availability in the presence of
+  congestion, but many of these problems are found in the civilian and
+  government sector as well.
+  </p>
+  <p>
+  As strategic and tactical computer communication networks are
+  developed and deployed, it is essential to provide means of
+  interconnecting them and to provide standard interprocess
+  communication protocols which can support a broad range of
+  applications.  In anticipation of the need for such standards, the
+  Deputy Undersecretary of Defense for Research and Engineering has
+  declared the Transmission Control Protocol (TCP) described herein to
+  be a basis for DoD-wide inter-process communication protocol
+  standardization.
+  <p>
+  TCP is a connection-oriented, end-to-end reliable protocol designed to
+  fit into a layered hierarchy of protocols which support multi-network
+  applications.  The TCP provides for reliable inter-process
+  communication between pairs of processes in host computers attached to
+  distinct but interconnected computer communication networks.  Very few
+  assumptions are made as to the reliability of the communication
+  protocols below the TCP layer.  TCP assumes it can obtain a simple,
+  potentially unreliable datagram service from the lower level
+  protocols.  In principle, the TCP should be able to operate above a
+  wide spectrum of communication systems ranging from hard-wired
+  connections to packet-switched or circuit-switched networks.
+  </p>
+  <a href="/Rainbow">Rainbow</a>
+  <br/>
+  <a href="/ThimblesGame">ThimblesGame</a>
+  <br/>
+  <a href="/unstablePage">unstablePage</a>
+  <br/>
+  <a href="/passwordSneak">passwordSneak</a>
+
+
+  <style type="text/css">
+    body {
+      background-color: #180331;
+      color: white;
+    }
+    a {
+      color: #abbd29;
+    }
+
+  </style>

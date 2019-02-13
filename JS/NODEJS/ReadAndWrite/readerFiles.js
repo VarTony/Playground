@@ -1,7 +1,8 @@
 const fs = require('fs');
+const fileName = process.argv[2];
 // const Promise = require('promise');
 
-function reverse (pathFile, callback = console.log) {
+function reverse (pathFile = './file', callback = console.log) {
 	fs.readFile(pathFile, 'utf-8',  (err, data) => {
 
 		if(err){
@@ -17,5 +18,9 @@ function reverse (pathFile, callback = console.log) {
 	});
 }
 
-reverse('./file', console.log);
+reverse(fileName, console.log);
+
+module.exports = reverse;
+
+
 
