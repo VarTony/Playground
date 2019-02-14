@@ -4,7 +4,7 @@
   "description": "__",
   "main": "server002.js",
   "scripts": {
-    "test": "test"
+    "start": "PORT=2073 node server002.js"
   },
   "author": "VarTony",
   "license": "ISC",
