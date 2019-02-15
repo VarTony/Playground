@@ -1,0 +1,15 @@
+import socket
+
+sockTCP = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sockTCP.connect(('fanserials.center', 80))
+res = open('res')
+req = open('req', 'w')
+res = res.read()
+print(res)
+sockTCP.send(res.encode('utf-8'))
+answer = sockTCP.recv(32024)
+answer = answer.decode('utf-8')
+req.write(answer)
+req.close()
+sockTCP.close()
+print(answer)
