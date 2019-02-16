@@ -10,7 +10,7 @@ const ls = (dirpath = __dirname, NameOfFile = []) =>
   	i++;
     return path.join(dirpath, filename);
     })
-    .map(path => new Promise((res,rej) => fs.stat(path, (err, data) => err? rej(err): res(data)))))
+    .map(path => new Promise((res,rej) => fs.stat(path, (err, data) => err ? rej(err): res(data)))))
   .then(promises => Promise.all(promises))
   .then(stats => stats
   	.filter(stat => stat.isFile())

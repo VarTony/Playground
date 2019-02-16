@@ -1,11 +1,11 @@
 const net = require('net');
-const port = '1982'; 
+const port = 1982; 
 const client = new net.Socket();
 client.setEncoding('utf-8');
 
 client.connect(port, 'localhost', () => {
  	console.log('connected to server'); 
- 	client.write('Who need in me?');
+ 	client.write('Who need to me?');
  });
 
 console.log(process.platform);

@@ -5,9 +5,9 @@ const server = net.createServer(connect => {
 
 	connect.on('data', data => {
 
-		console.log(`${data} from ${connect.remoteAddress} ${connect.remotePort}`);
-		connect.write(`Repeating :  ${data}`);
-	
+		console.log(`${data}from ${connect.remotePort}`);
+		const answer = `You : ${data}`;
+		connect.write(answer);
 	});
 
 	connect.on('close', () => console.log('Client closed connection'));
@@ -15,5 +15,3 @@ const server = net.createServer(connect => {
 }).listen(port);
 
 console.log(`Listen on port ${port}`);
-
-module.exports = port;

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>Client</title>
+</head>
+<body style="background-color: #2a2c40">
+	<audio src="./content/callAlert.mp3"></audio>
+	<style type="text/css">	
+	audio {
+		display: none;
+	}
+
+	#main {
+		position: relative;
+		z-index: 0;
+
+	}	
+	.list-group {
+		margin-top: 12px;
+		margin-left: 25%;
+	/*	border-bottom: solid #836A62 7px;
+		border-left: solid #836A62 5px;*/
+		position: absolute;
+		top: 0;
+		overflow-y: scroll; 
+		height: 500px; 
+		width: 50%;
+		border-radius: 5px 5px 5px 5px;
+		z-index: 2;
+	}
+
+	</style>
+
+
+	<ul class="list-group">
+	 <li class='list-group-item'>Это чат блок.</li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'>Сюда будут выводиться ваши сообщения в следующем формате : </li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'>Крыса Лариса : Привет!!</li>
+     <li class='list-group-item'>Чебурашка : Привет, крыса!! Че-почем, интеренет отключили?</li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'></li>
+     <li class='list-group-item'></li>
+	</ul>
+	<div id="main" style="height: 50%; width: 50%; margin-left: 25%; margin-top: 30%">
+		<div class="form-group">
+			<textarea id="textArea" type="text"  name="text" class="form-control m" rows='4'></textarea>
+			<label for='msg'>MSG</label>
+		</div>
+		<div class="form-group">
+			<button id="SendMSG" style="color: #3b6d42;background-color: #32334e; border-color: #32334e;" type="sabmit" class="btn btn-primary btn-block send">Send MSG</button>
+		</div>
+	</div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		const socket = io(`http://localhost:${1975}/`);
+		const listMsg = document.querySelector('.list-group');
+		const callAlert = document.querySelector('audio');
+		const textArea = document.querySelector('#textArea');
+		const sendMSG = (event, msg = '') => {
+			if(shift) {
+			event.preventDefault();
+			msg = textArea.value;
+			textArea.value =  '';
+			socket.emit('sendMSG', msg);
+			}	
+		}
+
+		let shift = true;
+		textArea.onkeydown = event => {
+				if(event.keyCode === 16)  shift = false;
+				return;
+		}
+		textArea.onkeyup = event => {
+		 if(event.keyCode === 16) shift = true;
+		 return;
+		}
+
+		textArea.onkeypress = event => event.keyCode  === 13?  sendMSG(event) : null;
+		document.querySelector('#SendMSG').onclick = event => sendMSG(event)
+
+		socket.on('Broadcast msg', msgText => {
+			let msg = document.createElement('li');
+			msg.innerText = msgText;
+			msg.classList.add('list-group-item');
+			listMsg.appendChild(msg);
+			callAlert.play();
+		});
+
+		function pageScroll() {
+    		listMsg.scrollBy(0,1);
+    		scrolldelay = setTimeout(pageScroll,10);
+		}
+
+		pageScroll();
+
+	</script>
+</body>
+</html>
