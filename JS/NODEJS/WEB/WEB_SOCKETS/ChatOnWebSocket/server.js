@@ -4,11 +4,13 @@ const http = require('http').Server(app);
 const socket = require('socket.io')(http);
 const config = require('./config.js');
 
-app.use(express.static('view'))
 
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/client.html');
 });
+app.get('/content/callAlert.mp3', (req, res) => {
+	res.sendFile(__dirname + '/content/callAlert.mp3');	
+})
 
 socket.on('connection', io => {
 	console.log('connection new client');

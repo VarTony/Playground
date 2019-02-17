@@ -5,12 +5,12 @@
 	<title>Client</title>
 </head>
 <body style="background-color: #2a2c40">
-	<audio src="./content/callAlert.mp3"></audio>
+	<audio src="/content/callAlert.mp3"></audio>
 	<style type="text/css">	
 	audio {
 		display: none;
 	}
-
+/*background:  linear-gradient(to top left, #32334e, powderblue)*/
 	#main {
 		position: relative;
 		z-index: 0;
@@ -85,6 +85,12 @@
 		 return;
 		}
 
+		let thisWindow = false;
+		let needCall = false;
+		window.onfocus = () => thisWindow = false;
+		window.onblur = () => thisWindow = true;
+
+
 		textArea.onkeypress = event => event.keyCode  === 13?  sendMSG(event) : null;
 		document.querySelector('#SendMSG').onclick = event => sendMSG(event)
 
@@ -93,7 +99,8 @@
 			msg.innerText = msgText;
 			msg.classList.add('list-group-item');
 			listMsg.appendChild(msg);
-			callAlert.play();
+			console.log(thisWindow);
+			if(thisWindow) callAlert.play();
 		});
 
 		function pageScroll() {
