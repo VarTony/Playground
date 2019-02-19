@@ -19,8 +19,6 @@
 	.list-group {
 		margin-top: 12px;
 		margin-left: 25%;
-	/*	border-bottom: solid #836A62 7px;
-		border-left: solid #836A62 5px;*/
 		position: absolute;
 		top: 0;
 		overflow-y: scroll; 
@@ -30,7 +28,38 @@
 		z-index: 2;
 	}
 
+
+/*	#block-of-name {
+		position:relative;
+		width: 100%
+		min-height: 100%;
+		z-index: 1975;
+		background: rgba(77,98, 109, 0.2);
+		display: block;
+	}
+
+	#input-for-name {
+		position: static;
+		height: 250px;
+		width: 450px;
+		display: block;
+		background-color: #2a2c40;
+		color: white;
+		margin-top: 50%; 
+	}
+*/
 	</style>
+
+
+<!-- 	<div id = "block-of-name">
+		<div id="input-for-name"> -->
+
+			<input type="textArea" name="name" id="name">
+			<label for="#name" style="color: white">Your name, please</label>
+<!-- 
+		</div>
+	</div> -->
+
 
 
 	<ul class="list-group">
@@ -62,6 +91,20 @@
 	</div>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
+		
+
+		const inputName = document.querySelector("#name");
+		let name = '';
+		inputName.onkeypress = e => {
+		 	if(e.keyCode === 13) {
+		 		name = inputName.value;
+		 		inputName.value = '';
+		 		inputName.style.display = "none"; 
+		 	}
+		}
+
+
+
 		const socket = io(`http://localhost:${1975}/`);
 		const listMsg = document.querySelector('.list-group');
 		const callAlert = document.querySelector('audio');
@@ -71,7 +114,7 @@
 			event.preventDefault();
 			msg = textArea.value;
 			textArea.value =  '';
-			socket.emit('sendMSG', msg);
+			socket.emit('sendMSG', `${name} : ${msg}`);
 			}	
 		}
 
