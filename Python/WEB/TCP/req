@@ -1,24 +1,5 @@
-HTTP/1.1 200 OK
-Date: Fri, 15 Feb 2019 19:50:16 GMT
-Content-Type: text/html; charset=UTF-8
-Transfer-Encoding: chunked
-Connection: close
-Set-Cookie: __cfduid=dccb94e6aa4c1aa3473b2e10017fc885d1550260216; expires=Sat, 15-Feb-20 19:50:16 GMT; path=/; domain=.fanserials.center; HttpOnly
-X-Powered-By: PHP/7.1.11
-Set-Cookie: PHPSESSID=69da9f54d52ed85357c63b7113617079; path=/
-Expires: Thu, 19 Nov 1981 08:52:00 GMT
-Cache-Control: no-store, no-cache, must-revalidate
-Pragma: no-cache
-Server: cloudflare
-CF-RAY: 4a9a4d6e300d9738-FRA
+GET / HTTP/1.1
+HOST: fanserials.center
+connection: close
+\n
 
-ba9
-<!DOCTYPE html>
-<html>
-<head>
-	<title>FanSerials.center - сайт лучших сериалов (ex Фансериалс.ТВ)</title>
-	<meta property="og:image" content="http://static.fanserials.center/uploads/main.jpg"/>
-	<meta name="description" content="Поисковик по Лучшим зарубежным сериалам. Единственный и официальный сайт ФАНСЕРИАЛС (ex fanserials.tv)!"/>
-	<meta name="og:description" content="Поисковик по Лучшим зарубежным сериалам - все озвучки, субтитры и оригиналы."/>
-	<meta name="keywords" content="FanSerials.center фан сериалс фансериалс fanserials.tv fanserials.site ЗОНА оффициальный сайт зеркало орг ком"/>
-	<meta name="msapplication-TileC

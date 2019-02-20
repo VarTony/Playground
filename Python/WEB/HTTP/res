@@ -1,0 +1,31 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Tue, 19 Feb 2019 23:54:38 GMT
+Content-Type: text/html; charset=UTF-8
+Content-Length: 206144
+Connection: keep-alive
+Keep-Alive: timeout=60
+Set-Cookie: drupal="1550620468:acdcdcd25de06ebc3656a15a6f3b919b2aa9ffb2"; Domain=.government.ru; Max-Age=1800; Path=/; expires=Wed, 20-Feb-2019 00:24:28 GMT
+
+
+<!doctype html>
+<html lang="ru"
+      itemscope="itemscope" xmlns="http://www.w3.org/1999/xhtml"
+      prefix="og: http://ogp.me/ns# video: http://ogp.me/ns/video# ya: http://webmaster.yandex.ru/vocabularies/"
+      class="no-js ">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Правительство России</title>
+        
+        <meta name="viewport" content="width=960"/>
+        
+        <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon"/>
+        <link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml"/>
+
+        
+        <link rel="stylesheet" type="text/css" media="all" href="/static/css/main.css"/>
+        <link rel="stylesheet" type="text/css" media="print" href="/static/css/print.css"/>
+        
+        <!--[IF IE]><link rel="stylesheet" type="text/css" media="all" href="/static/css/ie.css"/><![ENDIF]-->
+        <!--[IF IE 6]><link rel="stylesheet" 
