@@ -13,6 +13,7 @@ app.get('/content/callAlert.mp3', (req, res) => {
 })
 
 socket.on('connection', io => {
+	// console.log(io);
 	console.log('connection new client');
 	io.on('sendMSG', msg => {
 		socket.emit('Broadcast msg', msg);

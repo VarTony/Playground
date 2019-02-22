@@ -1,7 +1,7 @@
 import socket
 
 sockTCP = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sockTCP.connect(('fanserials.center', 80))
+sockTCP.connect(('kremlin.ru', 80))
 req = open('req')
 res = open('res', 'w')
 req = req.read()
