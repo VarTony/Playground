@@ -8,6 +8,7 @@ const response = (res, type = 'html') => {
 
 const handler = (req, res) => {
 	let url = req.url.split('.');
+	console.log(req.url.split('.')[1]);
 	console.log(url);
 	response(res, url[1]||'html');
 }
