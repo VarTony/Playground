@@ -1,0 +1,44 @@
+body {
+
+	background: url(https://i.pinimg.com/originals/e2/5f/a1/e25fa13305b8ead7d33010f703359961.jpg) no-repeat;
+}
+
+
+#before {
+	position: absolute;
+	top: 32%;
+	left: 2%;
+	width: 45%;
+	height: 58%;
+	border: solid;
+}
+
+#after {
+	position: absolute;
+	top: 32%;
+	left: 52%;
+	width: 45%;
+	height: 58%;
+	border: solid;
+}
+
+#input {
+	position: absolute;
+	border: solid;
+	width: 25%;
+	height: 25%;
+}
+
+#main {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(113,61,45,0.27);
+}
+
+canvas {
+
+	width: 100%;
+	height: 100%;
+
+}
