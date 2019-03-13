@@ -23,3 +23,5 @@ socket.on('connection', io => {
 
 http.listen(config.PORT, err => 
 	err ? console.log(err) : console.log(`Server run on port ${config.PORT}`));
+
+//, '192.168.1.155'
