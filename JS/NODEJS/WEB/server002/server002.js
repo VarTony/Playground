@@ -17,7 +17,6 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 
 app.get('/', (req, res) => {
-    res.sendFile( __dirname + '/view/Main/index.html' );
     res.send(filedata);
 });
 
