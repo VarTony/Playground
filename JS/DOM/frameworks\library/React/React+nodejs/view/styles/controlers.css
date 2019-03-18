@@ -1,0 +1,126 @@
+
+.controlers {
+	/*overflow:auto; */
+         width:100%; 
+         background-color: #374177; 
+         position: absolute;
+}
+
+#ruler {
+
+	width: 30px;
+
+}
+
+.icons {
+	width: 15px;
+	height: 15px;
+}
+
+input {
+	margin-left: 10px; 
+}
+
+/*body {
+    margin: 0;
+    padding: 0;
+}
+ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+ul:after {
+    display: block;
+    content: ' ';
+    clear: both;
+    float: none;*/
+}
+.tools {
+	width: 100%;
+}
+
+h3 {
+	margin-left: -15px;
+	width: 100%;
+	position: relative;
+	float: right;
+	padding: 3px;
+	margin: 10px;
+	display: inline-block;
+}
+
+h5 {
+	height: 25px;
+
+}
+
+img {
+	padding: 0;
+	margin: 0;
+	width: 15px;
+	height: 15px;
+	float: left;
+}
+
+
+
+
+ul {
+
+	margin: 0;
+
+}
+
+ul.tools {
+  	display: inline-flex;
+  	background: #374177;
+    list-style: none;
+    width: 100%;
+    height: 70px;
+    padding-left: 0;
+}
+
+li {
+    color: #fff;
+  	background: #374177;
+  	width: 20%;
+    display: block;
+    float: left;
+    padding: 1rem;
+    position: relative;
+    text-decoration: none;
+  	transition-duration: 0.5s;
+}
+  
+
+li:hover {
+    background: #314473;
+    cursor: pointer;
+}
+
+ul li ul {
+    background: #374177;
+    visibility: hidden;
+  	opacity: 0;
+  	min-width: 5rem;
+    position: absolute;
+  	transition: all 0.5s ease;
+  	margin-top: 1rem;
+    left: 0;
+  	display: none;
+}
+
+ul li:hover > ul,
+ul li ul:hover {
+  top: 53px;
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+ul li ul li {
+    clear: both;
+  	width: 100%;
+}

@@ -1,1 +1,1 @@
-import app from './components/main.jsx';
+import app from './components/Paint.jsx';

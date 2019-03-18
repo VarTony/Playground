@@ -4,15 +4,17 @@
   "description": "React + Nodejs",
   "main": "server.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "babel view/src/components/main.jsx -o view/dist/main.js -w"
+    "webpack" : "webpack --mode development",
+    "build": "babel view/src/components/main.jsx -o view/dist/main.js",
+    "watch": "babel view/src/components/main.jsx -o view/dist/main.js -w",
+    "go": "npm run webpack && nodemon server.js"
   },
-
   "author": "VarTony",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
