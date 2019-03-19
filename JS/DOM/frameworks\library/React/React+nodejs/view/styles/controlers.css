@@ -1,6 +1,6 @@
 
 .controlers {
-	/*overflow:auto; */
+
          width:100%; 
          background-color: #374177; 
          position: absolute;
@@ -21,21 +21,6 @@ input {
 	margin-left: 10px; 
 }
 
-/*body {
-    margin: 0;
-    padding: 0;
-}
-ul {
-    display: block;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-ul:after {
-    display: block;
-    content: ' ';
-    clear: both;
-    float: none;*/
 }
 .tools {
 	width: 100%;
@@ -120,7 +105,8 @@ ul li ul:hover {
   display: block;
 }
 
-ul li ul li {
+ul li ul li  {
     clear: both;
-  	width: 100%;
+  	width: 20%;
 }
+
