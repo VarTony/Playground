@@ -5,17 +5,6 @@ let color;
 
 class Controlers extends React.Component {
 		
-	state = {
-  	color: 'black' 
-}
-
-
-
-	handleColor(e) {
-		 this.setState({
-    		color : e.target.value
-	});
-	}
 
 	render () {
 	
@@ -24,7 +13,7 @@ class Controlers extends React.Component {
 							<li>
 								<h3>
 								<img className='icons' src='./imgs/icons/palette.svg'/> 
-								<input type='color' onChange={this.handleColor}  id='color'/> 
+								<input type='color' onChange={(e) => this.props.takeValues(e)}  id='color' name='color'/> 
 							</h3>
 						</li>
 						<li>
@@ -37,20 +26,32 @@ class Controlers extends React.Component {
     	 				<li>
     	 					<h3>Brush <img className='icons' src='./imgs/icons/edit.svg'/></h3>
           					<ul className="submenu brush">
-            					<li><h5><img className='icons' src='./imgs/icons/brush.svg'/>brush</h5></li>
-            					<li><h5><img className='icons' src='./imgs/icons/pen.svg'/>pen</h5></li>
-            					<li><h5><img className='icons' src='./imgs/icons/spray.svg'/>spray</h5></li>
-            					<li><h5><img className='icons' src='./imgs/icons/eraser.svg'/>eraser</h5></li>
+            					<li name='brush' onClick={(e) => this.props.takeBrushModel(e)}>
+            						<img className='icons' src='./imgs/icons/brush.svg'/>
+            						brush
+            					</li>
+            					<li name='pen' onClick={(e) => this.props.takeBrushModel(e)}>
+            						<img className='icons' src='./imgs/icons/pen.svg'/>
+            						pen
+            					</li>
+            					<li name='spray' onClick={(e) => this.props.takeBrushModel(e)}>
+            						<img className='icons' src='./imgs/icons/spray.svg'/ >
+            						spray
+            					</li>
+            					<li name='eraser' onClick={(e) => this.props.takeBrushModel(e)}>
+            						<img className='icons' src='./imgs/icons/eraser.svg'/>
+            						eraser
+            					</li>
          					</ul>
         				</li>
         				<li>
         					<h3>Brush-size <img className='icons' src='./imgs/icons/roller.svg'/></h3>
           					<ul className="submenu brush-size">
-            					<li><h5>5px</h5></li>
-            					<li><h5>10px</h5></li>
-            					<li><h5>15px</h5></li>
-            					<li><h5>20px</h5></li>
-            					<li><h5>25px</h5></li>
+            					<li name='5'  onClick={(e) => this.props.takeSizebrash(e)}>5px</li>
+            					<li name='10' onClick={(e) => this.props.takeSizebrash(e)}>10px</li>
+            					<li name='15' onClick={(e) => this.props.takeSizebrash(e)}>15px</li>
+            					<li name='20' onClick={(e) => this.props.takeSizebrash(e)}>20px</li>
+            					<li name='25' onClick={(e) => this.props.takeSizebrash(e)}>25px</li>
           						</ul>
         					</li>
         					<li><h3><img className='icons' src='./imgs/icons/fill-drip.svg'/>Fill field</h3></li>

@@ -6,10 +6,35 @@ import Controlers from './Controlers';
 
 
 class Paint extends Component {
+	constructor(props) {
+        super(props);
+        this.state = {
+	  	color : 'black',
+	  	sizebrash : 10,
+	  	tool : 'brush',
+	  	filldrip : false 
+	  }
+	   this.takeBrushModel = this.takeBrushModel.bind(this);
+	   this.takeValues = this.takeValues.bind(this);
+	   this.takeSizebrash = this.takeSizebrash.bind(this);
+}
+	
+	takeBrushModel(e) {
+		this.setState({
+			tool : e.target.getAttribute('name')
+		});
+	}
 
-	giveValues(e) {
+	takeSizebrash(e) {
+		console.log(e.target.getAttribute('name') * 1);
+		this.setState({
+			sizebrash : (e.target.getAttribute('name') * 1)
+		});
+	}
 
-		const { name, value } = e.target;
+
+	takeValues(e) {
+		const { name, value } = e.target;;
         this.setState({
           [name]: value
         });
@@ -19,8 +44,17 @@ class Paint extends Component {
 	render () {
 		return (
 			<div id='paint'>
-				<Controlers />
-				<Canvas/>
+				<Controlers 
+					takeValues={this.takeValues}  
+					takeBrushModel={this.takeBrushModel} 
+					takeSizebrash={this.takeSizebrash}
+				/>
+				
+				<Canvas
+					color={this.state.color}
+					tool={this.state.tool}
+					sizebrash={this.state.sizebrash}
+				/>
 			 </div>
 			);
 	}
