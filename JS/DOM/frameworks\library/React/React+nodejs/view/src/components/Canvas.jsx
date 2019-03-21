@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-// import * as CAV from './Controlers'; //controlers and them values
 import  Controlers from './Controlers';
+
 
 class Canvas extends Component   {
 
@@ -11,55 +11,150 @@ class Canvas extends Component   {
 	  }
 	}
 
-
 	
 
 	componentDidMount() {
 
 		const canvas = this.refs.canvas;
-		let action, ctx, points, pointer;
-		points = new Array(this.props.sizebrash || 10);
+		let action, ctx;
+		let penPoints, penPointer;  			   		//Pen
+		let offsetfeltTip, pointsfeltTip, buferfeltTip; 		//Brush
+		let eraser = false;								//Eraser
+		penPoints = new Array(this.props.sizebrash || 10);
 		document.body.onload = () => {
 			
-			action = 'up';
-      		ctx = canvas.getContext("2d");
-      		ctx.globalAlpha = 0.1;
-			if(this.props.tool === 'pen'){
-      			//this.props.color; #2d36a5'
-      			pointer = 0;
-      		}
+		action = 'up';
+      	ctx = canvas.getContext("2d");
+      	// ctx.globalAlpha = 0.1;
+      	pointsfeltTip = new Array();
+			
+
+
+			// if(this.props.tool === 'pen'){
+   //    			//this.props.color; #2d36a5'
+   //    			penPointer = 0;
+   //    			alert('Onload')
+   //    		}
+      	
+
+
       	}
+
+
     	canvas.onmousedown = e => {
+    		
     		console.log(this.props.tool)
-    		console.log(this.props.sizebrash)
-    		if(this.props.tool === 'pen'){
-    			points = new Array(this.props.sizebrash || 10);
+    		console.log(this.props.sizetool)
+
+    		////---------------------------feltTipDown--------------------///////////////
+    		if(this.props.tool === 'feltTip') {  			
+    			// ctx.strokeStyle = this.props.color;
+    			action = "down";
+   				// pointsBrush.push([e.pageX,e.pageY]);
+    			ctx.lineWidth = this.props.sizetool;
+   				//смещение (больше чем ширина канвы)
+   				offsetfeltTip = 1000;
+   				//параметры тени
+   				ctx.globalAlpha = 0.2;
+   				ctx.shadowBlur = 8;
+   				ctx.shadowColor = this.props.color;
+   				ctx.shadowOffsetX = -offsetfeltTip;
+   				eraser = false;
+    			penPoints = new Array(this.props.sizetool || 10);
     			action = 'down';
    				ctx.strokeStyle = this.props.color;
-   				points[0] = [e.offsetX, e.offsetY]; //e.offsetY;
-      			pointer = 0;
+   				penPoints[0] = [e.offsetX, e.offsetY]; //e.offsetY;
+      			penPointer = 0;
+   				//в буфере будем хранить растр канвы
+   				// buferBrush = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    		}
+    		////---------------------------------------------------------//////////////
+
+
+
+    		////---------------------------EraserDown--------------------//////////////
+    		if(this.props.tool === 'eraser') eraser = true;
+    		////---------------------------------------------------------//////////////
+
+
+
+    		////-----------------------------PenDown --------------------//////////////
+    		if(this.props.tool === 'pen'){
+    			ctx.globalAlpha = 0.1;
+    			ctx.shadowBlur = 0;
+   				ctx.shadowOffsetX = 0;
+   				ctx.lineWidth = 1;
+    			eraser = false;
+    			penPoints = new Array(this.props.sizetool || 10);
+    			action = 'down';
+   				ctx.strokeStyle = this.props.color;
+   				penPoints[0] = [e.offsetX, e.offsetY]; //e.offsetY;
+      			penPointer = 0;
       		}
-   				canvas.onmousemove = e => {		
-				// PenM(e);
-				if(this.props.tool === 'pen'){
-					if(action === 'down') {
-						console.log(points.length);
-						let nextpoint = pointer + 1;
-        				if (nextpoint > points.length - 1) nextpoint = 0;
+      		////---------------------------------------------------------/////////////
+
+
+
+   			canvas.onmousemove = e => {
+
+
+
+   				////---------------------------BrushMove--------------------///////////////
+    			if(this.props.tool === 'feltTip') {
+    				if (action == "down") {
+    					// ctx.putImageData(buferBrush,0,0);
+    					// pointsBrush.push([e.offsetX, e.offsetY]);
+    					// ctx.beginPath();
+    					// ctx.moveTo(pointsBrush[0][0]+offsetBrush, pointsBrush[0][1]);
+    					// for (let i = 1; i < pointsBrush.length; i++){
+     				// 	ctx.lineTo(pointsBrush[i][0]+offsetBrush,pointsBrush[i][1]);
+    				// }
+    				// ctx.stroke();
+    				let nextpoint = penPointer + 1;
+        				if (nextpoint > penPoints.length - 1) nextpoint = 0;
        					ctx.beginPath();
-       					console.log(points, pointer);
-        				ctx.moveTo(points[pointer][0],points[pointer][1]);
+       					console.log(penPointer);
+        				ctx.moveTo(penPoints[penPointer][0],penPoints[penPointer][1]);
         				ctx.lineTo(e.offsetX, e.offsetY);
-        				if (points[nextpoint]) { 
-          					ctx.moveTo(points[nextpoint][0] + Math.round(Math.random()*10-5),points[nextpoint][1] + Math.round(Math.random()*10-5));
+        				if (penPoints[nextpoint]) { 
+          					ctx.moveTo(penPoints[nextpoint][0] + Math.round(Math.random()*10-5), penPoints[nextpoint][1] + Math.round(Math.random()*10-5));
           					ctx.lineTo(e.offsetX, e.offsetY);
         				}
         				ctx.stroke();
-        				pointer = nextpoint;
-        				points[pointer] = [e.offsetX, e.offsetY]; 
-			}
-		}
-    ///////////////////////////////////////
+        				penPointer = nextpoint;
+        				penPoints[penPointer] = [e.offsetX, e.offsetY]; 
+   					}
+    			}
+    			////---------------------------------------------------------//////////////
+
+
+
+   				////---------------------------EraserMove--------------------///////////////////////////////////////////////////////////////////////////////////
+   				if(eraser) ctx.clearRect(e.offsetX, e.offsetY, (this.props.sizebrash || 10), (this.props.sizebrash || 10));	
+				///--------------------------------------------------------------------------------------------------------------///////////////////////////////
+
+
+
+				////-----------------------------PenMove --------------------///////////////////////////////////////////////////////////////////////////////////
+				if(this.props.tool === 'pen'){
+					if(action === 'down') {
+						console.log(penPoints.length);
+						let nextpoint = penPointer + 1;
+        				if (nextpoint > penPoints.length - 1) nextpoint = 0;
+       					ctx.beginPath();
+       					console.log(penPointer);
+        				ctx.moveTo(penPoints[penPointer][0],penPoints[penPointer][1]);
+        				ctx.lineTo(e.offsetX, e.offsetY);
+        				if (penPoints[nextpoint]) { 
+          					ctx.moveTo(penPoints[nextpoint][0] + Math.round(Math.random()*10-5), penPoints[nextpoint][1] + Math.round(Math.random()*10-5));
+          					ctx.lineTo(e.offsetX, e.offsetY);
+        				}
+        				ctx.stroke();
+        				penPointer = nextpoint;
+        				penPoints[penPointer] = [e.offsetX, e.offsetY]; 
+					}
+				}
+    			///--------------------------------------------------------------------------------------------------------------//////////////////////////////////////////////////
 
 				// let x = e.offsetX;
 				// let y = e.offsetY;
@@ -67,16 +162,41 @@ class Canvas extends Component   {
 				// clsearRect(x, y, width, height) eraser
 				// ctx.fillRect(x-5, y-5, 10, 10); //this.props.bs brush
 			}
+
+
 			canvas.onmouseup = e => {
+
+
+
+				////---------------------------BrushUp-----------------------///////////////
+    			if(this.props.tool === 'feltTip') {
+    				action = "up";
+    				action = 'up';
+					penPoints = new Array(this.props.sizetool || 10);
+   					// pointsBrush = new Array();
+   					// buferBrush = ctx.getImageData(0,0,canvas.width,canvas.height);	
+    			}
+    			////---------------------------------------------------------//////////////
+
+
+
+
+				////---------------------------EraserUp--------------------//////////////
+				if(this.props.tool === 'eraser') canvas.onmousemove = null;
+				////-------------------------------------------------------//////////////
+
+
+
+				////---------------------------PenUp-----------------------//////////////
 				if(this.props.tool === 'pen'){
 					action = 'up';
-					points = new Array(this.props.sizebrash || 10);
+					penPoints = new Array(this.props.sizetool || 10);
 				}
+				////-------------------------------------------------------//////////////
 			}
-	// canvas.onmouseup = () => canvas.onmousemove = null; action = 'up';
-	}
+		}
+  	}
 
-  }
 
 
 	render () {

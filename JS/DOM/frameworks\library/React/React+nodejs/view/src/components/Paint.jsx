@@ -9,14 +9,14 @@ class Paint extends Component {
 	constructor(props) {
         super(props);
         this.state = {
-	  	color : 'black',
-	  	sizebrash : 10,
-	  	tool : 'brush',
+	  	color : '#2d36a5',
+	  	sizetool : 10,
+	  	tool : 'feltTip',
 	  	filldrip : false 
 	  }
 	   this.takeBrushModel = this.takeBrushModel.bind(this);
 	   this.takeValues = this.takeValues.bind(this);
-	   this.takeSizebrash = this.takeSizebrash.bind(this);
+	   this.takeSizetool = this.takeSizetool.bind(this);
 }
 	
 	takeBrushModel(e) {
@@ -25,18 +25,18 @@ class Paint extends Component {
 		});
 	}
 
-	takeSizebrash(e) {
+	takeSizetool(e) {
 		console.log(e.target.getAttribute('name') * 1);
 		this.setState({
-			sizebrash : (e.target.getAttribute('name') * 1)
+			sizetool : (e.target.getAttribute('name') * 1)
 		});
 	}
 
 
 	takeValues(e) {
-		const { name, value } = e.target;;
+		const { name, value } = e.target;  
         this.setState({
-          [name]: value
+          [name]: value,
         });
 
 	}
@@ -45,15 +45,16 @@ class Paint extends Component {
 		return (
 			<div id='paint'>
 				<Controlers 
+					color={this.state.color}
 					takeValues={this.takeValues}  
 					takeBrushModel={this.takeBrushModel} 
-					takeSizebrash={this.takeSizebrash}
+					takeSizetool={this.takeSizetool}
 				/>
 				
 				<Canvas
 					color={this.state.color}
 					tool={this.state.tool}
-					sizebrash={this.state.sizebrash}
+					sizetool={this.state.sizetool}
 				/>
 			 </div>
 			);
