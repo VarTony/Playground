@@ -2,6 +2,7 @@
 body {
 	margin: 0;
 	padding: 0;
+	/*background-image: url(../imgs/saves/img.png) no-repeat;*/
 
 }
 
@@ -9,7 +10,7 @@ body {
 #root {
 	width: 100%;
 	height: 100%;
-	background-color: #8f8fb7;
+	background-color: rgba(71, 137, 241, 0.2);
 	position: absolute;
 	display: block;
 }

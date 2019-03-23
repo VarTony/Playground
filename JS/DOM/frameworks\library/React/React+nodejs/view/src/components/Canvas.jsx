@@ -16,6 +16,7 @@ class Canvas extends Component   {
 	componentDidMount() {
 
 		const canvas = this.refs.canvas;
+		const xhttp = new XMLHttpRequest();
 		let action, ctx;
 		let penPoints, penPointer;  			   		//Pen
 		let offsetfeltTip, pointsfeltTip, buferfeltTip; 		//Brush
@@ -191,6 +192,23 @@ class Canvas extends Component   {
 				if(this.props.tool === 'pen'){
 					action = 'up';
 					penPoints = new Array(this.props.sizetool || 10);
+					let img = canvas.toDataURL('image/png').replace('data:image/png;base64,', '');
+					let saveimg = JSON.stringify({data : img});
+					xhttp.open('post', '/handlerImg', true); //handlerImg
+					xhttp.setRequestHeader("Content-Type", "application/json");
+
+					xhttp.send(saveimg);
+
+					xhttp.onreadystatechange = function(){
+						if(this.readyState === 4 && this.status === 200) {
+							console.log(this.responseText);
+							document.body.style.backgroundRepeat = "repeat-y";
+							// document.body.style.backgroundRepeat = "repeat-x";
+							document.body.style.backgroundImage = `url(${this.responseText})`;
+							document.body.style.backgroundSize = "100%";
+
+						} 
+					}
 				}
 				////-------------------------------------------------------//////////////
 			}
