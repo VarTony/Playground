@@ -15,9 +15,39 @@ class Canvas extends Component   {
 
 	componentDidMount() {
 
+
+		const senderImgs = (img) => {  //, IFC
+						
+			let saveimg = JSON.stringify({data : img});
+			xhttp.open('post', '/handlerImg', true); //handlerImg
+			xhttp.setRequestHeader("Content-Type", "application/json");
+			xhttp.send(saveimg);
+
+			xhttp.onreadystatechange = function(){
+				if(this.readyState === 4 && this.status === 200) {
+					console.log(this.responseText);
+					// IFC.src =  this.responseText;
+						// IFC.onload  = () => {
+					document.body.style.backgroundRepeat = "repeat-y";
+					document.body.style.backgroundImage = `url(${this.responseText})`;
+					document.body.style.backgroundSize = "100%";
+				// }
+				} 
+			}
+		}	
+
+		// let imageElm = document.createElement('img');
+		// const root = document.querySelector('#root');
+		// imageElm.id = 'cacheImg';
+		// root.appendChild(imageElm);
+		// imageElm = document.querySelector('img');
+		// console.log(imageElm);
+		// imageElm.style.display='none';
+
+
 		const canvas = this.refs.canvas;
 		const xhttp = new XMLHttpRequest();
-		let action, ctx;
+		let action, ctx, img;
 		let penPoints, penPointer;  			   		//Pen
 		let offsetfeltTip, pointsfeltTip, buferfeltTip; 		//Brush
 		let eraser = false;								//Eraser
@@ -31,31 +61,20 @@ class Canvas extends Component   {
 			
 
 
-			// if(this.props.tool === 'pen'){
-   //    			//this.props.color; #2d36a5'
-   //    			penPointer = 0;
-   //    			alert('Onload')
-   //    		}
-      	
-
-
       	}
 
 
     	canvas.onmousedown = e => {
     		
+    		e.stopPropagation();
     		console.log(this.props.tool)
     		console.log(this.props.sizetool)
 
     		////---------------------------feltTipDown--------------------///////////////
     		if(this.props.tool === 'feltTip') {  			
-    			// ctx.strokeStyle = this.props.color;
     			action = "down";
-   				// pointsBrush.push([e.pageX,e.pageY]);
     			ctx.lineWidth = this.props.sizetool;
-   				//смещение (больше чем ширина канвы)
    				offsetfeltTip = 1000;
-   				//параметры тени
    				ctx.globalAlpha = 0.2;
    				ctx.shadowBlur = 8;
    				ctx.shadowColor = this.props.color;
@@ -66,15 +85,16 @@ class Canvas extends Component   {
    				ctx.strokeStyle = this.props.color;
    				penPoints[0] = [e.offsetX, e.offsetY]; //e.offsetY;
       			penPointer = 0;
-   				//в буфере будем хранить растр канвы
-   				// buferBrush = ctx.getImageData(0, 0, canvas.width, canvas.height);
     		}
     		////---------------------------------------------------------//////////////
 
 
 
     		////---------------------------EraserDown--------------------//////////////
-    		if(this.props.tool === 'eraser') eraser = true;
+    		if(this.props.tool === 'eraser') {
+    			action = 'down';
+    			eraser = true;
+    		}
     		////---------------------------------------------------------//////////////
 
 
@@ -97,20 +117,13 @@ class Canvas extends Component   {
 
 
    			canvas.onmousemove = e => {
-
-
+   				
+   				e.stopPropagation();
 
    				////---------------------------BrushMove--------------------///////////////
     			if(this.props.tool === 'feltTip') {
     				if (action == "down") {
-    					// ctx.putImageData(buferBrush,0,0);
-    					// pointsBrush.push([e.offsetX, e.offsetY]);
-    					// ctx.beginPath();
-    					// ctx.moveTo(pointsBrush[0][0]+offsetBrush, pointsBrush[0][1]);
-    					// for (let i = 1; i < pointsBrush.length; i++){
-     				// 	ctx.lineTo(pointsBrush[i][0]+offsetBrush,pointsBrush[i][1]);
-    				// }
-    				// ctx.stroke();
+
     				let nextpoint = penPointer + 1;
         				if (nextpoint > penPoints.length - 1) nextpoint = 0;
        					ctx.beginPath();
@@ -131,7 +144,7 @@ class Canvas extends Component   {
 
 
    				////---------------------------EraserMove--------------------///////////////////////////////////////////////////////////////////////////////////
-   				if(eraser) ctx.clearRect(e.offsetX, e.offsetY, (this.props.sizebrash || 10), (this.props.sizebrash || 10));	
+   				if(eraser && action === 'down') ctx.clearRect(e.offsetX, e.offsetY, (this.props.sizebrash || 10), (this.props.sizebrash || 10));	
 				///--------------------------------------------------------------------------------------------------------------///////////////////////////////
 
 
@@ -157,25 +170,20 @@ class Canvas extends Component   {
 				}
     			///--------------------------------------------------------------------------------------------------------------//////////////////////////////////////////////////
 
-				// let x = e.offsetX;
-				// let y = e.offsetY;
-				// ctx.fillStyle = this.props.color;
-				// clsearRect(x, y, width, height) eraser
-				// ctx.fillRect(x-5, y-5, 10, 10); //this.props.bs brush
 			}
 
 
 			canvas.onmouseup = e => {
 
+				e.stopPropagation();
 
-
-				////---------------------------BrushUp-----------------------///////////////
+				////---------------------------FeltTipUp-----------------------///////////////
     			if(this.props.tool === 'feltTip') {
     				action = "up";
-    				action = 'up';
 					penPoints = new Array(this.props.sizetool || 10);
-   					// pointsBrush = new Array();
-   					// buferBrush = ctx.getImageData(0,0,canvas.width,canvas.height);	
+					img = canvas.toDataURL('image/png').replace('data:image/png;base64,', '');
+					senderImgs(img); //, imageElm
+   	
     			}
     			////---------------------------------------------------------//////////////
 
@@ -183,7 +191,12 @@ class Canvas extends Component   {
 
 
 				////---------------------------EraserUp--------------------//////////////
-				if(this.props.tool === 'eraser') canvas.onmousemove = null;
+				if(this.props.tool === 'eraser'){
+					action = 'up';
+					img = canvas.toDataURL('image/png').replace('data:image/png;base64,', '');
+					senderImgs(img); //, imageElm
+					// canvas.onmousemove = null;
+				} 
 				////-------------------------------------------------------//////////////
 
 
@@ -192,24 +205,10 @@ class Canvas extends Component   {
 				if(this.props.tool === 'pen'){
 					action = 'up';
 					penPoints = new Array(this.props.sizetool || 10);
-					let img = canvas.toDataURL('image/png').replace('data:image/png;base64,', '');
-					let saveimg = JSON.stringify({data : img});
-					xhttp.open('post', '/handlerImg', true); //handlerImg
-					xhttp.setRequestHeader("Content-Type", "application/json");
-
-					xhttp.send(saveimg);
-
-					xhttp.onreadystatechange = function(){
-						if(this.readyState === 4 && this.status === 200) {
-							console.log(this.responseText);
-							document.body.style.backgroundRepeat = "repeat-y";
-							// document.body.style.backgroundRepeat = "repeat-x";
-							document.body.style.backgroundImage = `url(${this.responseText})`;
-							document.body.style.backgroundSize = "100%";
-
-						} 
-					}
-				}
+					img = canvas.toDataURL('image/png').replace('data:image/png;base64,', '');
+					senderImgs(img); //, imageElm
+			
+			}
 				////-------------------------------------------------------//////////////
 			}
 		}

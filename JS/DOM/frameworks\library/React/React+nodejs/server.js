@@ -34,10 +34,18 @@ app.post('/handlerImg', jsonParser, (req, res) => { //jsonParser,
 		}
 		// app.use(express.static('view'));
 		let imgpath = `../imgs/saves/img${iImgs}.png`;
+		
+		// res.set({
+  // 			'Content-Type': 'text',
+  // 			'Content-Length': 
+  // 			'Accept-Ranges': 'bytes',
+  // 			'Cache-Control': 'no-cache'
+		// });
+
 		res.send(imgpath);
 
 		console.log('ok');
-		setTimeout(() => iImgs++, 5);
+		iImgs++;
 		return;
 
 

@@ -5,7 +5,6 @@ console.log('work');
 const App = () => {
 	return (
 		<div>
-			<h1>work</h1>
 			<Paint/>
 		</div>
 	)

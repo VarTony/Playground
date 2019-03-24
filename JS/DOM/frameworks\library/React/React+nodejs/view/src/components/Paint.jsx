@@ -41,9 +41,37 @@ class Paint extends Component {
 
 	}
 
+
+	mover(e){
+		const paint = document.querySelector('#paint')
+		let timeOfClick = performance.now();
+  		paint.style.position = 'absolute';
+  		moveAt(e);
+  		document.body.appendChild(paint);
+  		paint.style.zIndex = 500; 
+
+  		function moveAt(e) {
+  			// console.log(childPos);
+   			paint.style.left = e.pageX - 10 + 'px'; //- paint.offsetWidth / 3   e.offsetX, e.offsetY
+    		paint.style.top = e.pageY - 10 + 'px'; //- paint.offsetHeight / 2
+  		}
+
+  		console.log('const contex = {block};');
+  		document.onmousemove = e => moveAt(e);
+  		paint.onmouseup = () => {
+    		timeOfClick = performance.now() - timeOfClick;
+
+    		document.onmousemove = null;
+    		paint.onmouseup = null;
+  		}
+
+	}
+
+
+
 	render () {
 		return (
-			<div id='paint'>
+			<div id='paint'  onMouseDown={this.mover}>
 				<Controlers 
 					color={this.state.color}
 					takeValues={this.takeValues}  
@@ -62,3 +90,28 @@ class Paint extends Component {
 }
 
 export default Paint;
+
+
+//// root.onmousedown = (e) => f(e, root);
+// blocks.forEach( block => block.onmousedown = (e) => f(e, block));
+// console.log('ms.js')
+// const f = (e, block)  => { 
+//   let timeOfClick = performance.now();
+//   block.style.position = 'absolute';
+//   moveAt(e);
+//   document.body.appendChild(block);
+//   block.style.zIndex = 500; 
+
+//   function moveAt(e) {
+//     block.style.left = e.pageX - block.offsetWidth / 3 + 'px';
+//     block.style.top = e.pageY - block.offsetHeight / 2 + 'px';
+//   }
+//   const contex = {block};
+//   document.onmousemove = e => moveAt(e);
+//   block.onmouseup = () => {
+//     timeOfClick = performance.now() - timeOfClick;
+
+//     document.onmousemove = null;
+//     block.onmouseup = null;
+//   }
+// }
