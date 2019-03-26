@@ -32,7 +32,6 @@ app.post('/handlerImg', jsonParser, (req, res) => { //jsonParser,
 		 console.log(err);
 		 return;
 		}
-		// app.use(express.static('view'));
 		let imgpath = `../imgs/saves/img${iImgs}.png`;
 		
 		// res.set({
@@ -50,18 +49,6 @@ app.post('/handlerImg', jsonParser, (req, res) => { //jsonParser,
 
 
 	});
-
-
-
-
-
-	// fs.writeFile(path.join(__dirname, '/file'), 'writemsg', (err) => err? console.log(err): console.log('write :', path.join(__dirname, '/file')));
-
-	// console.log(req);
-	// fs.writeFile(path.join(__dirname ,'./view/imgs/saves'), 'view/src/imgs/saves/01save.png', () => {
-	// // 	console.log(req.body);
-
-	// });
 
 });
 

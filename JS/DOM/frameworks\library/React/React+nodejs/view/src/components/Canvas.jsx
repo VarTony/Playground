@@ -16,7 +16,7 @@ class Canvas extends Component   {
 	componentDidMount() {
 
 
-		const senderImgs = (img) => {  //, IFC
+		const senderImgs = img => {  
 						
 			let saveimg = JSON.stringify({data : img});
 			xhttp.open('post', '/handlerImg', true); //handlerImg
@@ -26,30 +26,39 @@ class Canvas extends Component   {
 			xhttp.onreadystatechange = function(){
 				if(this.readyState === 4 && this.status === 200) {
 					console.log(this.responseText);
-					// IFC.src =  this.responseText;
-						// IFC.onload  = () => {
-					document.body.style.backgroundRepeat = "repeat-y";
-					document.body.style.backgroundImage = `url(${this.responseText})`;
-					document.body.style.backgroundSize = "100%";
-				// }
-				} 
+					win.src = this.responseText;
+				// 	win.onload  = () => {
+						// win.classList.add('hiddenBackgtound');
+						// win.transitionend = () => {
+						// 	win.classList.remove('hiddenBackgtound');
+						// 	win.removeEventListener('transitionend');
+				// 		}
+						
+				// 		// win.style.visibility = 'visible';
+
+						// win.classList.add('showBackgtound');
+						// win.transitionend = () => {
+						// 	win.classList.remove('showBackgtound');
+						// 	win.removeEventListener('transitionend');
+
+				// 	}
+				// } 
+			}
 			}
 		}	
 
-		// let imageElm = document.createElement('img');
-		// const root = document.querySelector('#root');
-		// imageElm.id = 'cacheImg';
-		// root.appendChild(imageElm);
-		// imageElm = document.querySelector('img');
-		// console.log(imageElm);
-		// imageElm.style.display='none';
+		const win = document.querySelector('#win');
+		// win.style.visibility = 'hidden';
+
+		// ctx.fillStyle = color;
+		// ctx.fill();
 
 
 		const canvas = this.refs.canvas;
 		const xhttp = new XMLHttpRequest();
 		let action, ctx, img;
 		let penPoints, penPointer;  			   		//Pen
-		let offsetfeltTip, pointsfeltTip, buferfeltTip; 		//Brush
+		let offsetfeltTip, pointsfeltTip, buferfeltTip; //Brush
 		let eraser = false;								//Eraser
 		penPoints = new Array(this.props.sizebrash || 10);
 		document.body.onload = () => {

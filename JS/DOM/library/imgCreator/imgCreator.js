@@ -7,13 +7,13 @@ const random = (max, min) => Math.floor(Math.random() * (max - min) + min);
 // const list = [];
 
 const drawField = list => {
-	ctx.clearRect(0,0, 280, 280);
+	ctx.clearRect(0,0, 200, 200);
 	let i = j = 0;
 	while(list.length-1 > i) {
 		while(list[i].length-1 > j){
 			if(list[i][j]) {
 				ctx.fillStyle = color;
-				ctx.fillRect(i * 35, j * 35, 35, 35);
+				ctx.fillRect(i * 25, j * 25, 25, 25);
 			}
 			j++;
 		}
@@ -29,16 +29,16 @@ const creatorField = (n,m,field = [], i = 0) => {
 	return creatorField(n, m, field, ++i);
 }
 
-let fieldOfLife = creatorField(28, 28);
+let fieldOfLife = creatorField(20, 20);
 
 const generate = () => {
 	generator.innerText = 'Reroll';
-	color = `#${(Math.floor(Math.random() * (12131217 - 0)) + 0).toString(16)}`;
+	color = `#${(Math.floor(Math.random() * (16777215 - 0)) + 0).toString(16)}`;
 	fieldOfLife = fieldOfLife.map(value => value.map(value => value = false));
-	let i = random(28 * 28, 0);
+	let i = random(20 * 20, 0);
 	while(i > 0) {
 		i--;
-		fieldOfLife[random(28, 0)][random(28, 0)] = true;
+		fieldOfLife[random(20, 0)][random(20, 0)] = true;
 	}
 	console.log('generate');
 	drawField(fieldOfLife);

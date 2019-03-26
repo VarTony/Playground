@@ -7,6 +7,29 @@ body {
 	overflow: hidden;
 }
 
+#win {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+
+.hiddenBackground{
+	opacity: 1;
+    transition: all 1s;
+}
+
+
+.showBackground{
+
+	opacity: 0;
+    transition: all 1s;
+}
+
+
 
 #root {
 	width: 100%;
@@ -14,6 +37,7 @@ body {
 	background-color: rgba(71, 137, 241, 0.2);
 	position: absolute;
 	display: block;
+	z-index: 15;
 }
 
 #paint {
