@@ -13,3 +13,61 @@
 	margin: 40px;
 	background: black;
 }
+
+button {
+	margin: 0;
+	padding: 0;
+	background-color: #70af83;
+	width: 200px;
+	height: 25px;
+	border-radius: 1px;
+	font-size: 15px;
+	color: white;
+	border: 0px;
+	cursor: pointer;
+}
+
+/*#CreateBtn {
+
+	margin-top: 90%;
+	margin-left: 90%;
+
+
+}*/
+
+/*#GenerateBtn {
+	margin-left: 10px;
+	margin-top: 0px;
+}*/
+
+#GID {
+	float: left;
+	margin: 10px;
+
+}
+
+#ContactCreater {
+	left: 10%;
+	position: absolute;
+	width: 80%;
+	height: 28%;
+	border: solid black 1px;
+
+}
+
+input{
+	margin-top: 15px;
+	box-sizing: border-box;
+	width: 80%;
+	line-height: 25px;
+
+}
+
+#FormContact {
+	left: 10%;
+	position: sticky;
+	width:  90%;;
+
+}
+
+/*GenerateBtn*/

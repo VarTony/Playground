@@ -13,7 +13,7 @@ class GIDCreator extends Component   {
 	componentDidMount() {
 		const canvas = this.refs.GID;
 		const ctx = canvas.getContext('2d');
-		const generator = document.querySelector('#generator');
+		const generator = document.querySelector('#GenerateBtn');
 		let color = `#${(Math.floor(Math.random() * (12131217 - 0)) + 0).toString(16)}`;
 		let user = `id-${(Math.floor(Math.random() * (12131217 - 0)) + 0).toString(16)}`;
 		const random = (max, min) => Math.floor(Math.random() * (max - min) + min);
