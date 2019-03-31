@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import GIDCreator from './GIDCreator';
-import FormContact from './FormContact';
-import GenerateBtn from './GenerateBtn';
-import CreateBtn from './CreateBtn';
+import BlockForContact from './BlockForContact';
+import BlockForGID from './BlockForGID';
+
 
 
 class ContactCreater extends Component {
@@ -19,11 +18,8 @@ class ContactCreater extends Component {
 	render() {
 		return(
 			<main id='ContactCreater'> 
-			<GIDCreator />
-			<CreateBtn />
-			<FormContact />
-			<GenerateBtn />
-			
+			<BlockForGID/>
+			<BlockForContact />			
 			</main>
 			);
 	}

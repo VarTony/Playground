@@ -5,7 +5,7 @@ import React from 'react'
 const GenerateBtn = () => {
 
 	return (
-			<button id="GenerateBtn">Generate</button>
+			<button id="GenerateBtn" className='btns'>Generate</button>
 		);
 }
 

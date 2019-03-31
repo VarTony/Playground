@@ -5,7 +5,7 @@ import React from 'react'
 const CreateBtn = () => {
 
 	return (
-			<button id="CreateBtn">Create Contact</button>
+			<button id="CreateBtn" className='btns'>Create Contact</button>
 		);
 }
 
