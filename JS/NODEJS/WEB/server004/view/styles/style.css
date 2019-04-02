@@ -1,5 +1,6 @@
 body {
-	background-color: black;
+	/*background-color: ./bckgrnd.png;*/ 
+	background-image: url('./bckgrnd.png'); 
 	margin: 0;
 	padding: 0;
 }

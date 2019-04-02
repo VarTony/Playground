@@ -2,11 +2,18 @@ import React from 'react'
 
 
 
-const GenerateBtn = () => {
+class  GenerateBtn extends React.Component {
 
-	return (
-			<button id="GenerateBtn" className='btns'>Generate</button>
+	constructor(props) {
+        super(props);
+	}
+
+	render() {
+
+		return (
+				<button id="GenerateBtn" className='btns'>Generate</button>
 		);
+	}
 }
 
 export default GenerateBtn;

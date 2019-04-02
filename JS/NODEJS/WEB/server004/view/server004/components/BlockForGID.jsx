@@ -1,15 +1,22 @@
-import React, {component} from 'react';
+import React, {Component} from 'react';
 import GenerateBtn from './GenerateBtn';
 import GIDCreator from './GIDCreator';
 
-const BlockForGID = () => {
+class BlockForGID extends Component {
 
-	return(
-		<div id='BlockForGID'>
-			<GIDCreator/>
-			<GenerateBtn/>
-		</div>
-	);
+	constructor(props) {
+        super(props);
+    }
+
+	render() {
+		return(
+			<div id='BlockForGID'>
+				<GIDCreator sendImg={this.props.sendImg} />
+				<GenerateBtn />
+			</div>
+		)
+	}
 }
+
 
 export default BlockForGID;

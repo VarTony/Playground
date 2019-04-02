@@ -2,11 +2,18 @@ import React from 'react'
 
 
 
-const CreateBtn = () => {
+class CreateBtn extends React.Component {
 
-	return (
-			<button id="CreateBtn" className='btns'>Create Contact</button>
+	constructor(props) {
+        super(props);
+	}
+
+	render() {
+
+		return (
+			<button id="CreateBtn" className='btns' onClick={() => this.props.sendForm('/createContact')}>Create Contact</button> 
 		);
+	}
 }
 
 export default CreateBtn;
