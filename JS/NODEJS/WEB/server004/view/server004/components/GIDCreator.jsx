@@ -48,14 +48,14 @@ class GIDCreator extends Component   {
 			fieldOfLife = fieldOfLife.map(value => value.map(value => value = false));
 			let i = random(20 * 20, 0);
 			while(i > 0) {
-			i--;
-			fieldOfLife[random(20, 0)][random(20, 0)] = true;
+				i--;
+				fieldOfLife[random(20, 0)][random(20, 0)] = true;
+			}
+			console.log('generate');
+			drawField(fieldOfLife);
 			const img = canvas.toDataURL('image/png').replace('data:image/png;base64,', '');
 			this.props.sendImg(img);
-			}
-		console.log('generate');
-		drawField(fieldOfLife);
-	}
+		}
 
 
 

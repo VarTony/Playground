@@ -11,7 +11,7 @@ class CreateBtn extends React.Component {
 	render() {
 
 		return (
-			<button id="CreateBtn" className='btns' onClick={() => this.props.sendForm('/createContact')}>Create Contact</button> 
+			<button id="CreateBtn" className='btns' onClick={() => this.props.sendForm('/CreateContact')}>Create Contact</button> 
 		);
 	}
 }
