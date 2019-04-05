@@ -9,8 +9,6 @@ body {
 #GID {
 	width: 200px;
 	height: 200px;
-	border: 3px solid black;
-	/*background: black;*/
 	margin: 10px;
 	border: none;
 
@@ -86,7 +84,48 @@ input{
 fieldset{
 	margin: 10px;
 	width: 85%;
-	/*float: right;*/
 	border: none;
+}
+
+
+/*------------------ Contact fiels  --------------*/
+
+#ContactsField {
+	/*border: solid white 1px;*/
+	top: 70%;
+	display: flex;
+	color: white;
+}
+
+#Contact {
+	display: flex;
+	width: 28%;
+	height: 20%;
 
 }
+
+#GIDOnContact {
+	width: 134px;
+	height: 134px;
+	margin: 3.333px;
+	margin-left: 10px;
+}
+
+
+#editBtn {
+	width: 134px;
+	height: 16,7px;
+}
+
+#deleteBtn {
+	width: 134px;
+	height: 16,7px;
+}
+
+/*----------------------------------------------*/
+
+
+
+
+
+

@@ -20,41 +20,47 @@ app.get('/', jsonParser, (req, res) => {
 
 app.post('/CreateContact', (req, res) => {
 
-	console.log('А-ю-ю');
-	// console.log(req.body);
 	let form = req.body.form; 
 	let img = req.body.img;
 	let imgpath = '';
 
-	fs.writeFile(path.join(__dirname, `./imgs/${form.name + form.lastname}.png`), img, {encoding : 'base64'}, err => {
+	const selectAll = () => new Promise((res, rej) => db.all(`SELECT * FROM contacts;`, (err, data) => { //each						
+			err? rej(err): res(data)
+		})).then(data =>  {
+
+			db.run(`DELETE FROM contacts WHERE name!=(?);`, 'DELETEALL', err => err 
+				? console.log(err) 
+				: console.log('successful'));		
+			
+			console.log(data);
+			res.send(data);
+		});
+
+
+	fs.writeFile(path.join(__dirname, `./view/imgs/${form.name + form.lastname}.png`), img, {encoding : 'base64'}, err => {
 
 		if(err){
 		 console.log(err);
 		 return;
 		}
-		imgpath = `../imgs/${form.name + form.lastname}.png`;
-	
+		
+		imgpath =  `./imgs/${form.name + form.lastname}.png`;	
 		db.run(`INSERT INTO contacts(name, lastname, number_phone, email, img) VALUES('${form.name}', '${form.lastname}', '${form.numberPhone}', '${form.email}', '${imgpath}');`);
-		db.each(`SELECT * FROM contacts;`, (err, data) => {			
-			err? console.log(err): console.log(data);
-			db.run(`DELETE FROM contacts WHERE name!=(?);`, '', err => err 
-				? console.log(err) 
-				: console.log('successful'));	
-		}); 
-
-		res.send('Маленько обожди,парень');
-
+		selectAll();
 	});
-
-
-
 
 });
 
 
 app.put('/UpdateContact', (req, res) => {});
 
-app.delete('/DeleteContact', (req, res) => {});
+app.delete('/DeleteContact', (req, res) => {
+
+	db.run(`DELETE FROM contacts WHERE name!=(?);`, '', err => err 
+		? console.log(err) 
+		: console.log('successful'));
+
+});
 
 
 

@@ -26,7 +26,7 @@ class ContactCreater extends Component {
 		return(
 			<main id='ContactCreater'> 
 			<BlockForGID sendImg={this.sendImg}/>
-			<BlockForContact img={this.state.contactImg} />			
+			<BlockForContact img={this.state.contactImg} giveDataFromForm={this.props.giveDataFromForm} />			
 			</main>
 			);
 	}

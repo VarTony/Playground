@@ -34,12 +34,9 @@ class BlockForContact extends Component {
 					"Content-type": "application/json"
 				},
 				body : valuesForm
-			}).then((req) =>{
-
-			 	console.log('У-лю-лю', req.body)
+			}).then((res) =>{
 
 			 	generateBtn.dispatchEvent(click);
-
 			 	this.setState({
 			 		name : '',
 			 		lastname : '',
@@ -47,9 +44,14 @@ class BlockForContact extends Component {
 					email : ''
 			 	})
 			
-			console.log(this.state);
+			// console.log(this.state);
+			 return res.json();
+			 }).then( data => {
 
-			 });
+				console.log(data)
+				this.props.giveDataFromForm(data);
+
+			});
 		
 			
 		}
