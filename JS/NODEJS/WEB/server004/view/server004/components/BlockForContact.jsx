@@ -34,7 +34,7 @@ class BlockForContact extends Component {
 					"Content-type": "application/json"
 				},
 				body : valuesForm
-			}).then((res) =>{
+			}).then((res) => {
 
 			 	generateBtn.dispatchEvent(click);
 			 	this.setState({

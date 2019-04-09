@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Node.js+python</title>
+</head>
+<body>
+	<style> 
+		body {
+  			width: 100%;
+  			margin: 0;
+  			overflow: hidden;
+  			color:white;
+  			background: linear-gradient(to left, #101, #0d151b);  
+		}
+		#blockForm {
+			position: absolute;
+			z-index: 55;
+		}
+
+		canvas {
+			position: absolute;
+			z-index: 0;
+		}
+
+	</style>	
+	<div id='blockForm'>
+		<h2 id='answer'></h2>
+		<form>
+			<input type="text" name="value" id='value'>
+		</form>
+		<button id='btn'>Send to python</button>
+	</div>
+	<canvas id='canvas'></canvas>
+
+	<script type="text/javascript">
+		
+		const btn = document.querySelector('#btn');
+		const value = document.querySelector('#value');
+		const answer = document.querySelector('#answer');
+
+		const senderForm = () => {
+
+			fetch('/sendData', {
+					method: 'post',
+					headers: {
+						"Content-type": "application/json"
+					},
+					body : JSON.stringify({value :value.value})
+				}).then(res => res.json()
+				).then(data => {
+
+				
+					console.log(data);
+					answer.innerText = data.data;
+				});
+
+			value.value = '';
+		}
+
+		btn.onclick = senderForm;
+
+//-------------------Canvas------------------------------------
+
+		let c = document.getElementById('canvas');
+		let ctx = c.getContext('2d');
+		let color = `#${(Math.floor(Math.random() * (12131217 - 1200000)) + 1200000).toString(16)}` //#24adac08 #346e6e08
+		// console.log(color + '08');
+
+		let w = c.width = window.innerWidth;
+		let h = c.height = window.innerHeight;
+		let t = 1;
+		let grd=ctx.createLinearGradient(10, 100, w, 0);
+		grd.addColorStop(0,"#101");
+		grd.addColorStop(1,'#0d151b');
+
+
+
+		const draw = (a, b, t) => {
+  			ctx.lineWidth = 0.8;
+  			// ctx.fillStyle = '#101';
+  			ctx.fillStyle = grd;
+  
+  			ctx.fillRect(0, 0, w, h);
+			for (let i = -128; i < 128; i += 1) {
+    			ctx.strokeStyle =  '#165d5008';  //`${color}08`; //brush '#165d5008'
+    			ctx.beginPath();
+    			ctx.moveTo(0, h / 2);
+    			for (let j = 0; j < w; j += 10) {
+      				ctx.lineTo(20 * Math.sin(i / 10) +
+        			j + 0.008 * j * j,
+        			Math.floor(h / 2 + j / 2 * Math.sin(j / 64 - t / 64 - i / 118) + (i * 0.9) * Math.sin(j / 35 - (i + t) / 75)));
+    }
+
+    	ctx.stroke();
+  }
+}
+
+
+		window.addEventListener('resize', () => {
+  			c.width = w = window.innerWidth;
+  			c.height = h = window.innerHeight;
+  			ctx.fillStyle=grd;
+		}, false);
+
+		const run = () => {
+  			window.requestAnimationFrame(run);
+  			t += 0.512;
+  			draw(33, 52 * Math.sin(t / 2400), t);
+		};
+
+		run();
+	</script>
+</body>
+</html>

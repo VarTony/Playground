@@ -8,7 +8,6 @@
 def gcd(num1, num2):
   min = num1 if num1 < num2 else num2
   max = num1 if num1 > num2 else num2
-  count = True
   while True:
     if max % min == 0: return min
     min-=1
