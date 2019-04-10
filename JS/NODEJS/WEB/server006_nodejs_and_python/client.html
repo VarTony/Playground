@@ -70,8 +70,8 @@
 		let h = c.height = window.innerHeight;
 		let t = 1;
 		let grd=ctx.createLinearGradient(10, 100, w, 0);
-		grd.addColorStop(0,"#101");
-		grd.addColorStop(1,'#0d151b');
+		grd.addColorStop(0,"#0e1f2b");
+		grd.addColorStop(1,'#16252b'); //#0d151b'
 
 
 
@@ -81,8 +81,8 @@
   			ctx.fillStyle = grd;
   
   			ctx.fillRect(0, 0, w, h);
-			for (let i = -128; i < 128; i += 1) {
-    			ctx.strokeStyle =  '#165d5008';  //`${color}08`; //brush '#165d5008'
+			for (let i = -85; i < 85; i+=1.015) {
+    			ctx.strokeStyle =  '#505e7908';  //`${color}08`; //brush '#165d5008'
     			ctx.beginPath();
     			ctx.moveTo(0, h / 2);
     			for (let j = 0; j < w; j += 10) {

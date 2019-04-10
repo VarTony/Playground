@@ -20,7 +20,9 @@ app.post('/sendData', jsonParser, (req, res) => {
 	let open = true;
 
 	console.log(python_run.pid)
-	fs.watchFile('./exchange',    () =>   {
+	fs.watch('./exchange',    (filename, event) =>   {
+		
+		// if(filename && event === 'change') {
 		fs.readFile('./exchange', 'utf-8', (err, data) => {
 
 			if(err){
@@ -34,6 +36,7 @@ app.post('/sendData', jsonParser, (req, res) => {
 			return;
 			
 		})
+		// }
 	})
 	
 });
