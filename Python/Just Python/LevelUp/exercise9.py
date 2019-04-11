@@ -13,7 +13,7 @@ def smallestDivisor(num):
   i = 2
   while i <= num :
     if num % i == 0:
-      if num == i: return 1
+      if num == i: return num
       return i
     i+=1
 

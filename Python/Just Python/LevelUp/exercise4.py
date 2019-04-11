@@ -4,7 +4,7 @@ data = sys.argv[1]
 
 def createFiles (c=10) :
     i = len([name for name in os.listdir('.') if os.path.isfile(name)]) + 1
-    print('count of files before: ', i)
+    print('count of files before: ', i-1)
     while(i <= c):
         file = open("exercise"+str(i)+".py", "w")
         file.write("print('exercise"+str(i)+".py')")

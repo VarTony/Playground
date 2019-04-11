@@ -15,46 +15,47 @@ class BlockForContact extends Component {
 		this.sendForm = this.sendForm.bind(this);
 	}
 		
-		changeValues (e) {
+	changeValues (e) {
 
-			const { name, value } = e.target;
-			this.setState({[name]: value});
-		}
+		const { name, value } = e.target;
+		this.setState({[name]: value});
+	}
 
 
-		sendForm(url) {
+	sendForm(url) {
 
-			const click = new Event('click');
-			const generateBtn = document.querySelector('#GenerateBtn');
+		const click = new Event('click');
+		const generateBtn = document.querySelector('#GenerateBtn');
 
-			let valuesForm = JSON.stringify({form : this.state, img : this.props.img});
-			fetch(url, {
-				method: 'post',
-				headers: {
-					"Content-type": "application/json"
-				},
-				body : valuesForm
-			}).then((res) => {
+		let valuesForm = JSON.stringify({form : this.state, img : this.props.img});
+		fetch(url, {
+			method: 'post',
+			headers: {
+				"Content-type": "application/json"
+			},
+			body : valuesForm
+		}).then((res) => {
 
-			 	generateBtn.dispatchEvent(click);
-			 	this.setState({
-			 		name : '',
-			 		lastname : '',
-					numberPhone :  '',
-					email : ''
-			 	})
+			generateBtn.dispatchEvent(click);
+			this.setState({
+			 	name : '',
+			 	lastname : '',
+				numberPhone :  '',
+				email : ''
+			 })
 			
 			// console.log(this.state);
-			 return res.json();
-			 }).then( data => {
+			return res.json();
+			}).then( data => {
 
 				console.log(data)
 				this.props.giveDataFromForm(data);
 
 			});
-		
 			
 		}
+
+
 
 
 	render() {

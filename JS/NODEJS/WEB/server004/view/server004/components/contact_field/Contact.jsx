@@ -20,7 +20,7 @@ class Contact extends React.Component {
 	}
 
 	render() {
-
+		console.log(this.props.data.numberPhone);
 		return(
 			<div id='Contact'> 
 				<div className='left-side'>
@@ -31,7 +31,7 @@ class Contact extends React.Component {
 				<div className='right-side' className={this.state.visibility}>
 					<h3> Id: {this.props.data.id}</h3>
 					<h3> Name: {this.props.data.name} Lastname: {this.props.data.lastname}</h3>
-					<h3>Number phone: {this.props.data.numberPhone} Email: {this.props.data.email}</h3>
+					<h3>Number phone: {this.props.data.number_phone} Email: {this.props.data.email}</h3>
 					<button className='btns' id='deleteBtn'>Delete</button>
 				</div>
 			</div>	);

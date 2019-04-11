@@ -8,7 +8,8 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			dataFromForm : []
+			// dataFromForm : [],
+			contacts : []
 		}
 		this.giveDataFromForm = this.giveDataFromForm.bind(this);
 	}
@@ -21,11 +22,24 @@ class App extends React.Component {
 
 	}
 
+	componentDidMount() {
+		console.log('here');
+		fetch('/readContacts', {method: 'get',
+			headers: {
+				"Content-type": "application/json"
+			},
+		 })
+			.then(res => res.json())
+			.then(gotContacts => 
+			this.setState({contacts : gotContacts}));
+	}
+
+
 	render() {
 		return (
 			<div>
 				<ContactCreater giveDataFromForm = {this.giveDataFromForm} />
-				<ContactsField  data={this.state.dataFromForm}/>
+				<ContactsField  data={this.state.contacts}/>
 			</div>
 		)
 	}

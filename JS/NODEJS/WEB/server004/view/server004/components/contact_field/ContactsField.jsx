@@ -9,7 +9,6 @@ class ContactsField extends React.Component {
 		this.state = {}
 	}
 
-
 	render() {
 		const contacts = this.props.data.map(data => <Contact data={data} key={data.id}/>);
 		return(
