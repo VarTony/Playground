@@ -1,5 +1,5 @@
 
-//width  variable resistor
+//with  variable resistor
 
 
 #define LED_PIN 5

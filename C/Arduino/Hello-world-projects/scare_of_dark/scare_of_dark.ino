@@ -1,4 +1,4 @@
-//width  photo resistor
+//with  photo resistor
 
 
 #define LED_PIN 5
