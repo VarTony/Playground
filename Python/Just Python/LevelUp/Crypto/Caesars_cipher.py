@@ -60,10 +60,9 @@ print(caesars_cipher('lbfl op xfcel wp nzxalclep', 27, False))
 
 class Caesars_cipher(object):
 
-    def __init__(self, open_text, key=3, code=True):
+    def __init__(self, open_text, key=3):
         self.list_close_text = list(open_text.lower())
         self.key = key
-        self.code = code
         self.alphabet = {'en': list('abcdefghijklmnopqrstuvwxyz'), 'ru': list('абвгдеёжзийклмнопрстуфхцчшщъыьэюя')}
         if self.list_close_text[0] in self.alphabet['en']:
             self.language = 'en'
