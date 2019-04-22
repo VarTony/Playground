@@ -3,6 +3,7 @@ body {
 	background-image: url('./bckgrnd.png'); 
 	margin: 0;
 	padding: 0;
+	overflow-y:hidden;
 }
 
 .hidden{
@@ -105,13 +106,25 @@ fieldset{
 	top: 70%;
 	display: flex;
 	color: white;
+	font-size: 10px;
+	height: 500px;
 }
 
-#Contact {
+.contacts {
 	display: flex;
 	width: 28%;
 	height: 20%;
+	flex-flow: column-wrap;
+	flex-direction: row;
+	align-content: space-between;
+	animation: float_contacts 25s infinite running linear;
+/*	flex-direction: row;
+	align-self: stretch;*/
 
+}
+
+.contacts:hover{
+	animation: float_contacts 0.85s infinite paused linear;
 }
 
 #GIDOnContact {
@@ -131,12 +144,22 @@ fieldset{
 #deleteBtn {
 	width: 134px;
 	height: 16,7px;
+	align-items: flex-end;
 }
 
 /*----------------------------------------------*/
 
+/*-------------Animation-----------------------*/
 
+@keyframes float_contacts{
 
+  	0%, 100% {margin-top: 1%;}
+    23% { margin-top: 11%;}
+    50% { margin-top: 25%;}
+    58% { margin-top: 20%;}
+    75% { margin-top: 15%;}
+    /*100%  {margin-top: 10px;}*/
+}
 
 
 
