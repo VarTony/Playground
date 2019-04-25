@@ -16,7 +16,6 @@ class ContactCreater extends Component {
 	}
 
 	sendImg (img) {
-
 		this.setState({
 			contactImg : img 
 		});
@@ -26,7 +25,7 @@ class ContactCreater extends Component {
 		return(
 			<main id='ContactCreater'> 
 			<BlockForGID sendImg={this.sendImg}/>
-			<BlockForContact img={this.state.contactImg} giveDataFromForm={this.props.giveDataFromForm} />			
+			<BlockForContact img={this.state.contactImg} />			
 			</main>
 			);
 	}

@@ -86,8 +86,16 @@ app.post('/CreateContact', (req, res) => {
 
 });
 
+app.get('/UpdateContact/:id', (req, res) => {
+	console.log(req.params.id);
+	let id = req.params.id;
+	requestsToDatabase.selectContactForUpdate(req, res, db, id);	
+});
+
 
 app.put('/UpdateContact', (req, res) => {});
+
+
 
 app.delete('/DeleteContact', (req, res) => {
 

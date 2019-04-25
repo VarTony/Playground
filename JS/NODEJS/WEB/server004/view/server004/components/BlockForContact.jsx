@@ -55,14 +55,11 @@ class BlockForContact extends Component {
 			
 		}
 
-
-
-
 	render() {
 
 		return(
 			<div id='BlockForContact'>
-			<form id='FormContact'> 
+			<form className='FormContact'> 
 				<fieldset>
 					<input type='name' name='name' id='name' placeholder='First name' value={this.state.name} onChange={e => this.changeValues(e)} />
 					<input type='lastname' name='lastname' id='lastname' placeholder='Last name' value={this.state.lastname} onChange={e => this.changeValues(e)} />

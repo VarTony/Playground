@@ -4,6 +4,7 @@ body {
 	margin: 0;
 	padding: 0;
 	overflow-y:hidden;
+	overflow-x:hidden;
 }
 
 .hidden{
@@ -15,7 +16,7 @@ body {
 	visibility: visible;
 }
 
-
+/*form img*/
 #GID {
 	width: 200px;
 	height: 200px;
@@ -26,6 +27,7 @@ body {
 
 .btns {
 	text-align: center;
+	flex-direction: row;
 	vertical-align: middle;
 	display: flex;
 	margin-left: 10px;
@@ -39,15 +41,19 @@ body {
 	color: #ffffff;
 	border: 0px;
 	cursor: pointer;
+	margin-top: auto;
+	margin-bottom: 5px;
+/*	align-self: flex-end;;*/
 }
 
 
 #CreateBtn {
 	flex-direction: row;
-	align-self: stretch;
+	/*align-items: stretch;*/
+	/*align-self: flex-end;*/
 }
 
-
+/*form block*/
 #ContactCreater {
 	display: flex;
 	flex-flow: column-wrap;
@@ -63,7 +69,7 @@ body {
 	margin: 0.1%;
 	display: flex;
 	flex-direction: column;
-
+	/*align-items: flex-end;*/
 }
 
 
@@ -107,7 +113,8 @@ fieldset{
 	display: flex;
 	color: white;
 	font-size: 10px;
-	height: 500px;
+	height: 450px;
+	animation: bounceInRight 1.5s;
 }
 
 .contacts {
@@ -117,14 +124,28 @@ fieldset{
 	flex-flow: column-wrap;
 	flex-direction: row;
 	align-content: space-between;
-	animation: float_contacts 25s infinite running linear;
+	align-self: center;
+	justify-content: center;
+/*	animation: bounceInRight 1s linear;*/
+	/*animation-delay: 1.5s;*/
 /*	flex-direction: row;
 	align-self: stretch;*/
 
 }
 
+
+.left-side{
+	flex-direction: row;
+}
+
+.right-side{
+	flex-direction: row;
+
+}
+
+
 .contacts:hover{
-	animation: float_contacts 0.85s infinite paused linear;
+	animation: hoverAnimateContacts 0.5s infinite paused linear;
 }
 
 #GIDOnContact {
@@ -137,29 +158,155 @@ fieldset{
 
 
 #editBtn {
-	width: 134px;
+	/*width: 134px;*/
 	height: 16,7px;
+	margin-left: 0;
 }
 
 #deleteBtn {
-	width: 134px;
+	/*width: 134px;*/
 	height: 16,7px;
-	align-items: flex-end;
+	margin-left: 0;
+	/*align-self: flex-end;*/
 }
 
 /*----------------------------------------------*/
 
 /*-------------Animation-----------------------*/
 
-@keyframes float_contacts{
+/*@keyframes float_contacts{
 
   	0%, 100% {margin-top: 1%;}
-    23% { margin-top: 11%;}
-    50% { margin-top: 25%;}
-    58% { margin-top: 20%;}
-    75% { margin-top: 15%;}
-    /*100%  {margin-top: 10px;}*/
+    23% { margin-top: 15%;}
+    50% { margin-top: 35%;}
+    58% { margin-top: 27%;}
+    75% { margin-top: 18%;}
+}*/
+
+@keyframes hoverAnimateContacts{
+
+  	0%, 100% {
+  		margin-top: 0.5%
+	}
 }
 
 
+@keyframes bounceInLeft {
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-3000px, 0, 0);
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(25px, 0, 0);
+    transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(5px, 0, 0);
+    transform: translate3d(5px, 0, 0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bounceInRight {
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(3000px, 0, 0);
+    transform: translate3d(3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(-25px, 0, 0);
+    transform: translate3d(-25px, 0, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(-5px, 0, 0);
+    transform: translate3d(-5px, 0, 0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+
+
+/*---------------------------------Update block--------------------------------*/
+
+/*form block*/
+#FormForUpdate{
+	margin-top: 12%;
+	display: flex;
+	flex-flow: column-wrap;
+	flex-direction: row;
+	align-content: space-between;
+	margin-left: 33%;
+	width: 33%;
+	height: 30%;
+}
+
+#FormForUpdate.left-side {
+	margin: 0.1%;
+	display: flex;
+	flex-direction: column;
+
+}
+
+/*form img*/
+#updatesImg {  
+	width: 200px;
+	height: 200px;
+	margin: 10px;
+	border: none;	
+}
+
+
+.UpdateBlock{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 55;
+	background-color: #101420eb;  
+	/*#101420ba;*/
+
+}
 
