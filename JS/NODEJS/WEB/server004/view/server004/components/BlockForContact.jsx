@@ -69,7 +69,7 @@ class BlockForContact extends Component {
 					<input type='email' name='email' id='email' placeholder='Email' value={this.state.email} onChange={e => this.changeValues(e)} />
 				</fieldset>
 			</form>
-			<CreateBtn sendForm={this.sendForm}/> 
+			<CreateBtn onClick={() => this.sendForm('/UpdateContact')}/> 
 			</div>
 			);
 	}

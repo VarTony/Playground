@@ -9,11 +9,13 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const jsonParser = express.json();
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./db/server004.db');
+// const db = new sqlite3.Database('./db/server004.db');
+let db;
+let cookie;
 const port = 1971;
 
 let offset = 0;
-let superUser = `id-${(Math.floor(Math.random() * (12131217 - 0)) + 0).toString(16)}`;
+let newUser = `id${(Math.floor(Math.random() * (12131217 - 0)) + 0).toString(16)}`;
 
 
 //---------------------Midleware handler----------------------
@@ -23,7 +25,7 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use(cookieParser('secret'));
-app.use(session({cookie: { maxAge: 50000 }}));
+app.use(session({cookie: { maxAge: 1800}}));
 app.use(flash());
 
 
@@ -31,7 +33,44 @@ app.use(flash());
 
 
 app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, '/view/server004.html'));
+	console.log(
+	 `cookie: ${req.headers.cookie}\n`,
+	 `method: ${req.method}\n`,
+	 `protocol: ${req.protocol}\n`,
+	 `accepts: ${req.accepts(['text/html', 'image/png', 'application/javascript', 'text/javascript', 'text/css'])}\n`,
+	 `ip : ${req.ip}`
+	);
+	cookie = req.headers.cookie;
+	// res.clearCookie('Set-Cookie');
+	
+	if(cookie === undefined){
+		console.log('\nno exist\n');
+		res.setHeader('Set-Cookie', `user:${newUser}`);
+		cookie = `user:${newUser}`
+
+	////////////////////
+
+		fs.copyFile(path.join(__dirname, '/db/server004.db'), path.join(__dirname, `/db/copiesDb/${cookie}|30.db`), err => {
+			if(err) {
+				console.error(err);
+				return;
+			}
+			fs.readdir(path.join(__dirname, '/db/copiesDb'), (err, data) => err? console.error(err) : console.log(data));
+			db = new sqlite3.Database(`./db/copiesDb/${cookie}|30.db`);
+			res.set('Cache-Control', 'no-cache');
+			res.sendFile(path.join(__dirname, '/view/server004.html'));
+		})	
+	}	
+
+	else{
+		cookie = req.headers.cookie;
+		db = new sqlite3.Database(`./db/copiesDb/${cookie}|30.db`); //user:id28a312|30.db
+		res.set('Cache-Control', 'no-cache');
+		res.sendFile(path.join(__dirname, '/view/server004.html'));
+	}
+
+	////////////////////////////////
+
 });
 
 

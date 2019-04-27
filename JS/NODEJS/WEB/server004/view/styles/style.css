@@ -47,7 +47,7 @@ body {
 }
 
 
-#CreateBtn {
+.SendBtn {
 	flex-direction: row;
 	/*align-items: stretch;*/
 	/*align-self: flex-end;*/

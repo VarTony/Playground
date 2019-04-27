@@ -6,6 +6,7 @@ const selectAll = (req, res, db, offset = 1) => {
 			err? rej(err): res(data)
 	})).then(data =>  {		
 		console.log(data);
+		res.set('Cache-Control', 'no-cache');
 		return res.send(data)	
 	}).catch(err => console.error(err));
 }

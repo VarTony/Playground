@@ -6,7 +6,6 @@ class Contact extends React.Component {
 		super(props);
 
 		this.state = {
-			// data : data,
 			visibility : 'hidden right-side',
 			visibilityBtn : 'hidden btns'
 		}
@@ -28,7 +27,6 @@ class Contact extends React.Component {
 
 
 	render() {
-		// console.log(this.props.data.numberPhone);
 		const data =  this.props.data;
 		return(
 			<div id='Contact'> 

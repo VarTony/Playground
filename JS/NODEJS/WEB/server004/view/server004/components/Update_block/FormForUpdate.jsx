@@ -10,14 +10,13 @@ class FormForUpdate extends React.Component {
 
 		this.state = {
 			img: '',
-			name : '',  //|| ''
+			name : '',  
 			lastname : '',
 			numberPhone : '',
 			email : '',
 			visability : 'hidden UpdateBlock'
-			// edit: this.props.edit || false
 		}
-		this.sendForm = this.sendForm.bind(this);
+		// this.sendForm = this.sendForm.bind(this);
 	}
 		
 	
@@ -38,41 +37,6 @@ class FormForUpdate extends React.Component {
 			visability : updateProps.visability
 		})
 	}
-
-
-
-	sendForm(url) {
-
-		const click = new Event('click');
-		const generateBtn = document.querySelector('#GenerateBtn');
-
-		let valuesForm = JSON.stringify({form : this.state, img : this.props.img});
-		fetch(url, {
-			method: 'post',
-			headers: {
-				"Content-type": "application/json"
-			},
-			body : valuesForm
-		}).then((res) => {
-
-			generateBtn.dispatchEvent(click);
-			// this.setState({
-			//  	name : '',
-			//  	lastname : '',
-			// 	numberPhone :  '',
-			// 	email : ''
-			//  })
-			
-			return res.json();
-			}).then( data => {
-
-				console.log(data)
-				this.props.giveDataFromForm(data);
-
-			});
-			
-		}
-
 
 
 	render(){
