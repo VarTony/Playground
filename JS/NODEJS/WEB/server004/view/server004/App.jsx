@@ -78,6 +78,8 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
+		console.log(document.cookie);
+
 		fetch('/readContacts', {method: 'get',
 			headers: {
 				"Content-type": "application/json"
@@ -94,7 +96,7 @@ class App extends React.Component {
 
 
 	render() {
-
+		
 		console.log(document.cookie)
 		return (
 			<div>
