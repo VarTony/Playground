@@ -9,32 +9,107 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			dataFromContact : {},
 			contacts : [],
-			visibleUpdateForm: 'hidden UpdateBlock'
+			visibleUpdateForm: false
 		}
+		
+		this.dataFromContact = {
+			img: '',
+			name : '',  
+			lastname : '',
+			number_phone : '',
+			email : '',
+		};
+
 		this.takeDataForUpdate = this.takeDataForUpdate.bind(this);
-		this.updateContactGet = this.updateContactGet.bind(this);
+		this.updateContactGetMethod = this.updateContactGetMethod.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
+		this.changerVisibleUpdateForm = this.changerVisibleUpdateForm.bind(this);
 		
 	}
 
 
+	changerVisibleUpdateForm() {
+			this.setState(prevState => {
+				console.log('seeetState', this.state.visibleUpdateForm);
+				return {
+					visibleUpdateForm : prevState.visibleUpdateForm? false : true
+				}
+		});
+	}
 
-	updateContactGet(id) {
-		// console.log(this.state.visibility === 'hidden UpdateBlock', this.state.visibility)
-		fetch(`/UpdateContact/${id}`, {method: 'get',
+
+	updateContactGetMethod(id) {
+			fetch(`/UpdateContact/${id}`, {method: 'get',
+				headers: {
+					"Content-type": "application/json"
+				},
+			})
+				.then(res => res.json())
+				.then(data => { 
+				console.log(data);
+				this.dataFromContact = data;
+				this.changerVisibleUpdateForm();
+		});
+	}
+
+
+
+	takeDataForUpdate(data) {
+		console.log(data);
+		this.setState({
+			dataFromContact : data
+		})
+	}
+
+
+	componentDidMount() {
+		console.log(document.cookie);
+
+		fetch('/readContacts', {method: 'get',
 			headers: {
 				"Content-type": "application/json"
 			},
 		 })
 			.then(res => res.json())
-			.then(data => 
+			.then(gotContacts => 
 			this.setState({
-				dataFromContact : data,
-				visibleUpdateForm : this.state.visibleUpdateForm === 'hidden UpdateBlock'? 'visible UpdateBlock' : 'hidden UpdateBlock'
-			}));
+				contacts : gotContacts,
+				}));
 	}
+
+
+
+	render() {
+		
+		console.log(document.cookie)
+		return (
+			<div>
+				<FormForUpdate 
+				 visibleUpdateForm={this.state.visibleUpdateForm}
+				 data={this.dataFromContact}
+				 changerVisibleUpdateForm={this.changerVisibleUpdateForm} 
+				 />
+				
+				<ContactCreater />
+				<ContactsField  
+				 data={this.state.contacts} 
+				 updateContactGetMethod={this.updateContactGetMethod}
+				 />
+			
+			</div>
+		)
+	}
+}
+
+render(<App/>, document.getElementById('root'));
+
+
+	
+
+
+
+
 
 	// UpdateFormPut(data) {
 	// 	// const click = new Event('click');
@@ -67,54 +142,3 @@ class App extends React.Component {
 
 	// 		});
 	// }
-
-
-
-	takeDataForUpdate(data) {
-		console.log(data);
-		this.setState({
-			dataFromContact : data,
-		})
-	}
-
-	componentDidMount() {
-		console.log(document.cookie);
-
-		fetch('/readContacts', {method: 'get',
-			headers: {
-				"Content-type": "application/json"
-			},
-		 })
-			.then(res => res.json())
-			.then(gotContacts => 
-			this.setState({
-				contacts : gotContacts,
-				visibleUpdateForm : 'hidden UpdateBlock'
-				}));
-	}
-
-
-
-	render() {
-		
-		console.log(document.cookie)
-		return (
-			<div>
-				<FormForUpdate 
-				 data={this.state.dataFromContact}
-				 visability={this.state.visibleUpdateForm}
-				 componentDidMount={this.componentDidMount}  
-				 />
-				
-				<ContactCreater />
-				<ContactsField  
-				 data={this.state.contacts} 
-				 updateContactGet={this.updateContactGet}
-				 />
-			
-			</div>
-		)
-	}
-}
-
-render(<App/>, document.getElementById('root'));

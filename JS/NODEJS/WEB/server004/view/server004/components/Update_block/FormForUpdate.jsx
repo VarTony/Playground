@@ -9,68 +9,51 @@ class FormForUpdate extends React.Component {
 	
 
 		this.state = {
-			img: '',
-			name : '',  
-			lastname : '',
-			numberPhone : '',
-			email : '',
-			visability : 'hidden UpdateBlock'
+			visibleUpdateForm : false
 		}
-		// this.sendForm = this.sendForm.bind(this);
+
+		this.dataForForm = this.props.data;
 	}
 		
-	
-	changerValues (e) {
-		const { name, value } = e.target;
-		this.setState({[name]: value});
-	}
 
 
 	componentWillReceiveProps(updateProps) {
-		console.log(updateProps)
+		console.log(updateProps);	
+		this.dataForForm = updateProps.data; 
 		this.setState({
-			img: updateProps.data.img,
-			name : updateProps.data.name,  //|| ''
-			lastname : updateProps.data.lastname,
-			numberPhone : updateProps.data.number_phone,
-			email : updateProps.data.email,
-			visability : updateProps.visability
+			visibleUpdateForm : updateProps.visibleUpdateForm
 		})
 	}
 
-
 	render(){
-		console.log('state update block : ',this.state, this.props.data.name);
 		return(
-			<div className={this.state.visability}>
+			<div className={this.state.visibleUpdateForm? 'visible UpdateBlock' :'hidden UpdateBlock'}>
 				<div id='FormForUpdate'>			
 					<div className='left-side'>
-						<img src={this.state.img} id='updatesImg' />
-						<button className='btns' onClick={this.props.componentDidMount}>Cancel</button>
+						<img src={this.dataForForm.img} id='updatesImg' />
+						<button className='btns' onClick={this.props.changerVisibleUpdateForm}>Cancel</button>
 					</div>
 
 					<div className='BlockForContact'>
 						<form className='FormContact'> 
 							<fieldset>
-								<input type='name' name='name' id='name' placeholder='First name' value={this.state.name} onChange={e => this.changerValues(e)} />
-								<input type='lastname' name='lastname' id='lastname' placeholder='Last name' value={this.state.lastname} onChange={e => this.changerValues(e)} />
+								<input type='name' name='name' id='name' placeholder='First name' value={this.dataForForm.name} onChange={e => this.changerValues(e)} />
+								<input type='lastname' name='lastname' id='lastname' placeholder='Last name' value={this.dataForForm.lastname} onChange={e => this.changerValues(e)} />
 							</fieldset>
 							<fieldset>
-								<input type='numberPhone' name='numberPhone' id='numberPhone' placeholder='Number phone' value={this.state.numberPhone} onChange={e => this.changerValues(e)} />					
-								<input type='email' name='email' id='email' placeholder='Email' value={this.state.email} onChange={e => this.changerValues(e)} />
+								<input type='numberPhone' name='numberPhone' id='numberPhone' placeholder='Number phone' value={this.dataForForm.number_phone} onChange={e => this.changerValues(e)} />					
+								<input type='email' name='email' id='email' placeholder='Email' value={this.dataForForm.email} onChange={e => this.changerValues(e)} />
 							</fieldset>
 						</form>
-					<UpdateBtn sendForm={this.sendForm}/> 
+					<UpdateBtn/> 
 					</div>
 				</div>	
 			</div>
 			
-			)
+			);
 		}
+	}
 
-		// }
-
-}
 
 export default FormForUpdate;
 

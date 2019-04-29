@@ -22,7 +22,7 @@ class ContactsField extends React.Component {
 		 			<div className='contacts' style={styles} key={data.id}> 
 		 				<Contact 
 		 				 data={data} 
-		 				 updateContactGet={this.props.updateContactGet}
+		 				 updateContactGetMethod={this.props.updateContactGetMethod}
 		 				/> 
 		 			</div>)
 			});
