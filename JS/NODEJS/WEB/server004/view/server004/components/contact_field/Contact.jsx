@@ -24,6 +24,21 @@ class Contact extends React.Component {
 		this.props.updateContactGetMethod(id)
 	}
 
+	
+	deleteContact(id) {
+		fetch(`/deleteContact/${id}`, {method: 'DELETE',
+			headers: {
+				"Content-type": "application/json"
+			},
+		 })
+			.then(res => res.text())
+			.then(res =>{
+				console.log(res);
+				this.props.componentDidMount();
+			});
+	}
+
+
 
 
 	render() {
@@ -41,7 +56,7 @@ class Contact extends React.Component {
 					<h3>Number phone: {this.props.data.number_phone}</h3>
 					<h3>Email: {this.props.data.email}</h3>
 					<button className='btns' id='editBtn' onClick={() => this.editContact(data.id)} >Edit</button>
-					<button className='btns' id='deleteBtn'>Delete</button>
+					<button className='btns' id='deleteBtn' onClick={() => this.deleteContact(data.id)}  >Delete</button>
 				</div>
 			</div>	);
 	}

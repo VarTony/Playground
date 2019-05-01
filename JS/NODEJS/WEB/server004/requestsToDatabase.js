@@ -55,12 +55,13 @@ const contactCreater = (res, req, form, db, cookie) => {
 	let img = req.body.img;
 	let imgpath = '';
 
-	fs.writeFile(path.join(__dirname, `./view/sessionsImg/${cookie.split('=')[1]}/${form.name + form.lastname}.png`), img, {encoding : 'base64'}, err => {
+	fs.writeFile(path.join(__dirname, `./view/sessionsImg/${cookie}/${form.name + form.lastname}.png`), img, {encoding : 'base64'}, err => {
 		if(err){
 		 	console.log(err);
 			return;
 		}
-		imgpath =  `./imgs/${form.name + form.lastname}.png`;	
+		console.log(cookie, 'contact creater');
+		imgpath =  `./sessionsImg/${cookie}/${form.name + form.lastname}.png`;	
 		db.run(`INSERT INTO contacts(name, lastname, number_phone, email, img) VALUES('${form.name}', '${form.lastname}', '${form.numberPhone}', '${form.email}', '${imgpath}');`);
 		res.redirect('/readContacts');
 			
@@ -70,8 +71,10 @@ const contactCreater = (res, req, form, db, cookie) => {
 }
 
 const validator = (response, request, db, cookie) => {
-	let form = request.body.form; 
-
+	let form = request.body.form;
+	console.log(cookie); 
+	cookie = cookie.split('=')[1];
+	console.log(cookie); 
 	checkExistContact(db, form)
 	.then(data =>  flashHandler(data, response, request, form))
 	.catch(() => contactCreater(response, request, form, db, cookie));

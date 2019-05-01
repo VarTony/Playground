@@ -17,11 +17,11 @@ class FormForUpdate extends React.Component {
 		
 
 
-	componentWillReceiveProps(updateProps) {
-		console.log(updateProps);	
-		this.dataForForm = updateProps.data; 
+	componentWillReceiveProps(updatedProps) {
+		console.log(updatedProps);	
+		this.dataForForm = updatedProps.data; 
 		this.setState({
-			visibleUpdateForm : updateProps.visibleUpdateForm
+			visibleUpdateForm : updatedProps.visibleUpdateForm
 		})
 	}
 

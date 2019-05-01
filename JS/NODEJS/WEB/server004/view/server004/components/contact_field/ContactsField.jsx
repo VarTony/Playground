@@ -23,6 +23,7 @@ class ContactsField extends React.Component {
 		 				<Contact 
 		 				 data={data} 
 		 				 updateContactGetMethod={this.props.updateContactGetMethod}
+		 				 componentDidMount={this.props.componentDidMount}
 		 				/> 
 		 			</div>)
 			});

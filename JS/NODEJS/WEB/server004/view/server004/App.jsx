@@ -21,7 +21,6 @@ class App extends React.Component {
 			email : '',
 		};
 
-		this.takeDataForUpdate = this.takeDataForUpdate.bind(this);
 		this.updateContactGetMethod = this.updateContactGetMethod.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.changerVisibleUpdateForm = this.changerVisibleUpdateForm.bind(this);
@@ -53,16 +52,6 @@ class App extends React.Component {
 		});
 	}
 
-
-
-	takeDataForUpdate(data) {
-		console.log(data);
-		this.setState({
-			dataFromContact : data
-		})
-	}
-
-
 	componentDidMount() {
 		console.log(document.cookie);
 
@@ -91,8 +80,12 @@ class App extends React.Component {
 				 changerVisibleUpdateForm={this.changerVisibleUpdateForm} 
 				 />
 				
-				<ContactCreater />
+				<ContactCreater 
+				 componentDidMount={this.componentDidMount}
+				/>
+				
 				<ContactsField  
+				 componentDidMount={this.componentDidMount}
 				 data={this.state.contacts} 
 				 updateContactGetMethod={this.updateContactGetMethod}
 				 />

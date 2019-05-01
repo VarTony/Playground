@@ -29,7 +29,7 @@ class BlockForContact extends Component {
 
 		let valuesForm = JSON.stringify({form : this.state, img : this.props.img});
 		fetch(url, {
-			method: 'post',
+			method: 'POST',
 			headers: {
 				"Content-type": "application/json"
 			},
@@ -43,17 +43,11 @@ class BlockForContact extends Component {
 				numberPhone :  '',
 				email : ''
 			 })
-			
-			// console.log(this.state);
-			return res.json();
-			}).then( data => {
+			this.props.componentDidMount()
+		})	
+	}
 
-				console.log(data)
-				this.props.giveDataFromForm(data);
-
-			});
-			
-		}
+	
 
 	render() {
 

@@ -193,11 +193,15 @@ app.put('/UpdateContact', (req, res) => {});
 
 
 
-app.delete('/DeleteContact', (req, res) => {
+app.delete('/DeleteContact/:id', (req, res) => {
+	let id = req.params.id;
 
-	db.run(`DELETE FROM contacts WHERE name!=(?);`, '', err => err 
+	db.run(`DELETE FROM contacts WHERE id=(?);`, id, err => err 
 		? console.log(err) 
 		: console.log('successful'));
+
+	res.send('Contact deleted');
+	// res.redirect('/');
 
 });
 
