@@ -1,8 +1,10 @@
 import React from 'react';
 import {render} from 'react-dom';
-import ContactCreater from './components/ContactCreater';
-import ContactsField from './components/contact_field/ContactsField';
+import ContactCreater from './components/Contact_creater/ContactCreater';
+import ContactsField from './components/Contact_field/ContactsField';
 import FormForUpdate from './components/Update_block/FormForUpdate';
+import BtnNext from './components/Btns_for_scroll_field_contact/BtnNext';
+import BtnPrevious from './components/Btns_for_scroll_field_contact/BtnPrevious';
 
 class App extends React.Component {
 	
@@ -21,9 +23,11 @@ class App extends React.Component {
 			email : '',
 		};
 
+		this.pageContacts = 0;
 		this.updateContactGetMethod = this.updateContactGetMethod.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.changerVisibleUpdateForm = this.changerVisibleUpdateForm.bind(this);
+		this.scrollContactField = this.scrollContactField.bind(this);
 		
 	}
 
@@ -52,10 +56,26 @@ class App extends React.Component {
 		});
 	}
 
+	scrollContactField(act) {
+		console.log(this.state.contacts.length);
+		if(act === 'next' && this.state.contacts.length >= 5){
+			this.pageContacts = this.pageContacts + 5;
+			this.componentDidMount();
+			return;
+		}
+
+		if(act === 'previous' && this.pageContacts >= 5){
+			this.pageContacts = this.pageContacts - 5;
+			this.componentDidMount();
+			return;
+		}
+
+	}
+
 	componentDidMount() {
 		console.log(document.cookie);
 
-		fetch('/readContacts', {method: 'get',
+		fetch(`/readContacts/${this.pageContacts}`, {method: 'get',
 			headers: {
 				"Content-type": "application/json"
 			},
@@ -79,11 +99,19 @@ class App extends React.Component {
 				 data={this.dataFromContact}
 				 changerVisibleUpdateForm={this.changerVisibleUpdateForm} 
 				 />
+
+				<BtnPrevious
+				 scrollContactField = {this.scrollContactField}
+				 />
 				
+				<BtnNext
+				 scrollContactField = {this.scrollContactField}
+				 />
+
 				<ContactCreater 
 				 componentDidMount={this.componentDidMount}
 				/>
-				
+
 				<ContactsField  
 				 componentDidMount={this.componentDidMount}
 				 data={this.state.contacts} 

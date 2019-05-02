@@ -166,8 +166,9 @@ app.get('/', (req, res) => {
 
 
 
-app.get('/readContacts', (req, res) => {
-	requestsToDatabase.selectAll(req, res, db, offset);
+app.get('/readContacts/:pageContacts', (req, res) => {
+	let pageContacts = req.params.pageContacts;
+	requestsToDatabase.selectAll(req, res, db, pageContacts);
 });
 
 app.get('/UpdateContact/:id', (req, res) => {

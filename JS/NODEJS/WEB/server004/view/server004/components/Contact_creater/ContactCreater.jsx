@@ -23,7 +23,7 @@ class ContactCreater extends Component {
 
 	render() {
 		return(
-			<main id='ContactCreater'> 
+			<main className='formBlock'> 
 			<BlockForGID sendImg={this.sendImg}/>
 			<BlockForContact img={this.state.contactImg} componentDidMount={this.props.componentDidMount} />			
 			</main>

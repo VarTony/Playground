@@ -28,7 +28,7 @@ class FormForUpdate extends React.Component {
 	render(){
 		return(
 			<div className={this.state.visibleUpdateForm? 'visible UpdateBlock' :'hidden UpdateBlock'}>
-				<div id='FormForUpdate'>			
+				<div id='formForUpdate' className='formBlock'>			
 					<div className='left-side'>
 						<img src={this.dataForForm.img} id='updatesImg' />
 						<button className='btns' onClick={this.props.changerVisibleUpdateForm}>Cancel</button>

@@ -46,15 +46,39 @@ body {
 /*	align-self: flex-end;;*/
 }
 
-
-.SendBtn {
-	flex-direction: row;
-	/*align-items: stretch;*/
-	/*align-self: flex-end;*/
+#btnNext {
+	top: 3%;
+	right: 0;
+	opacity: 0.3;
+	position: absolute;;
+	left: 95%;
+	height: 7%;
+	width: 3%;
+	z-index: 25;
 }
 
+#btnPrevious {
+	top: 3%;
+	right: 95%;
+	opacity: 0.3;
+	position: absolute;;
+	left: 0;
+	height: 7%;
+	width: 3%;
+	z-index: 25;
+}
+
+#btnNext:focus {
+    outline: none;
+}
+
+#btnPrevious:focus {
+    outline: none;
+}
+
+
 /*form block*/
-#ContactCreater {
+.formBlock {
 	display: flex;
 	flex-flow: column-wrap;
 	flex-direction: row;
@@ -65,7 +89,7 @@ body {
 	/*border: solid black 1px;*/
 }
 
-#BlockForContact {
+.BlockForContact {
 	margin: 0.1%;
 	display: flex;
 	flex-direction: column;
@@ -273,25 +297,12 @@ fieldset{
 /*---------------------------------Update block--------------------------------*/
 
 /*form block*/
-#FormForUpdate{
+#formForUpdate{
 	margin-top: 12%;
-	display: flex;
-	flex-flow: column-wrap;
-	flex-direction: row;
-	align-content: space-between;
-	margin-left: 33%;
-	width: 33%;
-	height: 30%;
+	height: 26%;
 }
 
-#FormForUpdate.left-side {
-	margin: 0.1%;
-	display: flex;
-	flex-direction: column;
 
-}
-
-/*form img*/
 #updatesImg {  
 	width: 200px;
 	height: 200px;
