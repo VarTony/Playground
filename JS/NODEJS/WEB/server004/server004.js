@@ -12,7 +12,7 @@ const sqlite3 = require('sqlite3').verbose();
 let db, cookie, newUser ;
 const port = 1971;
 let offset = 0;
-
+let timeDbChanged = false;
 
 //---------------------Midleware handler----------------------
 
@@ -20,7 +20,7 @@ app.use(express.static('view'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
-app.use(cookieParser('secret'));
+app.use(cookieParser('cookie'));
 app.use(session({cookie: { maxAge: 1800}}));
 app.use(flash());
 
@@ -28,6 +28,21 @@ app.use(flash());
 //------------------------------------------------------------
 
 //--------------Helpers---------------------------------------
+
+
+const checkExistDb = cookie => {
+	let dbList = fs.readdirSync(path.join(__dirname, 'db/copiesDb'));
+	cookie = cookie.length > 25? cookie.split(';')[0] : cookie;
+	let nameDb = dbList.filter(nameDb => nameDb.split('|')[0] === cookie.split('=')[1]);
+	let timeDb = '';
+	if(timeDbChanged && nameDb.length === 1) {
+		timeDbChanged = false;
+		timeDb = nameDb[0].split('|')[1].split('.')[0];
+		db = new sqlite3.Database(`./db/copiesDb/${cookie.split('=')[1]}|${timeDb}.db`);
+	}
+
+	return nameDb.length >= 1;
+}
 
 
 const rmdirRecursiveSync = dirPath => {
@@ -63,16 +78,13 @@ const dbControler = () =>{
 						console.log(`Files destroyed : ${id}`);
 
 					});
-				
-
-
 				return;
 			}
 
 			console.log(id);
 			fs.rename(path.join(__dirname, `/db/copiesDb/${db[0]+'|'+db[1]}`), path.join(__dirname, `/db/copiesDb/${id}|${time}.db`), err =>
 				err? console.error(err): console.log('success'));
-			// console.log(id, time);
+			timeDbChanged = true;
 
 		});
 	});
@@ -98,7 +110,7 @@ app.get('/', (req, res) => {
 
 	console.log(cookie === undefined, 'cookie === undefined')
 	if(cookie === undefined){
-		console.log('\nno exist\n');
+		// console.log('\nno exist\n');
 		newUser = `id${(Math.floor(Math.random() * (12131217 - 0)) + 0).toString(16)}`;
 		res.setHeader('Set-Cookie', `cookie=user:${newUser}`, {maxAge:  new Date(Date.now() + 1800)});  //
 		cookie = `user:${newUser}`
@@ -124,36 +136,29 @@ app.get('/', (req, res) => {
 		cookie = req.headers.cookie;
 		fs.readdir(path.join(__dirname, '/db/copiesDb'), (err, data) => {
 		
-		if(err){
-			console.error(err)
-			return;
+			if(err){
+				console.error(err)
+				return;
 		}
-		console.log(cookie, 'cookie \n');
 		
-		let thisIsTime = data.filter(db => db.split('|')[0] === cookie.split('=')[1])[0];
+			let thisIsTime = data.filter(db => db.split('|')[0] === cookie.split('=')[1])[0];
 		
 		
-		if(thisIsTime !== undefined) {
-			console.log(thisIsTime, 'thisIsTime !== undefined');
-			thisIsTime = thisIsTime.split('|')[1].split('.')[0];
-			db = new sqlite3.Database(`./db/copiesDb/${cookie.split('=')[1]}|${thisIsTime}.db`); //user:id28a312|30.db
-			res.set('Cache-Control', 'no-cache');
-			res.sendFile(path.join(__dirname, '/view/server004.html'));
-			return;
-		}
+			if(thisIsTime !== undefined) {
+				thisIsTime = thisIsTime.split('|')[1].split('.')[0];
+				db = new sqlite3.Database(`./db/copiesDb/${cookie.split('=')[1]}|${thisIsTime}.db`); //user:id28a312|30.db
+				res.set('Cache-Control', 'no-cache');
+				res.sendFile(path.join(__dirname, '/view/server004.html'));
+				return;
+			}
 
-		else {
-			console.log(cookie, 'cookie else');
-			res.clearCookie('cookie');
-			res.clearCookie('connect.sid');
-			// res.send('Cookie deleted');
-			res.redirect('/');
-			return;
+			else {
+				console.log(cookie, 'cookie else');
+				res.clearCookie('cookie');
+				res.clearCookie('connect.sid');
+				res.redirect('/');
+				return;
 		}
-
-		// thisIsTime =  thisIsTime !== undefined? thisIsTime.split('|')[1].split('.')[0]:null;
-		// console.log(thisIsTime)
-		
 
 		})
 
@@ -164,31 +169,28 @@ app.get('/', (req, res) => {
 });
 
 
-
-
 app.get('/readContacts/:pageContacts', (req, res) => {
 	let pageContacts = req.params.pageContacts;
-	requestsToDatabase.selectAll(req, res, db, pageContacts);
+	cookie = req.headers.cookie;
+	if(checkExistDb(cookie))requestsToDatabase.selectAll(req, res, db, pageContacts);
+	else res.redirect('/');
 });
 
 app.get('/UpdateContact/:id', (req, res) => {
-	// console.log(req.params.id);
 	let id = req.params.id;
-	requestsToDatabase.selectContactForUpdate(req, res, db, id);	
+	cookie = req.headers.cookie;
+	if(checkExistDb(cookie)) requestsToDatabase.selectContactForUpdate(req, res, db, id);	
+	else res.redirect('/');
 });
 
 
 app.post('/CreateContact', (req, res) => {
 	cookie = req.headers.cookie;
-	requestsToDatabase.validator(res, req, db, cookie);
+	if(checkExistDb(cookie)) requestsToDatabase.validator(res, req, db, cookie);
+	else res.redirect('/');
 
 });
 
-
-app.put('/updateOffset', (req, res) => {
-	offset = req.body.nextPage ? offset + 1: offset - 1;
-	res.redirect('/readContacts');
-});
 
 app.put('/UpdateContact', (req, res) => {});
 
@@ -214,37 +216,3 @@ app.delete('/DeleteContact/:id', (req, res) => {
 
 
 app.listen(port, err => !err ? console.log(`server work on port ${port}`) : console.log(`Error : ${err}`));
-
-
-	// let form = req.body.form; 
-	// let img = req.body.img;
-	// let imgpath = '';
-	// let email = form.email;
-	// let number_phone = form.numberPhone
-
-	// requestsToDatabase.deleteAll(db, superUser);  
-
-	// const validator = () => {
-	// 	new Promise((res, rej) =>
-	// 		db.get(`SELECT * FROM contacts WHERE email=? OR number_phone=?`, [form.email, form.numberPhone], (err, data) => {						
-	// 			data === undefined? rej(err): res(data) // rewrite on 'err? rej(err): res(data)' after update database
-	// 	})).then(data =>  {	
-	// 		// console.log(data);	
-	// 		req.flash('Cantact_already_exist', `Contact with email: ${form.email} or phone number: ${form.numberPhone} already exist`)
-	// 		console.log(req.flash('Cantact_already_exist'))
-	// 		res.send(JSON.stringify(req.flash('Cantact_already_exist')))
-
-	// 	}).catch(() =>  {
-
-	// 		fs.writeFile(path.join(__dirname, `./view/sessionsImg/${cookie.split('=')[1]}/${form.name + form.lastname}.png`), img, {encoding : 'base64'}, err => {
-	// 			if(err){
-	// 	 			console.log(err);
-	// 				return;
-	// 			}
-	// 			imgpath =  `./imgs/${form.name + form.lastname}.png`;	
-	// 			db.run(`INSERT INTO contacts(name, lastname, number_phone, email, img) VALUES('${form.name}', '${form.lastname}', '${form.numberPhone}', '${form.email}', '${imgpath}');`);
-	// 			res.redirect('/readContacts');
-	// 		})
-
-	// 	})
-	// }
