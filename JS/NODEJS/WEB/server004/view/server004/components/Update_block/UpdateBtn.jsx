@@ -11,7 +11,7 @@ class UpdateBtn extends React.Component {
 	render() {
 
 		return (
-			<button id="UpdateBtn" className='btns' onClick={() => this.props.sendForm('/UpdateContact')}>Update Contact</button> 
+			<button id="UpdateBtn" className='btns' onClick={() => this.props.updateForm(`/UpdateContact/${this.props.idContact}`)}>Update Contact</button> 
 		);
 	}
 }

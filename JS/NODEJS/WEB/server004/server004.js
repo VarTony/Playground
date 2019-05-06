@@ -186,13 +186,18 @@ app.get('/UpdateContact/:id', (req, res) => {
 
 app.post('/CreateContact', (req, res) => {
 	cookie = req.headers.cookie;
-	if(checkExistDb(cookie)) requestsToDatabase.validator(res, req, db, cookie);
+	if(checkExistDb(cookie)) requestsToDatabase.createContact(res, req, db, cookie);
 	else res.redirect('/');
 
 });
 
 
-app.put('/UpdateContact', (req, res) => {});
+app.put('/UpdateContact/:id', (req, res) => {
+	let id = req.params.id;
+	cookie = req.headers.cookie;
+	if(checkExistDb(cookie)) requestsToDatabase.updateContact(res, req, db, cookie, id);
+	else res.redirect('/');
+});
 
 
 

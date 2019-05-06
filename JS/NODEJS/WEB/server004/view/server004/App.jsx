@@ -97,6 +97,7 @@ class App extends React.Component {
 				<FormForUpdate 
 				 visibleUpdateForm={this.state.visibleUpdateForm}
 				 data={this.dataFromContact}
+				 componentDidMount={this.componentDidMount}
 				 changerVisibleUpdateForm={this.changerVisibleUpdateForm} 
 				 />
 

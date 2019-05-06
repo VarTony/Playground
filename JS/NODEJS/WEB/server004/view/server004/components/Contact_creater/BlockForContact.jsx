@@ -43,7 +43,7 @@ class BlockForContact extends Component {
 				numberPhone :  '',
 				email : ''
 			 })
-			this.props.componentDidMount()
+			this.props.componentDidMount();
 		})	
 	}
 

@@ -7,7 +7,6 @@ const selectAll = (req, res, db, offset = 1) => {
 		db.all(`SELECT * FROM contacts LIMIT 5 OFFSET ${offset};`, (err, data) => { //each						
 			err? rej(err): res(data)
 	})).then(data =>  {		
-		// console.log(data);
 		res.set('Cache-Control', 'no-cache');
 		return res.send(data)	
 	}).catch(err => console.error(err));
@@ -25,13 +24,18 @@ const selectContactForUpdate = (req, res, db, id) => {
 }
 
 
+const contactUpdater = (res, req, form, db, cookie, id) => {
+	let data = [form.name, form.lastname, form.email, form.numberPhone, id]; 
+	db.run(`UPDATE contacts SET name=(?), lastname=(?), email=(?), number_phone=(?)  WHERE id=(?)`, data, err => {
+		if (err) {
+    		return console.error(err.message);
+ 		 }
+ 		console.log(`Contact updated, id: ${id}`);
+ 		res.send(`Contact updated, id: ${id}`);
+	})
+}
 
 
-const deleteAll = (db, superUser) =>	{
-		db.run(`DELETE FROM contacts WHERE name!=(?);`, superUser, err => err 
-			? console.log(err) 
-			: console.log('successful'));
-	}
 
 
 const flashHandler = (data, res, req, form) => {
@@ -53,10 +57,14 @@ const checkEmailValid = email => {
 }
 
 
-const checkExistContact = (db, form) => {
+const checkExistContact = (db, form, id=false) => {
 	return new Promise((res, rej) =>{
-	 	db.get(`SELECT * FROM contacts WHERE email=? OR number_phone=?`, 
-	 		[form.email, form.numberPhone], (err, data) => {						
+		let sql = id 
+		 ?`SELECT * FROM contacts WHERE id!=${id} AND (email=(?) OR number_phone=(?))`
+		 :`SELECT * FROM contacts WHERE email=(?) OR number_phone=(?)`;	 		
+	 	let data = [form.email, form.numberPhone];
+	 	
+	 	db.get(sql, data, (err, data) => {						
 			data === undefined? rej(err): res(data);
 		});
 	});
@@ -87,22 +95,30 @@ const contactCreater = (res, req, form, db, cookie) => {
 		console.log(req.flash('Not_valid_email_or_phone_data'))
 		res.send(JSON.stringify(req.flash('Not_valid_email_or_phone_data')))
 	}
-
 }
 
 
-const validator = (response, request, db, cookie) => {
+const createContact = (response, request, db, cookie) => {
 	let form = request.body.form;
 	cookie = cookie.split('=')[1]; 
 	checkExistContact(db, form)
 	.then(data =>  flashHandler(data, response, request, form))
 	.catch(() => contactCreater(response, request, form, db, cookie));
-	}
+	
+}
+
+const updateContact = (response, request, db, cookie, id) => {
+	let form = request.body.form;
+	cookie = cookie.split('=')[1]; 
+	checkExistContact(db, form, id)
+	.then(data =>  flashHandler(data, response, request, form))
+	.catch(() => contactUpdater(response, request, form, db, cookie, id));
+}
 
 
 
 
 module.exports.selectAll = selectAll;
-module.exports.deleteAll = deleteAll;
+module.exports.updateContact = updateContact;
 module.exports.selectContactForUpdate = selectContactForUpdate;
-module.exports.validator = validator;
+module.exports.createContact = createContact;
