@@ -5,6 +5,7 @@ import ContactsField from './components/Contact_field/ContactsField';
 import FormForUpdate from './components/Update_block/FormForUpdate';
 import BtnNext from './components/Btns_for_scroll_field_contact/BtnNext';
 import BtnPrevious from './components/Btns_for_scroll_field_contact/BtnPrevious';
+import Flash from './components/flash/Flash';
 
 class App extends React.Component {
 	
@@ -23,7 +24,10 @@ class App extends React.Component {
 			email : '',
 		};
 
+		this.flashMsg = '';
 		this.pageContacts = 0;
+
+		this.flashHandler = this.flashHandler.bind(this);
 		this.updateContactGetMethod = this.updateContactGetMethod.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.changerVisibleUpdateForm = this.changerVisibleUpdateForm.bind(this);
@@ -69,8 +73,12 @@ class App extends React.Component {
 			this.componentDidMount();
 			return;
 		}
-
 	}
+
+	flashHandler(msg) {
+		this.flashMsg = msg;
+	}
+
 
 	componentDidMount() {
 		console.log(document.cookie);
@@ -94,7 +102,12 @@ class App extends React.Component {
 		console.log(document.cookie)
 		return (
 			<div>
+				<Flash 
+					flashMsg={this.flashMsg}
+				/>
+
 				<FormForUpdate 
+				 flashHandler={this.flashHandler}
 				 visibleUpdateForm={this.state.visibleUpdateForm}
 				 data={this.dataFromContact}
 				 componentDidMount={this.componentDidMount}
@@ -110,10 +123,12 @@ class App extends React.Component {
 				 />
 
 				<ContactCreater 
+				 flashHandler={this.flashHandler}
 				 componentDidMount={this.componentDidMount}
 				/>
 
 				<ContactsField  
+				 flashHandler={this.flashHandler}
 				 componentDidMount={this.componentDidMount}
 				 data={this.state.contacts} 
 				 updateContactGetMethod={this.updateContactGetMethod}

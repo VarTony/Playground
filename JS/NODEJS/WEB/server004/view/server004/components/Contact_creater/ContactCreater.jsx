@@ -25,7 +25,7 @@ class ContactCreater extends Component {
 		return(
 			<main className='formBlock'> 
 			<BlockForGID sendImg={this.sendImg}/>
-			<BlockForContact img={this.state.contactImg} componentDidMount={this.props.componentDidMount} />			
+			<BlockForContact flashHandler={this.props.flashHandler} img={this.state.contactImg} componentDidMount={this.props.componentDidMount} />			
 			</main>
 			);
 	}

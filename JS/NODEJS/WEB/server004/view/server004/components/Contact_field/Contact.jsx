@@ -33,7 +33,7 @@ class Contact extends React.Component {
 		 })
 			.then(res => res.text())
 			.then(res =>{
-				console.log(res);
+				this.props.flashHandler(res);
 				this.props.componentDidMount();
 			});
 	}

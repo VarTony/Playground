@@ -24,6 +24,7 @@ class ContactsField extends React.Component {
 		 				 data={data} 
 		 				 updateContactGetMethod={this.props.updateContactGetMethod}
 		 				 componentDidMount={this.props.componentDidMount}
+		 				 flashHandler={this.props.flashHandler}
 		 				/> 
 		 			</div>)
 			});

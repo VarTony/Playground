@@ -34,7 +34,9 @@ class BlockForContact extends Component {
 				"Content-type": "application/json"
 			},
 			body : valuesForm
-		}).then((res) => {
+		})
+		.then(res => res.text())
+		.then(res => {
 
 			generateBtn.dispatchEvent(click);
 			this.setState({
@@ -43,6 +45,7 @@ class BlockForContact extends Component {
 				numberPhone :  '',
 				email : ''
 			 })
+			this.props.flashHandler(res);
 			this.props.componentDidMount();
 		})	
 	}

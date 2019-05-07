@@ -205,19 +205,10 @@ app.delete('/DeleteContact/:id', (req, res) => {
 	let id = req.params.id;
 
 	db.run(`DELETE FROM contacts WHERE id=(?);`, id, err => err 
-		? console.log(err) 
-		: console.log('successful'));
-
-	res.send('Contact deleted');
-	// res.redirect('/');
-
+		? res.send(err)
+		: res.send(`Contact deleted, id:${id}.`)
+	);
 });
-
-
-
-// app.delete('/CookieDelete', (req, res) => {
-
-// });
 
 
 app.listen(port, err => !err ? console.log(`server work on port ${port}`) : console.log(`Error : ${err}`));

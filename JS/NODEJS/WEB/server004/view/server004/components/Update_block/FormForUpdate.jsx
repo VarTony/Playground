@@ -33,10 +33,10 @@ class FormForUpdate extends React.Component {
 				"Content-type": "application/json"
 			},
 			body : valuesForm
-		}).then(res => res.text())
+		}).then(res =>  res.text())
 		.then(res => {
 			console.log(res);
-			// this.setState({ })
+			this.props.flashHandler(res);
 			this.props.changerVisibleUpdateForm();
 			this.props.componentDidMount();
 		})	
@@ -50,7 +50,6 @@ class FormForUpdate extends React.Component {
 
 	componentWillReceiveProps(updatedProps) {
 		console.log(updatedProps);	
-		// this.dataForForm = updatedProps.data; 
 		this.setState({
 			visibleUpdateForm : updatedProps.visibleUpdateForm,
 			name : updatedProps.data.name,

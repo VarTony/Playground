@@ -18,8 +18,8 @@ body {
 
 /*form img*/
 #GID {
-	width: 200px;
-	height: 200px;
+	width: 92%;
+	height: 80%;
 	margin: 10px;
 	border: none;
 
@@ -319,5 +319,23 @@ fieldset{
 	background-color: #101420eb;  
 	/*#101420ba;*/
 
+}
+
+/*----------------------------------------------------------------------------*/
+
+
+#flash {
+	position: absolute;
+	display: flex;
+	width: 20%;
+	height: 12%;
+	background-color: #101420eb;
+	color: white;
+	align: center;
+	/*font-style: oblique;*/
+	font-family: monospace;
+	z-index: 100;
+	bottom: 5%;
+	left: 35%;
 }
 

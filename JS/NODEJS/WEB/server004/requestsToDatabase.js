@@ -23,32 +23,22 @@ const selectContactForUpdate = (req, res, db, id) => {
 			}).catch(err => console.error(err));
 }
 
+const flashHandler = (data, res, req, form, msg) => {
+		let flashMsg = {
+			'Cantact_already_exist': `Contact with email: ${form.email} or phone number: ${form.numberPhone} already exist`,
+			'Not_valid_email_or_phone_data' : `Email: ${form.email} or phone: ${form.numberPhone} data, not valid` 
+		}
 
-const contactUpdater = (res, req, form, db, cookie, id) => {
-	let data = [form.name, form.lastname, form.email, form.numberPhone, id]; 
-	db.run(`UPDATE contacts SET name=(?), lastname=(?), email=(?), number_phone=(?)  WHERE id=(?)`, data, err => {
-		if (err) {
-    		return console.error(err.message);
- 		 }
- 		console.log(`Contact updated, id: ${id}`);
- 		res.send(`Contact updated, id: ${id}`);
-	})
+		res.send(flashMsg[msg]);
 }
 
-
-
-
-const flashHandler = (data, res, req, form) => {
-		req.flash('Cantact_already_exist', `Contact with email: ${form.email} or phone number: ${form.numberPhone} already exist`)
-		console.log(req.flash('Cantact_already_exist'))
-		res.send(JSON.stringify(req.flash('Cantact_already_exist')))
-}
 
 const checknPhoneValid = number => {
 	let ints = number.split('').filter(int => Number(int) !== NaN);
 	console.log(ints.length >= 10 && 15 >= ints.length);
 	return ints.length >= 10 && 15 >= ints.length;
 }
+
 
 const checkEmailValid = email => {
 	let requiredСhars = email.split('').filter(char  => char === '@' || char === '.')
@@ -71,6 +61,23 @@ const checkExistContact = (db, form, id=false) => {
 }
 
 
+const contactUpdater = (res, req, form, db, cookie, id) => {
+	if(checkEmailValid(form.email) && checknPhoneValid(form.numberPhone)) {
+		let data = [form.name, form.lastname, form.email, form.numberPhone, id]; 
+		db.run(`UPDATE contacts SET name=(?), lastname=(?), email=(?), number_phone=(?)  WHERE id=(?)`, data, err => {
+			if (err) {
+    			return console.error(err.message);
+ 			}
+ 			console.log(`Contact updated, id: ${id}`);
+ 			res.send(`Contact updated, id:${id}.`);
+		});
+	}
+	else {
+		flashHandler(null, res, req, form, 'Not_valid_email_or_phone_data')
+	}
+}
+
+
 const contactCreater = (res, req, form, db, cookie) => {	
 	let img = req.body.img;
 	let imgpath = '';
@@ -87,13 +94,10 @@ const contactCreater = (res, req, form, db, cookie) => {
 			imgpath =  `./sessionsImg/${cookie}/${imgFileName}`;	
 			db.run(`INSERT INTO contacts(name, lastname, number_phone, email, img) VALUES('${form.name}', '${form.lastname}', '${form.numberPhone}', '${form.email}', '${imgpath}');`);
 			res.redirect('/readContacts');
-			
 		});
 	}
 	else {
-		req.flash('Not_valid_email_or_phone_data', `Email: ${form.email} or phone: ${form.numberPhone} data, not valid`);
-		console.log(req.flash('Not_valid_email_or_phone_data'))
-		res.send(JSON.stringify(req.flash('Not_valid_email_or_phone_data')))
+		flashHandler(null, res, req, form, 'Not_valid_email_or_phone_data')
 	}
 }
 
@@ -102,7 +106,7 @@ const createContact = (response, request, db, cookie) => {
 	let form = request.body.form;
 	cookie = cookie.split('=')[1]; 
 	checkExistContact(db, form)
-	.then(data =>  flashHandler(data, response, request, form))
+	.then(data =>  flashHandler(data, response, request, form, 'Cantact_already_exist'))
 	.catch(() => contactCreater(response, request, form, db, cookie));
 	
 }
@@ -111,7 +115,7 @@ const updateContact = (response, request, db, cookie, id) => {
 	let form = request.body.form;
 	cookie = cookie.split('=')[1]; 
 	checkExistContact(db, form, id)
-	.then(data =>  flashHandler(data, response, request, form))
+	.then(data =>  flashHandler(data, response, request, form, 'Cantact_already_exist'))
 	.catch(() => contactUpdater(response, request, form, db, cookie, id));
 }
 
