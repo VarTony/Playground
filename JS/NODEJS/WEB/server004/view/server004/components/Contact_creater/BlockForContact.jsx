@@ -45,8 +45,8 @@ class BlockForContact extends Component {
 				numberPhone :  '',
 				email : ''
 			 })
-			this.props.flashHandler(res);
 			this.props.componentDidMount();
+			this.props.flashHandler(res);
 		})	
 	}
 

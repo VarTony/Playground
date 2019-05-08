@@ -38,7 +38,7 @@ class App extends React.Component {
 
 	changerVisibleUpdateForm() {
 			this.setState(prevState => {
-				console.log('seeetState', this.state.visibleUpdateForm);
+				// console.log('seeetState', this.state.visibleUpdateForm);
 				return {
 					visibleUpdateForm : prevState.visibleUpdateForm? false : true
 				}
@@ -77,6 +77,9 @@ class App extends React.Component {
 
 	flashHandler(msg) {
 		this.flashMsg = msg;
+		setTimeout(() => {
+			this.flashMsg = '';
+		}, 5000);
 	}
 
 
@@ -140,42 +143,3 @@ class App extends React.Component {
 }
 
 render(<App/>, document.getElementById('root'));
-
-
-	
-
-
-
-
-
-	// UpdateFormPut(data) {
-	// 	// const click = new Event('click');
-	// 	// const generateBtn = document.querySelector('#GenerateBtn');
-
-	// 	// let valuesForm = JSON.stringify({form : this.state, img : this.props.img});
-		
-	// 	fetch(url, {
-	// 		method: 'post',
-	// 		headers: {
-	// 			"Content-type": "application/json"
-	// 		},
-	// 		body : data
-	// 	}).then((res) => {
-
-	// 		generateBtn.dispatchEvent(click);
-	// 		this.setState({
-	// 		 	name : '',
-	// 		 	lastname : '',
-	// 			numberPhone :  '',
-	// 			email : ''
-	// 		 })
-			
-	// 		// console.log(this.state);
-	// 		return res.json();
-	// 		}).then( data => {
-
-	// 			console.log(data)
-	// 			this.props.giveDataFromForm(data);
-
-	// 		});
-	// }

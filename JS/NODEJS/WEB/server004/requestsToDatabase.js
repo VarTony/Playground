@@ -49,11 +49,10 @@ const checkEmailValid = email => {
 
 const checkExistContact = (db, form, id=false) => {
 	return new Promise((res, rej) =>{
-		let sql = id 
-		 ?`SELECT * FROM contacts WHERE id!=${id} AND (email=(?) OR number_phone=(?))`
-		 :`SELECT * FROM contacts WHERE email=(?) OR number_phone=(?)`;	 		
+		id ?`SELECT * FROM contacts WHERE id!=${id} AND (email=(?) OR number_phone=(?))`
+		   :`SELECT * FROM contacts WHERE email=(?) OR number_phone=(?)`;	 		
 	 	let data = [form.email, form.numberPhone];
-	 	
+	 	 	
 	 	db.get(sql, data, (err, data) => {						
 			data === undefined? rej(err): res(data);
 		});

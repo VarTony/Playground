@@ -6,24 +6,21 @@ class Flash extends React.Component {
 		super(props);
 		
 		this.state = {
-			flashMsg : this.props.flashMsg,
-			visible : false
+			flashMsg : this.props.flashMsg
 		}
 	}
 
-	componentWillReceiveProps(updatedProps) {
-		// console.log(updatedProps, ' : updatedProps');		
+	componentWillReceiveProps(updatedProps) {		
+		console.log(updatedProps);
 		this.setState({
-			flashMsg : updatedProps.flashMsg, 		//flash.msg,
-			visible: true
+			flashMsg : updatedProps.flashMsg.length < 128 ? updatedProps.flashMsg : 'Contact created', 		//flash.msg,
 		});
-
-		setTimeout(() => this.setState({visible : false}), 5000);
 	}
+
 
 	render() {
 		return(
-			<div id='flash' className={this.state.visible? 'visible': 'hidden'}> 
+			<div id='flash' className='visibleFlash'> 
 				<h3>{this.state.flashMsg}</h3>
 			</div>
 			);

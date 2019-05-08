@@ -1,6 +1,7 @@
 body {
-	/*background-color: ./bckgrnd.png;*/ 
-	background-image: url('./bckgrnd.png'); 
+	background-image: url('./bckgrnd.png');
+	background-size: 100%;
+	background-repeat: no-repeat;
 	margin: 0;
 	padding: 0;
 	overflow-y:hidden;
@@ -15,6 +16,14 @@ body {
 .visible{
 	visibility: visible;
 }
+
+
+
+.visibleFlash {
+	animation: opacityFlashVisible 5s linear;
+}
+
+
 
 /*form img*/
 #GID {
@@ -86,14 +95,12 @@ body {
 	margin-left: 33%;
 	width: 33%;
 	height: 30%;
-	/*border: solid black 1px;*/
 }
 
 .BlockForContact {
 	margin: 0.1%;
 	display: flex;
 	flex-direction: column;
-	/*align-items: flex-end;*/
 }
 
 
@@ -198,14 +205,17 @@ fieldset{
 
 /*-------------Animation-----------------------*/
 
-/*@keyframes float_contacts{
 
-  	0%, 100% {margin-top: 1%;}
-    23% { margin-top: 15%;}
-    50% { margin-top: 35%;}
-    58% { margin-top: 27%;}
-    75% { margin-top: 18%;}
-}*/
+
+@keyframes opacityFlashVisible{
+	0%, 100% {
+  		opacity: 0
+	}
+	50% {
+		opacity: 1
+	}
+}
+
 
 @keyframes hoverAnimateContacts{
 
@@ -317,8 +327,6 @@ fieldset{
 	height: 100%;
 	z-index: 55;
 	background-color: #101420eb;  
-	/*#101420ba;*/
-
 }
 
 /*----------------------------------------------------------------------------*/
@@ -329,13 +337,11 @@ fieldset{
 	display: flex;
 	width: 20%;
 	height: 12%;
-	background-color: #101420eb;
 	color: white;
 	align: center;
-	/*font-style: oblique;*/
 	font-family: monospace;
 	z-index: 100;
 	bottom: 5%;
-	left: 35%;
+	left: 38%;
 }
 

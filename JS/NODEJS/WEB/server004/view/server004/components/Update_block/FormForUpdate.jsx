@@ -10,17 +10,14 @@ class FormForUpdate extends React.Component {
 
 		this.state = {
 			visibleUpdateForm : false,
-			// form : this.props.data
 			name : this.props.data.name,
 			lastname : this.props.data.lastname,
 			numberPhone :  this.props.data.number_phone,
 			email : this.props.data.email,
 			img: this.props.data.img
-			// id:  this.props.data.id
 		}
 
 		this.updateForm = this.updateForm.bind(this);
-		// this.img = this.props.data.img;
 	}
 	
 	updateForm(url) {
