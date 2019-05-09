@@ -7,7 +7,7 @@ class Flash extends React.Component {
 		
 		this.state = {
 			flashMsg : this.props.flashMsg
-		}
+		} 
 	}
 
 	componentWillReceiveProps(updatedProps) {		
@@ -20,7 +20,7 @@ class Flash extends React.Component {
 
 	render() {
 		return(
-			<div id='flash' className='visibleFlash'> 
+			<div id='flash'> 
 				<h3>{this.state.flashMsg}</h3>
 			</div>
 			);
@@ -28,9 +28,3 @@ class Flash extends React.Component {
 }
 
 export default Flash;
-
-
-		// this.state = {
-		// 	flashMsg : this.props.flash.msg,
-		// 	visible : this.props.flash.visible
-		// }

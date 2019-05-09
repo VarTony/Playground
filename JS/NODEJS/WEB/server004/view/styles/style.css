@@ -17,14 +17,6 @@ body {
 	visibility: visible;
 }
 
-
-
-.visibleFlash {
-	animation: opacityFlashVisible 5s linear;
-}
-
-
-
 /*form img*/
 #GID {
 	width: 92%;
@@ -341,7 +333,8 @@ fieldset{
 	align: center;
 	font-family: monospace;
 	z-index: 100;
-	bottom: 5%;
-	left: 38%;
+	/*bottom: 5%;*/
+	top: 2%;
+	left: 15%;
 }
 

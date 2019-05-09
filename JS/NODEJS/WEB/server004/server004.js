@@ -4,6 +4,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const requestsToDatabase = require('./requestsToDatabase');
+const helpers = require('./helpers');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -206,7 +207,7 @@ app.delete('/DeleteContact/:id', (req, res) => {
 
 	db.run(`DELETE FROM contacts WHERE id=(?);`, id, err => err 
 		? res.send(err)
-		: res.send(`Contact deleted, id:${id}.`)
+		: res.send(`Contact deleted - (id:${id}).`)
 	);
 });
 

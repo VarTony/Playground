@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const helpers = require('./helpers');
 
 const selectAll = (req, res, db, offset = 1) => { 
 	
@@ -33,26 +34,12 @@ const flashHandler = (data, res, req, form, msg) => {
 }
 
 
-const checknPhoneValid = number => {
-	let ints = number.split('').filter(int => Number(int) !== NaN);
-	console.log(ints.length >= 10 && 15 >= ints.length);
-	return ints.length >= 10 && 15 >= ints.length;
-}
-
-
-const checkEmailValid = email => {
-	let requiredСhars = email.split('').filter(char  => char === '@' || char === '.')
-	console.log(requiredСhars);
-	return requiredСhars.length >= 2 && requiredСhars[1] === '.'; 
-}
-
-
 const checkExistContact = (db, form, id=false) => {
 	return new Promise((res, rej) =>{
 		id ?`SELECT * FROM contacts WHERE id!=${id} AND (email=(?) OR number_phone=(?))`
 		   :`SELECT * FROM contacts WHERE email=(?) OR number_phone=(?)`;	 		
 	 	let data = [form.email, form.numberPhone];
-	 	 	
+
 	 	db.get(sql, data, (err, data) => {						
 			data === undefined? rej(err): res(data);
 		});
@@ -61,14 +48,14 @@ const checkExistContact = (db, form, id=false) => {
 
 
 const contactUpdater = (res, req, form, db, cookie, id) => {
-	if(checkEmailValid(form.email) && checknPhoneValid(form.numberPhone)) {
+	if(helpers.checkEmailValid(form.email) && helpers.checknPhoneValid(form.numberPhone)) {
 		let data = [form.name, form.lastname, form.email, form.numberPhone, id]; 
 		db.run(`UPDATE contacts SET name=(?), lastname=(?), email=(?), number_phone=(?)  WHERE id=(?)`, data, err => {
 			if (err) {
     			return console.error(err.message);
  			}
  			console.log(`Contact updated, id: ${id}`);
- 			res.send(`Contact updated, id:${id}.`);
+ 			res.send(`Contact updated - (id:${id}).`);
 		});
 	}
 	else {
@@ -81,7 +68,7 @@ const contactCreater = (res, req, form, db, cookie) => {
 	let img = req.body.img;
 	let imgpath = '';
 
-	if(checkEmailValid(form.email) && checknPhoneValid(form.numberPhone)) {
+	if(helpers.checkEmailValid(form.email) && helpers.checknPhoneValid(form.numberPhone)) {
 		
 		let imgFileName = `${form.lastname}${form.email.split('@')[0]}@${form.email.split('@')[1].split('.')[0]}.png`; 
 		

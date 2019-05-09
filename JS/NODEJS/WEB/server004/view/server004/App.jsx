@@ -79,7 +79,7 @@ class App extends React.Component {
 		this.flashMsg = msg;
 		setTimeout(() => {
 			this.flashMsg = '';
-		}, 5000);
+		}, 500);
 	}
 
 
