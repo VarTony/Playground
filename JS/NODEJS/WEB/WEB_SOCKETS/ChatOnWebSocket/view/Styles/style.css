@@ -1,8 +1,19 @@
+
+body {
+	background-color: #2a2c40;
+}
+
 	
 audio {
 	display: none;
 }
 	
+/*#Chat {
+	top: 10%;
+	width: 50%;
+	height: 80%
+}*/
+
 
 .list-group {
 	margin-top: 12px;
@@ -16,7 +27,7 @@ audio {
 	z-index: 2;
 }
 
-#main {
+#MsgForm {
 	height: 50%;
 	width: 50%;
 	margin-left: 25%;

@@ -1,5 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
+import Chat from './Components/Chat/Chat';
+import Audio from './Components/Audio';
 
 class App extends React.Component {
 
@@ -7,12 +9,13 @@ class App extends React.Component {
 		super(props);
 	}
 
-
 	render() {
 		return(
 			<div>
-				<h1> Hello, Term!!! </h1>
-			</div>);
+				<Audio />
+				<Chat />		
+			</div>
+		);
 	}
 }
 
