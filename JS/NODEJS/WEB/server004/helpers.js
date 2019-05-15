@@ -11,11 +11,30 @@ const checknPhoneValid = number => {
 }
 
 
+const stopChars = ['$', '{', '}', '[', ']', '\\', '<', '/', '>', '#', '%'];
+
+const charsControler = (char, sChrs = stopChars) => {
+	let i = 0;
+	while(sChrs.length -1 >= i) {
+		if(sChrs[i] === char) return false;
+		i++;
+	}
+	return true;
+}
+
+const dataValidator = form => {
+	for(let key in form) {
+		form[key] = form[key].split('').filter(char => charsControler(char)).join('');
+	}
+}
+
+
 const checkEmailValid = email => {
 	let requiredСhars = email.split('').filter(char  => char === '@' || char === '.')
 	console.log(requiredСhars);
-	return requiredСhars.length >= 2 && requiredСhars[1] === '.'; 
+	return requiredСhars.length >= 2 && requiredСhars[1] === '.';
 }
 
 module.exports.checknPhoneValid = checknPhoneValid;
 module.exports.checkEmailValid = checkEmailValid;
+module.exports.dataValidator = dataValidator;
