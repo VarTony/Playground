@@ -11,7 +11,7 @@ const checknPhoneValid = number => {
 }
 
 
-const stopChars = ['$', '{', '}', '[', ']', '\\', '<', '/', '>', '#', '%'];
+const stopChars = ['$', '{', '}', '[', ']', '\\', '<', '/', '>', '#', '%', '`', '\'', '"'];
 
 const charsControler = (char, sChrs = stopChars) => {
 	let i = 0;
@@ -23,9 +23,8 @@ const charsControler = (char, sChrs = stopChars) => {
 }
 
 const dataValidator = form => {
-	for(let key in form) {
-		form[key] = form[key].split('').filter(char => charsControler(char)).join('');
-	}
+	console.log('form :    |||| ', form)
+	for(let key in form) form[key] = form[key].split('').filter(char => charsControler(char)).join('');
 }
 
 
