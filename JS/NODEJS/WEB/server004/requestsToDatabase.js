@@ -26,7 +26,7 @@ const selectContactForUpdate = (req, res, db, id) => {
 			}).catch(err => console.error(err));
 }
 
-const flashHandler = (data, res, req, form, msg) => {
+const flashHandler = (data, req, res, form, msg) => {
 		let flashMsg = {
 			'Cantact_already_exist': `Contact with email: ${form.email} or phone number: ${form.numberPhone} already exist`,
 			'Not_valid_email_or_phone_data' : `Email: ${form.email} or phone: ${form.numberPhone} data, not valid`
@@ -49,7 +49,7 @@ const checkExistContact = (db, form, id=false) => {
 }
 
 
-const contactUpdater = (res, req, form, db, cookie, id) => {
+const contactUpdater = (req, res, form, db, cookie, id) => {
 	helpers.dataValidator(form);
 
 	if(helpers.checkEmailValid(form.email) && helpers.checknPhoneValid(form.numberPhone)) {
@@ -63,12 +63,12 @@ const contactUpdater = (res, req, form, db, cookie, id) => {
 		});
 	}
 	else {
-		flashHandler(null, res, req, form, 'Not_valid_email_or_phone_data')
+		flashHandler(null, req, res, form, 'Not_valid_email_or_phone_data')
 	}
 }
 
 
-const contactCreater = (res, req, form, db, cookie) => {
+const contactCreater = (req, res, form, db, cookie) => {
 	let img = req.body.img;
 	let imgpath = '';
 	helpers.dataValidator(form);
@@ -88,27 +88,35 @@ const contactCreater = (res, req, form, db, cookie) => {
 		});
 	}
 	else {
-		flashHandler(null, res, req, form, 'Not_valid_email_or_phone_data')
+		flashHandler(null, req, res, form, 'Not_valid_email_or_phone_data')
 	}
 }
 
 
-const createContact = (response, request, db, cookie) => {
+const createContact = ( request, response, db, cookie) => {
 	let form = request.body.form;
 	cookie = cookie.split('=')[1];
 	checkExistContact(db, form)
-	.then(data =>  flashHandler(data, response, request, form, 'Cantact_already_exist'))
-	.catch(() => contactCreater(response, request, form, db, cookie));
+	.then(data =>  flashHandler(data, request, response, form, 'Cantact_already_exist'))
+	.catch(() => contactCreater(request, response, form, db, cookie));
 
 }
 
-const updateContact = (response, request, db, cookie, id) => {
+const updateContact = (request, response, db, cookie, id) => {
 	let form = request.body.form;
 	cookie = cookie.split('=')[1];
 	checkExistContact(db, form, id)
-	.then(data =>  flashHandler(data, response, request, form, 'Cantact_already_exist'))
-	.catch(() => contactUpdater(response, request, form, db, cookie, id));
+	.then(data =>  flashHandler(data, request,  response, form, 'Cantact_already_exist'))
+	.catch(() => contactUpdater(request, response, form, db, cookie, id));
 }
+
+const deleteContact = (req, res, db, cookie, id) => {
+	db.run(`DELETE FROM contacts WHERE id=(?);`, id, err => err
+		? res.send(err)
+		: res.send(`Contact deleted - (id:${id}).`)
+	);
+}
+
 
 
 
@@ -117,3 +125,4 @@ module.exports.selectAll = selectAll;
 module.exports.updateContact = updateContact;
 module.exports.selectContactForUpdate = selectContactForUpdate;
 module.exports.createContact = createContact;
+module.exports.deleteContact = deleteContact;

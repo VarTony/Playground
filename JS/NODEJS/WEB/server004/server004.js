@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-// const flash = require('connect-flash');
 const requestsToDatabase = require('./requestsToDatabase');
 const helpers = require('./helpers');
 const fs = require('fs');
@@ -10,8 +9,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const jsonParser = express.json();
 const sqlite3 = require('sqlite3').verbose();
-const uuidv1 = require('uuid/v1');
-const uuidv4 = require('uuid/v4');
 let db, cookie, newUser;
 const port = 1971;
 let offset = 0;
@@ -24,9 +21,6 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use(cookieParser('cookie'));
-// app.use(session({cookie: { maxAge: 1800}}));
-// app.use(flash());
-
 
 //------------------------------------------------------------
 
@@ -35,7 +29,6 @@ app.use(cookieParser('cookie'));
 
 const checkExistDb = (cookie, newUser = false) => {
 	let dbList = fs.readdirSync(path.join(__dirname, 'db/copiesDb'));
-	// cookie = cookie.length > 25? cookie.split(';')[0] : cookie;
 	cookie = !newUser ? cookie.split('=')[1] : cookie;
 	console.log(cookie);
 
@@ -106,38 +99,18 @@ setInterval(dbControler, (60000 * 5)); //
 
 app.get('/', (req, res) => {
 	cookie = req.headers.cookie;
-	console.log(
-	 `cookie: ${cookie}\n`,
-	 `method: ${req.method}\n`,
-	 `protocol: ${req.protocol}\n`,
-	 `accepts: ${req.accepts(['text/html', 'image/png', 'application/javascript', 'text/javascript', 'text/css'])}\n`,
-	 `ip : ${req.ip}`
-	);
+	// console.log(
+	//  `cookie: ${cookie}\n`,
+	//  `method: ${req.method}\n`,
+	//  `protocol: ${req.protocol}\n`,
+	//  `accepts: ${req.accepts(['text/html', 'image/png', 'application/javascript', 'text/javascript', 'text/css'])}\n`,
+	//  `ip : ${req.ip}`
+	// );
 
-	console.log(cookie === undefined, 'cookie === undefined')
+	// console.log(cookie === undefined, 'cookie === undefined')
 	if(cookie === undefined){
-		// console.log('\nno exist\n');
-		const takeIdPart = (uid, part) => uid().split('-')[part];
-		newUser = uuidv4();
-		while(true) {
-			console.log(!checkExistDb(newUser));
-			if(checkExistDb(newUser, true)) newUser = uuidv4();
-			else break;
-		}
-
-		res.setHeader('Set-Cookie', `cookie=user:${newUser}`, {maxAge:  new Date(Date.now() + 1800)});  
-		cookie = `user:${newUser}`
-
-	////////////////////
-
-		fs.copyFileSync(path.join(__dirname, '/db/server004.db'), path.join(__dirname, `/db/copiesDb/${cookie}|30.db`));
-		
-
-			fs.mkdirSync(path.join(__dirname, `/view/sessionsImg/${cookie}`));
-			db = new sqlite3.Database(`./db/copiesDb/${cookie}|30.db`);
-			res.set('Cache-Control', 'no-cache');
-			res.sendFile(path.join(__dirname, '/view/server004.html'));
-			return;
+	cookie = helpers.createNewUserName(req, res, checkExistDb);
+	db = helpers.createNewDataBase(req, res, db, cookie, sqlite3);
 	}
 
 	else{
@@ -145,7 +118,7 @@ app.get('/', (req, res) => {
 		fs.readdir(path.join(__dirname, '/db/copiesDb'), (err, data) => {
 
 			if(err){
-				console.error(err)
+				console.error(err);
 				return;
 		}
 
@@ -161,7 +134,7 @@ app.get('/', (req, res) => {
 			}
 
 			else {
-				console.log(cookie, 'cookie else');
+				// console.log(cookie, 'cookie else');
 				res.clearCookie('cookie');
 				res.clearCookie('connect.sid');
 				res.redirect('/');
@@ -194,7 +167,7 @@ app.get('/UpdateContact/:id', (req, res) => {
 
 app.post('/CreateContact', (req, res) => {
 	cookie = req.headers.cookie;
-	if(checkExistDb(cookie)) requestsToDatabase.createContact(res, req, db, cookie);
+	if(checkExistDb(cookie)) requestsToDatabase.createContact(req, res, db, cookie);
 	else res.redirect('/');
 
 });
@@ -203,7 +176,7 @@ app.post('/CreateContact', (req, res) => {
 app.put('/UpdateContact/:id', (req, res) => {
 	let id = req.params.id;
 	cookie = req.headers.cookie;
-	if(checkExistDb(cookie)) requestsToDatabase.updateContact(res, req, db, cookie, id);
+	if(checkExistDb(cookie)) requestsToDatabase.updateContact(req, res, db, cookie, id);
 	else res.redirect('/');
 });
 
@@ -211,11 +184,9 @@ app.put('/UpdateContact/:id', (req, res) => {
 
 app.delete('/DeleteContact/:id', (req, res) => {
 	let id = req.params.id;
-
-	db.run(`DELETE FROM contacts WHERE id=(?);`, id, err => err
-		? res.send(err)
-		: res.send(`Contact deleted - (id:${id}).`)
-	);
+	console.log(req.headers.cookie);
+	if(checkExistDb(cookie)) requestsToDatabase.deleteContact(req, res, db, cookie, id);
+	else res.redirect('/');
 });
 
 
