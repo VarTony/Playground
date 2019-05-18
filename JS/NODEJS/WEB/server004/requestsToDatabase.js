@@ -1,8 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const helpers = require('./helpers');
-
-
+const helpersForValidateForm = require('./helpers/helpersForValidateForm');
 
 const selectAll = (req, res, db, offset = 1) => {
 
@@ -50,9 +48,9 @@ const checkExistContact = (db, form, id=false) => {
 
 
 const contactUpdater = (req, res, form, db, cookie, id) => {
-	helpers.dataValidator(form);
+	helpersForValidateForm.formDataValidator(form);
 
-	if(helpers.checkEmailValid(form.email) && helpers.checknPhoneValid(form.numberPhone)) {
+	if(helpersForValidateForm.checkEmailValid(form.email) && helpersForValidateForm.checknPhoneValid(form.numberPhone)) {
 		let data = [form.name, form.lastname, form.email, form.numberPhone, id];
 		db.run(`UPDATE contacts SET name=(?), lastname=(?), email=(?), number_phone=(?)  WHERE id=(?)`, data, err => {
 			if (err) {
@@ -71,9 +69,9 @@ const contactUpdater = (req, res, form, db, cookie, id) => {
 const contactCreater = (req, res, form, db, cookie) => {
 	let img = req.body.img;
 	let imgpath = '';
-	helpers.dataValidator(form);
+	helpersForValidateForm.formDataValidator(form);
 
-	if(helpers.checkEmailValid(form.email) && helpers.checknPhoneValid(form.numberPhone)) {
+	if(helpersForValidateForm.checkEmailValid(form.email) && helpersForValidateForm.checknPhoneValid(form.numberPhone)) {
 
 		let imgFileName = `${form.lastname}${form.email.split('@')[0]}@${form.email.split('@')[1].split('.')[0]}.png`;
 
@@ -104,6 +102,7 @@ const createContact = ( request, response, db, cookie) => {
 
 const updateContact = (request, response, db, cookie, id) => {
 	let form = request.body.form;
+	console.log(form);
 	cookie = cookie.split('=')[1];
 	checkExistContact(db, form, id)
 	.then(data =>  flashHandler(data, request,  response, form, 'Cantact_already_exist'))
