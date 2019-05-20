@@ -27,23 +27,7 @@ class Canvas extends Component   {
 				if(this.readyState === 4 && this.status === 200) {
 					console.log(this.responseText);
 					win.src = this.responseText;
-				// 	win.onload  = () => {
-						// win.classList.add('hiddenBackgtound');
-						// win.transitionend = () => {
-						// 	win.classList.remove('hiddenBackgtound');
-						// 	win.removeEventListener('transitionend');
-				// 		}
-						
-				// 		// win.style.visibility = 'visible';
-
-						// win.classList.add('showBackgtound');
-						// win.transitionend = () => {
-						// 	win.classList.remove('showBackgtound');
-						// 	win.removeEventListener('transitionend');
-
-				// 	}
-				// } 
-			}
+			  }
 			}
 		}	
 
