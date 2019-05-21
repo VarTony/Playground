@@ -1,0 +1,9 @@
+#taskbar{
+  position: absolute;
+  height: 100%;
+  width: 2.3%;
+  top: 0;
+  left: 0;
+  background-color: #1b1627f0;
+  z-index: 16;
+}

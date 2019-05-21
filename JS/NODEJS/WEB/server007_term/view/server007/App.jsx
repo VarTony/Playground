@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Term from './Components/term/Term';
+import Taskbar from './Components/taskbar/Taskbar.jsx';
 
 
 class App extends React.Component {
@@ -22,17 +23,16 @@ componentDidMount() {
 	let h = canvas.height = window.innerHeight;
 	let t = 1;
 	let grd=ctx.createLinearGradient(10, 100, w, 0);
-	grd.addColorStop(0,"#101");
-	grd.addColorStop(1,'#0d151b');
+	grd.addColorStop(0,'#0d151b');
+	grd.addColorStop(1,'#1b2036'); //'#1e243e'
 
 	const draw = (a, b, t) => {
   	ctx.lineWidth = 0.8;
-  	// ctx.fillStyle = '#101';
   	ctx.fillStyle = grd;
 
   	ctx.fillRect(0, 0, w, h);
-  	for (let i = -128; i < 128; i += 1) {
-    	ctx.strokeStyle = '#7787da08';   //`${color}08`; //brush '#165d5008'
+  	for (let i = 0; i < 128; i += 1) {
+    	ctx.strokeStyle = '#7787da08';   //`${color}08`; //brush '#165d5008' '#7787da08' '#b097ee08'
     	ctx.beginPath();
     	ctx.moveTo(0, h / 2);
     	for (let j = 0; j < w; j += 10) {
@@ -42,14 +42,13 @@ componentDidMount() {
           	Math.sin(j / 64 - t / 64 - i / 118) +
           	(i * 0.9) * Math.sin(j / 35 - (i + t) / 75)));
     	};
-    	ctx.stroke();
-  	}
+			ctx.stroke();
+		}
 	}
 
 	window.addEventListener('resize', () => {
   	canvas.width = w = window.innerWidth;
   	canvas.height = h = window.innerHeight;
-  	// ctx.fillStyle = '#101';
   	ctx.fillStyle=grd;
 	}, false);
 
@@ -63,9 +62,15 @@ componentDidMount() {
 }
 
 
+
+
+
+
+
 	render() {
 		return(
 			<div>
+				<Taskbar/>
 				<Term/>
 				<canvas id='canvas' ref="canvas"> </canvas>
 			</div>);
