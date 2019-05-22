@@ -15,7 +15,6 @@ componentDidMount() {
 	const ctx = canvas.getContext('2d');
 	let color = `#${(Math.floor(Math.random() * (12131217 - 1200000)) + 1200000).toString(16)}` //#24adac08 #346e6e08
 
-
 	console.log(color + '08');
 
 
