@@ -8,3 +8,27 @@
   /* #3a0c0cc7; */
   z-index: 16;
 }
+
+.taskbar_info_li{
+  margin-top: 68%;
+  font-size: 85%;
+  text-align: center;
+}
+
+#energy{
+  top: 70%;
+  position: absolute;
+  height: 25%;
+  width: 100%;
+  background: url('../energy.png') no-repeat 100% 100% ; /* */
+  background-size: cover;
+  background-position: center;
+}
+
+#taskbar_info {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 30%;
+  width: 100%;
+}

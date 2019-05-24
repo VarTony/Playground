@@ -20,10 +20,16 @@ body{
   z-index: 2;
 }
 
-
-
-
-
 #back{
   display: none;
+}
+
+.charging {
+  color: #afc73ac4;
+  font-family: sans-serif;
+}
+
+.not_charging {
+    color: #d5efd9c4;
+    font-family: sans-serif;
 }
