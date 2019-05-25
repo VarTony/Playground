@@ -59,6 +59,7 @@ padding: 0;
 }
 
 #log_field_term::-webkit-scrollbar {
+  font-family: monospace;
   background-color: #282342a8;  /* #5d0a0a57; */
   width: 8px;
   outline: 5px solid white;

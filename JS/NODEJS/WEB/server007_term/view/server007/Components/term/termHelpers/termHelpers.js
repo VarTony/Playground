@@ -14,14 +14,14 @@ const handlerLogs = logs => {
 
   let newLogs = [];
   newLogs = logs.map(log =>   {
-    let response = log.response.split(' ')[0] !== 'Command'
+    // console.log('|',log.response.split(' ')[0],'|')
+    let response = log.response.split(' ')[0] !== 'Command' && log.response.split(' ')[0] !== 'Path'
       ? log.response.split(' ').map(res => <li className='logs_with_indent' key={keyGenerate()}>{res}</li>)
       : log.response;
 
       return (
         <ul className='logs_list' key={keyGenerate()}>
-          <br/>
-          <br/>
+          {log.response !== '' && <br/>}
           <li className='logs' key={keyGenerate()}>{log.comand}</li>
           {response}
         </ul>);

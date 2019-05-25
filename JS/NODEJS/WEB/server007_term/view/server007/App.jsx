@@ -30,11 +30,6 @@ componentDidMount() {
 
 	else this.setState({energyLvl : 'NaN%'});
 //////////////////////////////////////////
-	const rec = () => {
-		console.log(this.state)
-		setTimeout(rec, 5000);
-	}
-	rec();
 
 	const canvas = this.refs.canvas;
 	const ctx = canvas.getContext('2d');
@@ -55,7 +50,7 @@ componentDidMount() {
 
   	ctx.fillRect(0, 0, w, h);
   	for (let i = 0; i < 128; i += 1) {
-    	ctx.strokeStyle = this.state.chargeBattery ? '#cfe28408' : '#7787da08';   //`${color}08`; //brush '#165d5008' '#7787da08' '#b097ee08'
+    	ctx.strokeStyle = this.state.chargeBattery ? '#afd65408' : '#7787da08';   //`${color}08`; //brush '#165d5008' '#7787da08' '#b097ee08'
     	ctx.beginPath();
     	ctx.moveTo(0, h / 2);
     	for (let j = 0; j < w; j += 10) {
@@ -85,7 +80,6 @@ componentDidMount() {
 }
 
 	render() {
-		// setTimeout(() => this.setState({chargeBattery: !this.state.chargeBattery})  ,5000)
 		return(
 			<div>
 

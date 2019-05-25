@@ -5,7 +5,9 @@ const path = require('path');
 const jsonParser = express.json();
 const bodyParser = require('body-parser');
 const ls = require('./term_comands/main/ls');
-const comands =  {'ls' : ls};
+const cd = require('./term_comands/main/cd');
+const pwd = require('./term_comands/main/pwd');
+const comands =  {'ls' : ls, 'cd': cd, 'pwd' : pwd.read(true)};
 
 app.use(express.static('view'));
 app.use(bodyParser.json({limit: '50mb'}));
@@ -17,9 +19,11 @@ app.get('/',  (req, res) => {
 });
 
 app.post('/termComand',  (req, res) => {
- let comand = req.body.comand;
+ let comand = req.body.comand.split(' ')[0];
+ let argument = req.body.comand.split(' ')[1];
+ console.log(argument);
  console.log(req.body);
- if(comands[comand]) comands[comand](res, req);
+ if(comands[comand]) argument ?comands[comand](req, res, argument) :comands[comand](req, res);
  else res.send(`Command '${comand}' not found.`)
 });
 
