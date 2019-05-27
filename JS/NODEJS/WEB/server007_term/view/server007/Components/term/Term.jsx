@@ -8,7 +8,8 @@ class Term extends React.Component {
     super(props);
     this.state = {
       comand : '',
-      logs : []
+      logs : [],
+      chargeBattery: this.props.chargeBattery
     }
   }
 
@@ -21,7 +22,6 @@ class Term extends React.Component {
         this.setState({
           logs: [],
           comand : '',
-          chargeBattery: this.props.chargeBattery
         });
         return;
       }

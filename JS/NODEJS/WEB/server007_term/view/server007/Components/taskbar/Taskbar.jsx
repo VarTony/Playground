@@ -1,5 +1,6 @@
 import React from 'react';
 // import {} from './taskbarHelpers/taskbarHelpers.js';
+import Clock from './Clock';
 
 class Taskbar extends React.Component {
   constructor(props){
@@ -9,7 +10,6 @@ class Taskbar extends React.Component {
       chargeBattery: this.props.chargeBattery
     }
   }
-
 
   componentWillReceiveProps(updatedProps) {
     this.setState({
@@ -29,6 +29,7 @@ class Taskbar extends React.Component {
           <div id='energy'>
             <li className={this.state.chargeBattery? 'charging taskbar_info_li': 'not_charging taskbar_info_li'}>{this.state.energyLvl}</li>
           </div>
+          <Clock time={this.props.time} chargeBattery={this.props.chargeBattery} />
         </ul>
         </div>
 

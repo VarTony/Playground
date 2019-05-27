@@ -25,6 +25,20 @@
   background-position: center;
 }
 
+#clock {
+  top: 50%;
+  position: absolute;
+  height: 15%;
+  width: 100%;
+  color: #d5efd9c4;
+  font-family: sans-serif;
+}
+
+#clock ul {
+  margin-left: 25%;
+
+}
+
 #taskbar_info {
   position: absolute;
   left: 0;

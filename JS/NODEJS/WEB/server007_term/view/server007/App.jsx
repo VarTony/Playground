@@ -11,6 +11,8 @@ class App extends React.Component {
 		this.state = {
 			energyLvl: '100%',
 			chargeBattery: false,
+			hour: '00',
+			minute: '00'
 		};
 
 
@@ -29,8 +31,25 @@ componentDidMount() {
 	}
 
 	else this.setState({energyLvl : 'NaN%'});
-//////////////////////////////////////////
 
+/////////////////Timer///////////////////
+
+
+// let delay;
+
+const timer = () => {
+		const date =  new Date();
+		let delay = date.getSeconds() > 0? (60 - date.getUTCSeconds()) * 1000 : 60000;
+		this.setState({
+			hour: date.getHours() < 10? `0${date.getHours()}`: date.getHours(),
+			minute: date.getMinutes()
+		});
+		console.log(this.state, ';', delay);
+		setTimeout(timer, delay);
+}
+timer();
+
+///////////////////////////////////////
 	const canvas = this.refs.canvas;
 	const ctx = canvas.getContext('2d');
 
@@ -86,6 +105,7 @@ componentDidMount() {
 				<Taskbar
 				energyLvl={this.state.energyLvl}
 				chargeBattery={this.state.chargeBattery}
+				time={{minute: this.state.minute, hour: this.state.hour}}
 				/>
 
 				<Term chargeBattery={this.state.chargeBattery} />
