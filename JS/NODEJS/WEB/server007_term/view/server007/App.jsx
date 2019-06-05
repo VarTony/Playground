@@ -42,7 +42,7 @@ const timer = () => {
 		let delay = date.getSeconds() > 0? (60 - date.getUTCSeconds()) * 1000 : 60000;
 		this.setState({
 			hour: date.getHours() < 10? `0${date.getHours()}`: date.getHours(),
-			minute: date.getMinutes()
+			minute: date.getMinutes() < 10? `0${date.getMinutes()}`: date.getMinutes()
 		});
 		console.log(this.state, ';', delay);
 		setTimeout(timer, delay);
@@ -69,7 +69,7 @@ timer();
 
   	ctx.fillRect(0, 0, w, h);
   	for (let i = 0; i < 128; i += 1) {
-    	ctx.strokeStyle = this.state.chargeBattery ? '#afd65408' : '#7787da08';   //`${color}08`; //brush '#165d5008' '#7787da08' '#b097ee08'
+    	ctx.strokeStyle = this.state.chargeBattery ? '#7787da10' : '#7787da08';   //`${color}08`; //brush '#165d5008' '#7787da08' '#b097ee08' '#ff8faf08'
     	ctx.beginPath();
     	ctx.moveTo(0, h / 2);
     	for (let j = 0; j < w; j += 10) {
