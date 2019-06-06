@@ -4,7 +4,7 @@ const fs = require('fs');
 const pwdRead = (client=false) => (req=null, res=null) => {
   let pwdPath = fs.readFileSync(path.join(__dirname, './.pwd'), 'utf-8');
   pwdPath = pwdPath.split('/').filter(char => char !== '\n').join('/');
-  if(client) res.send(pwdPath);
+  if(client) res.send({'type':'data', 'data':pwdPath});
   else return pwdPath; //.split('\n')[0]
 }
 
@@ -19,7 +19,7 @@ const pwdWrite = data => {
 const pwdRewrite = (req, res, full=false) => {
   if(full) {
     pwdWrite('/')
-    res.send('');
+    res.send({'type':'native', 'data':''});
     return;
   }
 
@@ -28,7 +28,7 @@ const pwdRewrite = (req, res, full=false) => {
   pwd = pwd.split('/');
   pwd = pwd.splice(0, (pwd.length-2)).join('/') + '/';
   pwdWrite(pwd);
-  res.send('');
+  res.send({'type':'native', 'data':''});
   return;
 }
 

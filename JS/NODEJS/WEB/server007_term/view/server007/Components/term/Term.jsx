@@ -38,7 +38,7 @@ class Term extends React.Component {
 			     },
 			     body : comand
 		})
-		.then(res => res.text())
+		.then(res => res.json())
 		.then(res => {
       console.log('вурнулся : ', res);
       this.setState({

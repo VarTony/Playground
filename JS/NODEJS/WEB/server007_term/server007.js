@@ -5,9 +5,14 @@ const path = require('path');
 const jsonParser = express.json();
 const bodyParser = require('body-parser');
 const termComands = require('./term_comands/termComandsFacade');
-// const cd = require('./term_comands/main/cd');
-// const pwd = require('./term_comands/main/pwd');
-const comands =  {'ls' : termComands.ls, 'cd': termComands.cd, 'pwd' : termComands.pwd.read(true)};
+const comands =  {
+	'ls' : termComands.ls,
+ 	'cd': termComands.cd,
+  'pwd' : termComands.pwd.read(true),
+	'touch' : termComands.touch,
+	'mv' : termComands.mv,
+	'cat' : termComands.cat
+}
 
 app.use(express.static('view'));
 app.use(bodyParser.json({limit: '50mb'}));

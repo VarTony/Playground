@@ -15,7 +15,6 @@ class App extends React.Component {
 			minute: '00'
 		};
 
-
 	}
 
 componentDidMount() {
@@ -33,9 +32,6 @@ componentDidMount() {
 	else this.setState({energyLvl : 'NaN%'});
 
 /////////////////Timer///////////////////
-
-
-// let delay;
 
 const timer = () => {
 		const date =  new Date();
