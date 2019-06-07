@@ -58,6 +58,10 @@ padding: 0;
     left: 0;
 }
 
+.cat_output {
+  color: green;
+}
+
 #log_field_term::-webkit-scrollbar {
   font-family: monospace;
   background-color: #282342a8;  /* #5d0a0a57; */
@@ -71,12 +75,20 @@ padding: 0;
 } */
 
 
+#user_string {
+  position: absolute;
+  color: #d5efd9c4;
+  font-size: 17px;
+  width: 100%;
+}
+
+
 #input_term {
   position: absolute;
-  left: 0;
+  left: 16%;
   bottom: 0;
-  width: 100%;
-  height: 12%;
+  width: 84%;
+  height: 100%;
   border: none;
   font-size: 17px;
   /* color: #7fad76cc; */

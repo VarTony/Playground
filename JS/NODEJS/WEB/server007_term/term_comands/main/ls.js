@@ -13,7 +13,7 @@ const ls = (req, res) => {
     console.log(filenames);
     // filenames = filenames.map(file => fs.statSync(dirpath + file).isDirectory()? `${file}|dir` : `${file}|file`  )
     const result = filenames.join(' \n ');
-    res.send({'type':'data', 'data':result});
+    res.send({'userString': helpers.getUserString(req, res), 'type':'data', 'data':result});
   });
 }
 module.exports = ls;

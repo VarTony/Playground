@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --watch --mode development ",
-    "watch_server" : "nodemon server007.js",
+    "watch_server": "nodemon server007.js",
     "go": "npm-run-all --parallel watch_server webpack"
   },
   "author": "VarTony",
@@ -28,6 +28,7 @@
     "react-dom": "^16.8.5",
     "react-hot-loader": "^4.8.0",
     "sqlite3": "^4.0.6",
+    "uuid": "^3.3.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.4.1"

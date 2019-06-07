@@ -104,7 +104,7 @@ timer();
 				time={{minute: this.state.minute, hour: this.state.hour}}
 				/>
 
-				<Term chargeBattery={this.state.chargeBattery} />
+				<Term chargeBattery={this.state.chargeBattery}  userString={`${document.cookie.split('=')[1].split('-')[0]}:~$`}  />
 				<canvas id='canvas' ref="canvas"> </canvas>
 			</div>);
 	}

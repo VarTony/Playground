@@ -9,7 +9,9 @@ class Term extends React.Component {
     this.state = {
       comand : '',
       logs : [],
-      chargeBattery: this.props.chargeBattery
+      chargeBattery: this.props.chargeBattery,
+      oldUserString : this.props.userString,
+      newUserString : this.props.userString
     }
   }
 
@@ -42,8 +44,10 @@ class Term extends React.Component {
 		.then(res => {
       console.log('вурнулся : ', res);
       this.setState({
-        logs: [...this.state.logs, {comand : this.state.comand, response:  res}],
-        comand : ''
+        logs: [...this.state.logs, {comand : `${this.state.oldUserString} ${this.state.comand}`, response:  res}],
+        comand : '',
+        oldUserString : this.state.newUserString,
+        newUserString : res.userString
       });
       // helpers.
       showLastLog();
@@ -70,7 +74,7 @@ class Term extends React.Component {
 
   render(){
     const logs = handlerLogs(this.state.logs);
-    console.log(logs);
+    console.log(this.state);
     return(
       <div  id='term'>
         <div id='term_header'  className={this.state.chargeBattery? 'charging': 'not_charging'} onMouseDown={(e) => mover(e)}><h3 id='logo_term'>Term_alpha</h3></div>
@@ -80,7 +84,9 @@ class Term extends React.Component {
               {logs}
             </ul>
           </div>
-          <input id='input_term' value={this.state.comand} onChange={e => this.writeInLog(e)} onKeyPress={e => this.handleInput(e)}   />
+          <h3 id='user_string'>{this.state.newUserString}
+            <input id='input_term' value={this.state.comand} onChange={e => this.writeInLog(e)} onKeyPress={e => this.handleInput(e)} />
+          </h3>
         </div>
       </div>
     );

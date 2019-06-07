@@ -17,11 +17,12 @@ const cd = (req, res, newPartPath = 'r00t1115') => {
       fs.stat(`${helpers.creatorPath()}${newPartPath}/`, (err, stat) => {
         if(err) {
           console.error(err);
-          res.send(`Path ${newPartPath} not found or not directory`);
+          res.send({'userString': helpers.getUserString(req, res), 'type':'native', 'data':`Path ${newPartPath} not found or not directory`});
         }else {
           pwdPath = `${pwdPath}${newPartPath}/`;
-          pwd.write(pwdPath);
-          res.send({'type':'native', 'data':''});
+          pwd.write(req, res, pwdPath);
+          return;
+          // res.send({'userString': helpers.getUserString(req, res), 'type':'native', 'data':''});
         }
       });
     });

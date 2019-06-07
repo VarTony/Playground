@@ -20,7 +20,9 @@ const handlerLogs = logs => {
       ? log.response.data.split(' ').map(res => <li className='logs_with_indent' key={keyGenerate()}>{res}</li>)
       : log.response.data;
 
-      return (
+      return log.response.type === 'code'
+      ? (<pre className='cat_output' key={keyGenerate()}>{response}</pre>) 
+      :(
         <ul className='logs_list' key={keyGenerate()}>
           {log.response.data !== '' && <br/>}
           <li className='logs' key={keyGenerate()}>{log.comand}</li>
