@@ -24,7 +24,7 @@ componentDidMount() {
 
 	if(navigator.getBattery){
 		navigator.getBattery().then(battery => {
-			battery.addEventListener('levelchange', () => this.setState({energyLvl : `${+battery.level * 100}%`}));
+			battery.addEventListener('levelchange', () => this.setState({energyLvl : `${Math.floor(+battery.level * 100)}%`}));
 			battery.addEventListener('chargingchange', () => this.setState({chargeBattery: +battery.charging}));
 			});
 	}

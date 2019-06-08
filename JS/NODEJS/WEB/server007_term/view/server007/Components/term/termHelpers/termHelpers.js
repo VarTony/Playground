@@ -21,7 +21,12 @@ const handlerLogs = logs => {
       : log.response.data;
 
       return log.response.type === 'code'
-      ? (<pre className='cat_output' key={keyGenerate()}>{response}</pre>) 
+      ?(
+        <ul className='logs_list' key={keyGenerate()}>
+          {log.response.data !== '' && <br/>}
+          <li className='logs' key={keyGenerate()}>{log.comand}</li>
+          <pre className='cat_output' key={keyGenerate()}>{response}</pre>
+        </ul>)
       :(
         <ul className='logs_list' key={keyGenerate()}>
           {log.response.data !== '' && <br/>}

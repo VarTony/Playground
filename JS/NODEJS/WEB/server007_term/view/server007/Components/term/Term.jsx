@@ -84,9 +84,10 @@ class Term extends React.Component {
               {logs}
             </ul>
           </div>
-          <h3 id='user_string'>{this.state.newUserString}
+          <div id='user_input'>
+            <h3 id='user_string'>{this.state.newUserString}</h3>
             <input id='input_term' value={this.state.comand} onChange={e => this.writeInLog(e)} onKeyPress={e => this.handleInput(e)} />
-          </h3>
+          </div>  
         </div>
       </div>
     );

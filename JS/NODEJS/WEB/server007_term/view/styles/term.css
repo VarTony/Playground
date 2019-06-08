@@ -51,7 +51,7 @@ padding: 0;
 #log_field_term {
     color: #d5efd9c4; /*#7fad76cc;*/
     overflow-y: scroll;
-    scrollbar-color: #5d0a0a57 #282342a8;
+    scrollbar-color: #282342a8 #282342a8;
     /* #a5f; */
     height: 88%;
     width: 100%;
@@ -60,6 +60,7 @@ padding: 0;
 
 .cat_output {
   color: green;
+  margin-left: 5%
 }
 
 #log_field_term::-webkit-scrollbar {
@@ -69,29 +70,36 @@ padding: 0;
   outline: 5px solid white;
 }
 
-/* .scroller {
-  overflow-y: scroll;
-  scrollbar-color: #5d0a0a57;
-} */
 
+
+#user_input {
+  height: 10%;
+  display: flex;
+  flex-wrap: nowrap;
+  bottom: 0;
+}
 
 #user_string {
-  position: absolute;
+  justify-content: flex-start;
+  position: relative;
+  /* align-self: flex-end; */
   color: #d5efd9c4;
   font-size: 17px;
-  width: 100%;
+  flex-basis: content;
 }
 
 
 #input_term {
-  position: absolute;
-  left: 16%;
-  bottom: 0;
-  width: 84%;
-  height: 100%;
+  justify-content: flex-end;
+  align-self: flex-end;
+  flex-basis: content;
+  align-items: flex-end;
+  position: relative;
+  margin-left: 10px;
+  margin-bottom: 2px;
+  font-size: 17px;
   border: none;
   font-size: 17px;
-  /* color: #7fad76cc; */
   color: #d5efd9c4;
   background-color: #0c050e00;
   caret-color: color;

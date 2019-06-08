@@ -1,0 +1,13 @@
+------------------------Comands----------------------
+
+|help - view a list of commands|
+|cp - copy file|
+|ls - display list of directories and files|
+|cat - read file|
+|mv - remove file|
+|touch - make file|
+|mkdir - make directory|
+|cd - change directory|
+|pwd - view personal path|
+
+

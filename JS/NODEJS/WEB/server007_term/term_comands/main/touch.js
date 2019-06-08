@@ -1,10 +1,11 @@
 const path = require('path');
 const fs = require('fs');
 const pwd = require('./pwd');
+const helpers = require('./helpers');
 
-const touch = (req, res, fileName) => {
-  let folderPath = pwd.read()();
-  fs.writeFile(path.join(__dirname, `./${folderPath}${fileName}`), `${fileName}`, err => err? console.error(err) : res.send({'userString': helpers.getUserString(req, res), 'type':'native', 'data':''}));
+const touch = (userName, req, res, fileName) => {
+  let folderPath = pwd.read()(userName);
+  fs.writeFile(path.join(__dirname, `../../users/${userName}${folderPath}${fileName}`), `${fileName}`, err => err? console.error(err) : res.send({'userString': helpers.getUserString(userName, req, res), 'type':'native', 'data':''}));
 }
 
 module.exports = touch;

@@ -2,34 +2,31 @@ const path = require('path');
 const fs = require('fs');
 const helpers = require('./helpers');
 
-const pwdRead = (client=false) => (req=null, res=null) => {
-  let pwdPath = fs.readFileSync(path.join(__dirname, './.pwd'), 'utf-8');
+const pwdRead = (client=false) => (userName, req=null, res=null) => {
+  let pwdPath = fs.readFileSync(path.join(__dirname, `../../users/${userName}/original_system_files/.pwd`), 'utf-8');
   pwdPath = pwdPath.split('/').filter(char => char !== '\n').join('/');
-  if(client) res.send({'userString': helpers.getUserString(req, res), 'type':'data', 'data':pwdPath});
+  if(client) res.send({'userString': helpers.getUserString(userName, req, res), 'type':'data', 'data':pwdPath});
   else return pwdPath;
 }
 
 
-const pwdWrite = (req, res, data) => {
+const pwdWrite = (userName, req, res, data) => {
   console.log('data : ', data);
-  fs.writeFile(path.join(__dirname, './.pwd'), data, err => err? console.error(err): res.send({'userString': helpers.getUserString(req, res), 'type':'native', 'data':''})); //console.log('pwd updated')
+  fs.writeFile(path.join(__dirname, `../../users/${userName}/original_system_files/.pwd`), data, err => err? console.error(err): res.send({'userString': helpers.getUserString(userName, req, res), 'type':'native', 'data':''})); //console.log('pwd updated')
   return;
 }
 
 
-const pwdRewrite = (req, res, full=false) => {
+const pwdRewrite = (userName, req, res, full=false) => {
   if(full) {
-    pwdWrite(req, res, '/')
-    // res.send({'userString': helpers.getUserString(req, res), 'type':'native', 'data':''});
+    pwdWrite(userName, req, res, '/')
     return;
   }
 
-
-  let pwd = pwdRead()();
+  let pwd = pwdRead()(userName);
   pwd = pwd.split('/');
   pwd = pwd.splice(0, (pwd.length-2)).join('/') + '/';
-  pwdWrite(req, res, pwd);
-  // res.send({'userString': helpers.getUserString(req, res), 'type':'native', 'data':''});
+  pwdWrite(userName, req, res, pwd);
   return;
 }
 

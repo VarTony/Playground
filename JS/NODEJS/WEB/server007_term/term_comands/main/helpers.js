@@ -3,21 +3,21 @@ const fs = require('fs');
 const pwd = require('./pwd');
 
 
-const creatorPath = () =>  pwd.read()() === '.'? __dirname :  path.join(__dirname, pwd.read()());
+const creatorPath = userName =>  pwd.read()(userName) === '.'? path.join(__dirname,  `../../users/${userName}`):  path.join(__dirname, `../../users/${userName}/${pwd.read()(userName)}`);
 
 
-const getUserString = (req, res) => {
+const getUserString = (userName, req, res) => {
   let cookie = req.headers.cookie.split('=')[1].split('-')[0];
-  let userPath = pwd.read()();
+  let userPath = pwd.read()(userName);
   return `${cookie}:~${userPath}$`;
 }
 
 
-const pathHandler = (req, res, path) => {
+const pathHandler = (userName, req, res, path) => {
   const pathsForHandler = {
-    '../' : () => pwd.rewrite(req, res),
-    '/' : () => res.send({'userString': getUserString(req, res), 'type':'native', 'data':''}),
-    'r00t1115' : () => pwd.rewrite(req, res, true)
+    '../' : () => pwd.rewrite(userName, req, res),
+    '/' : () => res.send({'userString': getUserString(userName, req, res), 'type':'native', 'data':''}),
+    'r00t1115' : () => pwd.rewrite(userName, req, res, true)
   }
   if(pathsForHandler[path]) {
     pathsForHandler[path]();
@@ -27,8 +27,8 @@ const pathHandler = (req, res, path) => {
 }
 
 
-const checkFileExist = (folderPath, fileName) => {
-  let data = fs.readdirSync(path.join(__dirname, folderPath));
+const checkFileExist = (userName, folderPath, fileName) => {
+  let data = fs.readdirSync(path.join(__dirname, `../../users/${userName}${folderPath}`));
   return data.filter(file => fileName === file)[0]? true : false;
 }
 

@@ -3,26 +3,25 @@ const fs = require('fs');
 const pwd = require('./pwd');
 const helpers = require('./helpers');
 
-const cd = (req, res, newPartPath = 'r00t1115') => {
-  const processed = helpers.pathHandler(req, res ,newPartPath);
+const cd = (userName, req, res, newPartPath = 'r00t1115') => {
+  const processed = helpers.pathHandler(userName, req, res, newPartPath);
 
   if(!processed) {
-    let pwdPath = pwd.read()();
-    fs.readdir(helpers.creatorPath(),  (err, filenames) => {
+    let pwdPath = pwd.read()(userName);
+    fs.readdir(helpers.creatorPath(userName),  (err, filenames) => {
       if(err) {
         console.error(err);
         return;
       }
 
-      fs.stat(`${helpers.creatorPath()}${newPartPath}/`, (err, stat) => {
+      fs.stat(`${helpers.creatorPath(userName)}${newPartPath}/`, (err, stat) => {
         if(err) {
           console.error(err);
-          res.send({'userString': helpers.getUserString(req, res), 'type':'native', 'data':`Path ${newPartPath} not found or not directory`});
+          res.send({'userString': helpers.getUserString(userName, req, res), 'type':'native', 'data':`Path ${newPartPath} not found or not directory`});
         }else {
           pwdPath = `${pwdPath}${newPartPath}/`;
-          pwd.write(req, res, pwdPath);
+          pwd.write(userName, req, res, pwdPath);
           return;
-          // res.send({'userString': helpers.getUserString(req, res), 'type':'native', 'data':''});
         }
       });
     });
