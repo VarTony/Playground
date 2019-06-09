@@ -14,8 +14,6 @@ const handlerLogs = logs => {
 
   let newLogs = [];
   newLogs = logs.map(log =>   {
-    // console.log('|',log.response.split(' ')[0],'|')
-    // let response = log.response.split(' ')[0] !== 'Command' && log.response.split(' ')[0] !== 'Path'
      let response = log.response.type === 'data'
       ? log.response.data.split(' ').map(res => <li className='logs_with_indent' key={keyGenerate()}>{res}</li>)
       : log.response.data;
@@ -64,14 +62,5 @@ const mover = e => {
   }
 }
 
-// const batteryInfo = {
-//   level: `100%`
-// }
 
-  // navigator.getBattery().then(battery => {
-  //   battery.addEventListener('levelchange', () => {
-  //     batteryInfo.level = `${+battery.level * 100}%`
-  //   });
-  // });
-
-export { mover, handlerLogs, showLastLog};
+export { mover, handlerLogs, showLastLog, keyGenerate};

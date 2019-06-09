@@ -25,11 +25,13 @@ body{
 }
 
 .charging {
-  color: #fff;
+  /* color: #fff; */
+  color: #c8f4ff;
   font-family: sans-serif;
 }
 
 .not_charging {
-    color: #d5efd9c4;
+    /* color: #d5efd9c4; */
+    color: #fff;
     font-family: sans-serif;
 }

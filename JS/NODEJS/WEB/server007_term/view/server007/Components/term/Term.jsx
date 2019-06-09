@@ -1,6 +1,7 @@
 import React from 'react';
 import "babel-polyfill";
-import { mover, handlerLogs, showLastLog} from './termHelpers/termHelpers';
+import BtnTerm from './BtnTerm';
+import { mover, handlerLogs, showLastLog, keyGenerate} from './termHelpers/termHelpers';
 
 
 class Term extends React.Component {
@@ -13,6 +14,7 @@ class Term extends React.Component {
       oldUserString : this.props.userString,
       newUserString : this.props.userString
     }
+    this.handlerCloseBtn = this.handlerCloseBtn.bind(this);
   }
 
   handleInput(e){
@@ -64,6 +66,16 @@ class Term extends React.Component {
     });
   }
 
+  handlerCloseBtn(e) {
+    // e.preventDefault();
+    console.log('close btn');
+    this.setState({
+      logs: [],
+      comand : '',
+    });
+
+  }
+
 
   componentWillReceiveProps(updatedProps) {
     this.setState({
@@ -73,11 +85,17 @@ class Term extends React.Component {
 
 
   render(){
-    const logs = handlerLogs(this.state.logs);
+    const logs = handlerLogs(this.state.logs); //not_charging
     console.log(this.state);
     return(
       <div  id='term'>
-        <div id='term_header'  className={this.state.chargeBattery? 'charging': 'not_charging'} onMouseDown={(e) => mover(e)}><h3 id='logo_term'>Term_alpha</h3></div>
+        <div id='term_header'  className={this.state.chargeBattery? 'charging': 'not_charging'} onMouseDown={(e) => mover(e)}>
+          <h3 id='logo_term'>Term_alpha</h3>
+          <div id='term_control_block'>
+            <BtnTerm handlerBtn={this.handlerCloseBtn}>X</BtnTerm>
+            <BtnTerm handlerBtn={this.handlerCloseBtn}>-</BtnTerm>
+          </div>
+        </div>
         <div id='body_term'>
           <div id='log_field_term'>
             <ul className='logs_list'>
@@ -87,7 +105,7 @@ class Term extends React.Component {
           <div id='user_input'>
             <h3 id='user_string'>{this.state.newUserString}</h3>
             <input id='input_term' value={this.state.comand} onChange={e => this.writeInLog(e)} onKeyPress={e => this.handleInput(e)} />
-          </div>  
+          </div>
         </div>
       </div>
     );

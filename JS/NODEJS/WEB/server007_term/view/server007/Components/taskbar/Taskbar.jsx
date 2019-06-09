@@ -1,6 +1,8 @@
 import React from 'react';
-// import {} from './taskbarHelpers/taskbarHelpers.js';
 import Clock from './Clock';
+import Logo from './Logo';
+// import {} from './taskbarHelpers/taskbarHelpers.js';
+
 
 class Taskbar extends React.Component {
   constructor(props){
@@ -23,6 +25,7 @@ class Taskbar extends React.Component {
     return(
       <div id='taskbar'>
         <ul className='taskbar_list'>
+          <Logo />
         </ul>
         <div id='taskbar_info'>
         <ul className='taskbar_list'>
@@ -32,7 +35,6 @@ class Taskbar extends React.Component {
           <Clock time={this.props.time} chargeBattery={this.props.chargeBattery} />
         </ul>
         </div>
-
       </div>
     );
   }
