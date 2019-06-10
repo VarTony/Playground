@@ -37,7 +37,11 @@ const handlerLogs = logs => {
 
 
 const mover = e => {
+
   e.preventDefault();
+  e.stopPropagation();
+  if(e.currentTarget !== e.target) return;
+
   const term = document.querySelector('#term');
   let mousePosition;
   let offset = [term.offsetLeft - e.clientX, term.offsetTop - e.clientY ];

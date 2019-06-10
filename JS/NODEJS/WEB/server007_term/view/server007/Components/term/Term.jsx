@@ -12,7 +12,8 @@ class Term extends React.Component {
       logs : [],
       chargeBattery: this.props.chargeBattery,
       oldUserString : this.props.userString,
-      newUserString : this.props.userString
+      newUserString : this.props.userString,
+      visible: this.props.visible
     }
     this.handlerCloseBtn = this.handlerCloseBtn.bind(this);
   }
@@ -67,19 +68,19 @@ class Term extends React.Component {
   }
 
   handlerCloseBtn(e) {
-    // e.preventDefault();
     console.log('close btn');
     this.setState({
       logs: [],
       comand : '',
     });
-
+    this.props.changeTermVisible(e)
   }
 
 
   componentWillReceiveProps(updatedProps) {
     this.setState({
-        chargeBattery: updatedProps.chargeBattery
+        chargeBattery: updatedProps.chargeBattery,
+        visible : updatedProps.visible
     });
   }
 
@@ -88,12 +89,12 @@ class Term extends React.Component {
     const logs = handlerLogs(this.state.logs); //not_charging
     console.log(this.state);
     return(
-      <div  id='term'>
+      <div  id='term' className={this.state.visible ? 'visible':   'not_visible'}>
         <div id='term_header'  className={this.state.chargeBattery? 'charging': 'not_charging'} onMouseDown={(e) => mover(e)}>
           <h3 id='logo_term'>Term_alpha</h3>
-          <div id='term_control_block'>
-            <BtnTerm handlerBtn={this.handlerCloseBtn}>X</BtnTerm>
-            <BtnTerm handlerBtn={this.handlerCloseBtn}>-</BtnTerm>
+          <div id='term_control_block' onClick={e => e.stopPropagation()}>
+            <BtnTerm  handlerBtn={this.handlerCloseBtn}>X</BtnTerm>
+            <BtnTerm  handlerBtn={this.props.changeTermVisible}>-</BtnTerm>
           </div>
         </div>
         <div id='body_term'>

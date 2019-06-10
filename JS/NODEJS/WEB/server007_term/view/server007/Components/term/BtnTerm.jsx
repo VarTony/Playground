@@ -1,7 +1,6 @@
 import React from 'react';
 
 class BtnTerm extends React.Component {
-
   constructor(props) {
     super(props);
   }
@@ -9,7 +8,7 @@ class BtnTerm extends React.Component {
 
   render() {
     return(
-      <button className='btn_term' onClick={() => console.log('console')}>{this.props.children}</button>
+      <button className='btn_term' onClick={(e) => this.props.handlerBtn(e)}>{this.props.children}</button>
     );
   }
 }

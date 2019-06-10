@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Term from './Components/term/Term';
-import Taskbar from './Components/taskbar/Taskbar.jsx';
+import Toolbar from './Components/toolbar/Toolbar.jsx';
 
 
 class App extends React.Component {
@@ -12,13 +12,13 @@ class App extends React.Component {
 			energyLvl: '100%',
 			chargeBattery: false,
 			hour: '00',
-			minute: '00'
+			minute: '00',
+		  visibleOfTerm : false
 		};
-
+		this.changeTermVisible = this.changeTermVisible.bind(this);
 	}
 
 componentDidMount() {
-
 
 //---------------battery-------------------
 
@@ -94,17 +94,33 @@ timer();
 	run();
 }
 
+	changeTermVisible(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		this.setState((prevState, props) => ({visibleOfTerm : !prevState.visibleOfTerm}));
+	}
+
+
+
+
 	render() {
 		return(
 			<div>
 
-				<Taskbar
+				<Toolbar
 				energyLvl={this.state.energyLvl}
 				chargeBattery={this.state.chargeBattery}
 				time={{minute: this.state.minute, hour: this.state.hour}}
+				changeTermVisible={this.changeTermVisible}
 				/>
 
-				<Term chargeBattery={this.state.chargeBattery}  userString={`${document.cookie.split('=')[1].split('-')[0]}:~$`}  />
+				<Term
+				chargeBattery={this.state.chargeBattery}
+				userString={`${document.cookie.split('=')[1].split('-')[0]}:~$`}
+				changeTermVisible={this.changeTermVisible}
+				visible = {this.state.visibleOfTerm}
+				/>
+
 				<canvas id='canvas' ref="canvas"> </canvas>
 			</div>);
 	}
