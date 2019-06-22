@@ -30,7 +30,6 @@ class Taskbar extends React.Component {
     }
 
     badgeListHandlers[badgeName](e);
-    // this.props.changeTermVisible();
     console.log(contextOfTerm.props);
 
   }
@@ -40,7 +39,6 @@ class Taskbar extends React.Component {
     const badges = this.state.badges.map(badgeName => badgeName === 'logo'?
       <Badge key={badgeName} logo={true}  toolImg={badgeName} tool={() => console.log('JS')}/> :
       <Badge key={badgeName} logo={false} toolImg={badgeName} tool={(e) => this.handlerToolbar(this, e, 'term')}/> );
-    // console.log('badges : ', badges);
     return(
       <div id='toolbar'>
         <div className='badge_list'>
