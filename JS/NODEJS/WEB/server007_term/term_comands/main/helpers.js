@@ -3,7 +3,7 @@ const fs = require('fs');
 const pwd = require('./pwd');
 
 
-const creatorPath = userName =>  pwd.read()(userName) === '.'? path.join(__dirname,  `../../users/${userName}`):  path.join(__dirname, `../../users/${userName}/${pwd.read()(userName)}`);
+const creatorPath = userName =>  pwd.read()(userName) === '.'? path.join(__dirname,  `../../users/${searchUserDir(userName)}`):  path.join(__dirname, `../../users/${searchUserDir(userName)}/${pwd.read()(userName)}`);
 
 
 const getUserString = (userName, req, res) => {
@@ -32,6 +32,11 @@ const checkFileExist = (userName, folderPath, fileName) => {
   return data.filter(file => fileName === file)[0]? true : false;
 }
 
+const searchUserDir = userId => {
+  if(userId.split('|')[1]) return userId;
+  const userDir = fs.readdirSync(path.join(__dirname, '../../users')).filter(dirName => dirName.split('|')[0] === userId);
+  return userDir[0];
+}
 
 
 
@@ -39,3 +44,4 @@ module.exports.creatorPath = creatorPath;
 module.exports.pathHandler = pathHandler;
 module.exports.checkFileExist = checkFileExist;
 module.exports.getUserString  = getUserString;
+module.exports.searchUserDir = searchUserDir;

@@ -3,6 +3,7 @@ const fs = require('fs');
 const helpers = require('./helpers');
 
 const ls = (userName, req, res) => {
+  userName = helpers.searchUserDir(userName);
   const dirpath = helpers.creatorPath(userName);
   const NameOfFile = [];
   fs.readdir(dirpath,  (err, filenames) => {

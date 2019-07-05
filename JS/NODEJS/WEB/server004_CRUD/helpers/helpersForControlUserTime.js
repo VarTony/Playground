@@ -45,7 +45,7 @@ const renameDatabase = (db, id, time) => {
 }
 
 
-const checkTimeUser = (db) => {
+const checkTimeUser = db => {
 	db = db.split('|');
 	let id = db[0];
 	let time = +(db[1].split('.')[0]);

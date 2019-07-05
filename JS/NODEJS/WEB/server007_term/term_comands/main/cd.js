@@ -4,6 +4,7 @@ const pwd = require('./pwd');
 const helpers = require('./helpers');
 
 const cd = (userName, req, res, newPartPath = 'r00t1115') => {
+  userName = helpers.searchUserDir(userName);
   const processed = helpers.pathHandler(userName, req, res, newPartPath);
 
   if(!processed) {
