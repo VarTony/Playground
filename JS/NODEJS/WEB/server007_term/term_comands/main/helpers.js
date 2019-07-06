@@ -33,6 +33,7 @@ const checkFileExist = (userName, folderPath, fileName) => {
 }
 
 const searchUserDir = userId => {
+  if(!userId) return userId;
   if(userId.split('|')[1]) return userId;
   const userDir = fs.readdirSync(path.join(__dirname, '../../users')).filter(dirName => dirName.split('|')[0] === userId);
   return userDir[0];

@@ -4,7 +4,7 @@ const helpers = require('./helpers');
 
 const pwdRead = (client=false) => (userName, req=null, res=null) => {
   userName = helpers.searchUserDir(userName);
-  let pwdPath = fs.readFileSync(path.join(__dirname, `../../users/${userName}/original_system_files/.pwd`), 'utf-8');
+  let pwdPath = fs.readFileSync(path.join(__dirname, `../../users/${userName}/system_files/.pwd`), 'utf-8');
   console.log('pwdPath1', `|${pwdPath}|`);
   pwdPath = pwdPath.split('/').filter(char => char !== '\n').join('/') //pwdPath[0] !== '/'? : pwdPath;
   console.log('pwdPath2', pwdPath);
@@ -16,7 +16,7 @@ const pwdRead = (client=false) => (userName, req=null, res=null) => {
 const pwdWrite = (userName, req, res, data) => {
   userName = helpers.searchUserDir(userName);
   console.log('data : ', data);
-  fs.writeFile(path.join(__dirname, `../../users/${userName}/original_system_files/.pwd`), data, err => err? console.error(err): res.send({'userString': helpers.getUserString(userName, req, res), 'type':'native', 'data':''})); //console.log('pwd updated')
+  fs.writeFile(path.join(__dirname, `../../users/${userName}/system_files/.pwd`), data, err => err? console.error(err): res.send({'userString': helpers.getUserString(userName, req, res), 'type':'native', 'data':''})); //console.log('pwd updated')
   return;
 }
 

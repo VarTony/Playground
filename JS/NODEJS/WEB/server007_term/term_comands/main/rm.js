@@ -3,7 +3,7 @@ const fs = require('fs');
 const pwd = require('./pwd');
 const helpers = require('./helpers');
 
-const mv = (userName, req, res, targetName) => {
+const rm = (userName, req, res, targetName) => {
   userName = helpers.searchUserDir(userName);
   let folderPath = pwd.read()(userName);
   let legalPath = helpers.checkFileExist(userName, folderPath, targetName);
@@ -11,4 +11,4 @@ const mv = (userName, req, res, targetName) => {
   else res.send({'userString': helpers.getUserString(userName, req, res), 'type':'native',  'data':`File with name ${fileName} not found`});
 }
 
-module.exports = mv;
+module.exports = rm;
