@@ -11,7 +11,7 @@ const rmdirRecursiveSync = dirName => {
 }
 
 const renameUserdir = (dirName, userId, time) => {
-	fs.rename(path.join(__dirname, `../users/${dirName[0]+'|'+dirName[1]}`), path.join(__dirname, `./users/${userId}|${time}`), err =>
+	fs.rename(path.join(__dirname, `../users/${dirName[0]+'|'+dirName[1]}`), path.join(__dirname, `../users/${userId}|${time}`), err =>
 		err? console.error(err): console.log('success'));
 }
 
@@ -24,7 +24,7 @@ const checkTimeUser = userDir => {
 	else renameUserdir(dirName, userId, time);
 }
 
-const userDirControler = () =>{
+const controlingUsersDirs = () =>{
 
 	fs.readdir(path.join(__dirname, '../users'), (err, dirUser) => {
 		if(err){
@@ -36,4 +36,16 @@ const userDirControler = () =>{
 	});
 }
 
-module.exports.userDirControler = userDirControler;
+const answerOnNotExistUserDir = res => {
+  const answer = {
+    'userString' : `user:NaN`,
+    'type':'code',
+     'data':`A user with this name has not yet been created, or his time is up.
+      Please reload the page to start a new session`
+  }
+  res.send(answer);
+}
+
+
+module.exports.controlingUsersDirs = controlingUsersDirs;
+module.exports.answerOnNotExistUserDir = answerOnNotExistUserDir;

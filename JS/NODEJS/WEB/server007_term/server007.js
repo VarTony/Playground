@@ -10,7 +10,7 @@ const sqlite3 = require('sqlite3').verbose();
 const termComands = require('./term_comands/termComandsFacade');
 const helpersOfTerm = require('./term_comands/main/helpers');
 const newUserCreator = require('./helpersForServer/newUserCreator');
-const userDirControler = require('./helpersForServer/userDirControler').userDirControler;
+const userDirControler = require('./helpersForServer/userDirControler');
 const comands =  {
 	'ls' : termComands.ls,
  	'cd': termComands.cd,
@@ -19,8 +19,7 @@ const comands =  {
 	'rm' : termComands.rm,
 	'cat' : termComands.cat,
 	'help' : termComands.help
-}
-let cookie;
+};
 
 
 app.use(express.static('view'));
@@ -28,38 +27,34 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cookieParser('cookie'));
 
-setInterval(userDirControler, (60000 * 5));
+setInterval(userDirControler.controlingUsersDirs, (60000 * 5));
 
 app.get('/',  (req, res) => {
-	console.log(req.headers.cookie, ': req.headers.cookie');
+	let cookie = req.headers.cookie;
 	if(!req.headers.cookie) {
 		cookie = newUserCreator.createNewUserId();
-		console.log(cookie, 'if');
 		newUserCreator.createNewUser(req, res, cookie);
 	}
 	else {
-		cookie = req.headers.cookie.split('=')[1].split(':')[1];
+		cookie = cookie.split('=')[1].split(':')[1];
 		if(!helpersOfTerm.searchUserDir(cookie)) {
 				res.clearCookie('cookie');
 				res.redirect('/');
 				return;
 		}
 	}
-
-	console.log(cookie, ': cookie');
 	res.setHeader('Set-Cookie', `cookie=user:${cookie}`, {maxAge:  new Date(Date.now() + 1800)});
 	res.sendFile(path.join(__dirname, 'view/server007.html'));
 });
 
 
 app.post('/termComand',  (req, res) => {
+	const cookie = req.headers.cookie
+		?req.headers.cookie.split('=')[1].split(':')[1]
+		:req.headers.cookie;
+
 	if(!helpersOfTerm.searchUserDir(`user:${cookie}`)) {
-			res.send({
-			'userString' : `user:NaN`,
-			'type':'code',
-			 'data':`A user with this name has not yet been created, or his time is up.
-			 	Please reload the page to start a new session`
-		 });
+		 userDirControler.answerOnNotExistUserDir(res);
 		 return;
 		}
  let comand = req.body.comand.split(' ')[0];
