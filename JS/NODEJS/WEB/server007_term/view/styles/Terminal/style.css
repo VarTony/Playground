@@ -3,6 +3,8 @@ body{
   margin: 0;
   overflow-x: none;
   overflow-y: none;
+  background: url(https://atgbcentral.com/data/out/197/5731071-darkness-wallpaper.jpg) no-repeat;
+  background-size: 100%;
 }
 
 #root{

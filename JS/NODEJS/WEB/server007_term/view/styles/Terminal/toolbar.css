@@ -27,7 +27,7 @@
   position: absolute;
   height: 25%;
   width: 100%;
-  background: url('../energy.png') no-repeat 100% 100% ;
+  background: url('../imgs/toolbarImgs/energy.png') no-repeat 100% 100% ;
   background-size: cover;
   background-position: center;
 }

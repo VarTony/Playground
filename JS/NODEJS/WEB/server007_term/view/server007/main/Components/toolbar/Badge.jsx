@@ -8,7 +8,7 @@ class Badge extends React.Component {
   render() {
     return(
       <div className={this.props.logo? 'logo badge' : 'badge'} onClick={(e) => this.props.tool(e)}>
-        <img src={`./toolbarImgs/${this.props.toolImg}.png`} />
+        <img src={`./imgs/toolbarImgs/${this.props.toolImg}.png`} />
       </div>
     );
   }
