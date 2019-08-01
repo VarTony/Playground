@@ -4,7 +4,7 @@ import React from 'react';
 let color;
 
 class Controlers extends React.Component {
-		
+
 
 	stopPropagation() {
 
@@ -12,96 +12,96 @@ class Controlers extends React.Component {
 
 
 	render () {
-	
-			return	(<nav className='controlers'> 
-						<ul className='tools' 
+
+			return	(<nav className='controlers'>
+						<ul className='tools ul_of_paint'
 							// onMouseDown={e => e.stopPropagation()}
 							// onMouseMove={e => e.stopPropagation()}
 							// onMouseUp={e => e.stopPropagation()}
 							>
-							<li>
-								<h3
+							<li className='li_of_paint'>
+								<h3 className='tools_name'
 								onMouseDown={e => e.stopPropagation()}
 								onMouseMove={e => e.stopPropagation()}
 								onMouseUp={e => e.stopPropagation()}
 
 								>
-									<img className='icons' src='./imgs/icons/palette.svg'/> 
-									<input type='color' onChange={(e) => this.props.takeValues(e)}  id='color' name='color' value={this.props.color} onMouseDown={e => e.stopPropagation()} 
-									onMouseMove={e => e.stopPropagation()} 
-									onMouseUp={e => e.stopPropagation()} /> 
+									<img className='icons' src='./imgs/icons/palette.svg'/>
+									<input type='color' onChange={(e) => this.props.takeValues(e)}  id='color' name='color' value={this.props.color} onMouseDown={e => e.stopPropagation()}
+									onMouseMove={e => e.stopPropagation()}
+									onMouseUp={e => e.stopPropagation()} />
 							</h3>
 						</li>
-						<li>
-							<h3
+						<li className='li_of_paint'>
+							<h3 className='tools_name'
 							onMouseDown={e => e.stopPropagation()}
 							onMouseMove={e => e.stopPropagation()}
 							onMouseUp={e => e.stopPropagation()}
 							>
-								<img className='icons' src='./imgs/icons/ruler.svg'/> 
-								<input type='text' id='ruler'/>
-								px 
+								<img className='icons' src='./imgs/icons/ruler.svg'/>
+								<input className='input_of_paint' type='text' id='ruler'/>
+								px
 							</h3>
 						</li>
-    	 				<li>
-    	 					<h3
+    	 				<li className='li_of_paint'>
+    	 					<h3 className='tools_name'
     	 						onMouseDown={e => e.stopPropagation()}
-								onMouseMove={e => e.stopPropagation()}
-								onMouseUp={e => e.stopPropagation()}
+									onMouseMove={e => e.stopPropagation()}
+									onMouseUp={e => e.stopPropagation()}
     	 					>
-    	 						Tools 
+    	 						Tools
     	 						<img className='icons' src='./imgs/icons/edit.svg'/>
     	 					</h3>
-          					<ul className="submenu brush"
-								onMouseDown={e => e.stopPropagation()}
-								onMouseMove={e => e.stopPropagation()}
-								onMouseUp={e => e.stopPropagation()}
+          					<ul className="submenu brush ul_of_paint"
+											onMouseDown={e => e.stopPropagation()}
+											onMouseMove={e => e.stopPropagation()}
+											onMouseUp={e => e.stopPropagation()}
           						>
-            					<li name='feltTip' onClick={(e) => this.props.takeBrushModel(e)}>
+            					<li className='li_of_paint' name='feltTip' onClick={(e) => this.props.takeBrushModel(e)}>
             						<img className='icons' src='./imgs/icons/brush.svg'/>
             						feltip
             					</li>
-            					<li name='pen' onClick={(e) => this.props.takeBrushModel(e)}>
+            					<li className='li_of_paint' name='pen' onClick={(e) => this.props.takeBrushModel(e)}>
             						<img className='icons' src='./imgs/icons/pen.svg'/>
             						pen
             					</li>
-            					<li name='spray' onClick={(e) => this.props.takeBrushModel(e)}>
+            					<li className='li_of_paint' name='spray' onClick={(e) => this.props.takeBrushModel(e)}>
             						<img className='icons' src='./imgs/icons/spray.svg'/ >
             						spray
             					</li>
-            					<li name='eraser' onClick={(e) => this.props.takeBrushModel(e)}>
+            					<li className='li_of_paint' name='eraser' onClick={(e) => this.props.takeBrushModel(e)}>
             						<img className='icons' src='./imgs/icons/eraser.svg'/>
             						eraser
             					</li>
          					</ul>
         				</li>
-        				<li>
-        					<h3
+        				<li className='li_of_paint'>
+        					<h3 className='tools_name'
         						onMouseDown={e => e.stopPropagation()}
-								onMouseMove={e => e.stopPropagation()}
-								onMouseUp={e => e.stopPropagation()}
+										onMouseMove={e => e.stopPropagation()}
+										onMouseUp={e => e.stopPropagation()}
         					>
-        						Tool-size 
-        						<img className='icons' 
+        						Tool-size
+        						<img className='icons'
         						src='./imgs/icons/roller.svg'/>
         						</h3>
-          					<ul className="submenu tool-size"
-          						onMouseDown={e => e.stopPropagation()}
-								onMouseMove={e => e.stopPropagation()}
-								onMouseUp={e => e.stopPropagation()}
+          					<ul className="submenu tool-size ul_of_paint"
+          							onMouseDown={e => e.stopPropagation()}
+												onMouseMove={e => e.stopPropagation()}
+												onMouseUp={e => e.stopPropagation()}
           					>
-            					<li name='5'  onClick={(e) => this.props.takeSizetool(e)}>5px</li>
-            					<li name='10' onClick={(e) => this.props.takeSizetool(e)}>10px</li>
-            					<li name='15' onClick={(e) => this.props.takeSizetool(e)}>15px</li>
-            					<li name='20' onClick={(e) => this.props.takeSizetool(e)}>20px</li>
-            					<li name='25' onClick={(e) => this.props.takeSizetool(e)}>25px</li>
+            					<li className='li_of_paint' name='5'  onClick={(e) => this.props.takeSizetool(e)}>5px</li>
+            					<li className='li_of_paint' name='10' onClick={(e) => this.props.takeSizetool(e)}>10px</li>
+            					<li className='li_of_paint' name='15' onClick={(e) => this.props.takeSizetool(e)}>15px</li>
+            					<li className='li_of_paint' name='20' onClick={(e) => this.props.takeSizetool(e)}>20px</li>
+            					<li className='li_of_paint' name='25' onClick={(e) => this.props.takeSizetool(e)}>25px</li>
           						</ul>
         					</li>
-        					<li>
-        						<h3	
+        					<li className='li_of_paint'>
+        						<h3 className='tools_name'
         							onMouseDown={e => e.stopPropagation()}
-									onMouseMove={e => e.stopPropagation()}
-									onMouseUp={e => e.stopPropagation()}>
+											onMouseMove={e => e.stopPropagation()}
+											onMouseUp={e => e.stopPropagation()}>
         							<img className='icons' src='./imgs/icons/fill-drip.svg'/>Fill field
         						</h3>
         					</li>

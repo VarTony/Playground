@@ -1,1 +1,0 @@
-import app from './components/Paint.jsx';

@@ -208,7 +208,7 @@ class Canvas extends Component   {
 // width={1000} height={650}
 	render () {
 		return (
-			<canvas ref="canvas" id='canvas' width={1000} height={800} ></canvas>
+			<canvas ref="canvas" id='canvasOfPaint' width={1000} height={800} ></canvas>
 			);
 	}
 }

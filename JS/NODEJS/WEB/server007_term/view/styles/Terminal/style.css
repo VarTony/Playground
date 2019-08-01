@@ -1,8 +1,9 @@
 body{
   padding: 0;
   margin: 0;
-  overflow-x: none;
-  overflow-y: none;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
   background: url(https://atgbcentral.com/data/out/197/5731071-darkness-wallpaper.jpg) no-repeat;
   background-size: 100%;
 }
@@ -26,13 +27,11 @@ body{
 }
 
 .charging {
-  /* color: #fff; */
   color: #c8f4ff;
   font-family: sans-serif;
 }
 
 .not_charging {
-    /* color: #d5efd9c4; */
     color: #fff;
     font-family: sans-serif;
 }

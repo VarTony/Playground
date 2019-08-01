@@ -1,9 +1,9 @@
 
 .controlers {
 
-         width:100%; 
-         background-color: #374177; 
-         position: absolute;
+    width:100%;
+    /* background-color: #48457d33; /*#314473*/ */
+    position: absolute;
 }
 
 #ruler {
@@ -17,8 +17,8 @@
 	height: 15px;
 }
 
-input {
-	margin-left: 10px; 
+.input_of_paint {
+	margin-left: 10px;
 }
 
 }
@@ -26,7 +26,7 @@ input {
 	width: 100%;
 }
 
-h3 {
+.tools_name {
 	margin-left: -15px;
 	width: 100%;
 	position: relative;
@@ -41,7 +41,7 @@ h5 {
 
 }
 
-img {
+.icons {
 	padding: 0;
 	margin: 0;
 	width: 15px;
@@ -52,7 +52,7 @@ img {
 
 
 
-ul {
+.ul_of_paint {
 
 	margin: 0;
 
@@ -60,16 +60,15 @@ ul {
 
 ul.tools {
   	display: inline-flex;
-  	background: #374177;
+  	background: #48457d33;
     list-style: none;
     width: 100%;
     height: 70px;
     padding-left: 0;
 }
 
-li {
+.li_of_paint {
     color: #fff;
-  	background: #374177;
   	width: 20%;
     display: block;
     float: left;
@@ -78,15 +77,15 @@ li {
     text-decoration: none;
   	transition-duration: 0.5s;
 }
-  
 
-li:hover {
-    background: #314473;
+
+.li_of_paint:hover {
+    /* background: #48457d33; */
     cursor: pointer;
 }
 
-ul li ul {
-    background: #374177;
+ul .li_of_paint ul {
+    /* background: #48457d33; */
     visibility: hidden;
   	opacity: 0;
   	min-width: 5rem;
@@ -97,16 +96,15 @@ ul li ul {
   	display: none;
 }
 
-ul li:hover > ul,
-ul li ul:hover {
+ul .li_of_paint:hover > ul,
+ul .li_of_paint ul:hover {
   top: 53px;
   visibility: visible;
   opacity: 1;
   display: block;
 }
 
-ul li ul li  {
+ul .li_of_paint ul .li_of_paint  {
     clear: both;
   	width: 20%;
 }
-
