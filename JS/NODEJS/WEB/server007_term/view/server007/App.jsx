@@ -15,7 +15,7 @@ class App extends React.Component {
     return ( //
         <BrowserRouter>
           <Route path='/' component={Main_page}/>
-          <Route path='/paint' component={Paint}/>
+          <Route path='/' component={Paint}/>
         </BrowserRouter>
 
     );
@@ -24,3 +24,6 @@ class App extends React.Component {
 }
 
 render(<App/>, document.getElementById('root'));
+
+// <Route path='/' component={Main_page}/>
+// <Route path='/paint' component={Paint}/>
