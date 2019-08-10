@@ -1,0 +1,15 @@
+{
+  "block_name" : "b_0",
+  "hash_of_block": "9380dbbb5a5a253b69c14647314bc09173fdf02c74ba86aed081220e7953c33e92e983ec038a728dafcc940283aa42e1b4a551077a66282aa3926a95cb19d153",
+  "transactions" : {
+      "transaction_1" : {
+          "donor" : "0u0fc7aa7fc6f166f9abd35a443a8bd0d215e7d2003eead6659b859709e535ace7",
+          "recipient" : "0u3e988097a8d5cfc66d66a09b20a1baeabdaec3a7fe9bcf3e87b5dff43fcf2992",
+          "amount" : "0.027124193",
+          "fee" : "0.000000021",
+          "time_transaction" : "0000000000",
+          "txid" : "c0646ac2e13d05205d5b3bcf0fa44e67106e8e646e04bc74f3422fcbc9a533a3"
+      }
+  }
+}
+
