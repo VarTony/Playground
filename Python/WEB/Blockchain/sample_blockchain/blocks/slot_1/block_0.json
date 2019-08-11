@@ -1,6 +1,7 @@
 {
   "block_name" : "b_0",
   "hash_of_block": "9380dbbb5a5a253b69c14647314bc09173fdf02c74ba86aed081220e7953c33e92e983ec038a728dafcc940283aa42e1b4a551077a66282aa3926a95cb19d153",
+  "crate_time" : 1565449951.3987496,
   "transactions" : {
       "transaction_1" : {
           "donor" : "0u0fc7aa7fc6f166f9abd35a443a8bd0d215e7d2003eead6659b859709e535ace7",

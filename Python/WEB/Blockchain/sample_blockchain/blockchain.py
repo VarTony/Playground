@@ -1,27 +1,49 @@
-import hashlib, json
+import hashlib, json, os, time
 
 
 class Blockchain:
-    # def __init__(self, amount):
-    #     self.amount : amount
+    def __init__(self):
+        print('blockchain created')
 
-    def get_hash_block(prevBlock):
-        bytes_of_prevBlock = json.dumps(prevBlock)
-        hash = hashlib.sha512(bytes(bytes_of_prevBlock, encoding='utf-8')).hexdigest()
+
+    def get_hash_block(self, prev_block):
+        bytes_of_prev_block = json.dumps(prev_block)
+        hash = hashlib.sha512(bytes(bytes_of_prev_block, encoding='utf-8')).hexdigest()
         return hash
 
-    def get_hash_transaction(transaction):
+    def get_hash_transaction(self, transaction):
         bytes_of_transaction = json.dumps(transaction)
         txid = hashlib.sha256(bytes(bytes_of_transaction, encoding='utf-8')).hexdigest()
         return txid
 
+    def create_block(self):
+        path_to_dir_blocks = os.path.abspath(os.curdir) + '/blocks'
+        block_list = os.listdir(path_to_dir_blocks)
+        last_block = block_list[len(block_list) - 1]
+        last_slot = 'slot_' + str((len(block_list)))
+        number_of_new_block = str(len(os.listdir(path_to_dir_blocks + '/' + last_slot)))
+        # new_block = open(path_to_dir_blocks + '/' + last_slot + 'block_' + number_of_new_block + '.json', 'w') #.close()
+        new_block = open('./blocks/' + last_slot + '/' + 'block_' + number_of_new_block + '.json', 'w+')
+        data = {
+            "block_name": 'b_' + number_of_new_block,
+            "hash_of_prev_block": self.get_hash_block(last_block),
+            "crate_time": time.time(),
+            "transactions": {
+            }
+        }
+        new_block.write(json.dumps(data, indent=4))
+        # new_block.read()
+        new_block.close()
+
+
+def main():
+    blockchain = Blockchain()
+    blockchain.create_block()
 
 
 
-
-
-
-
+if __name__ ==  '__main__':
+    main()
 
 
 #     # hashlib.sha512().update(b'test')
