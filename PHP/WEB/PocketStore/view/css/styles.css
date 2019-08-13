@@ -1,0 +1,80 @@
+#root {
+	width    : 80%;
+	position : center;
+	float    : right;
+}
+
+.bodyExemplar {
+	
+	width: 150px;
+	height: 250px;
+	background-color: orange;
+}
+
+
+.bodyExemplar {
+/*	border: 1px solid #b7cfe6;*/
+	min-width: 288px;
+	max-width: 300px;
+	z-index: 1;
+}
+
+
+#btn {
+	width: 180px;
+	border: 0px solid #4c4282;
+	border-radius: 65px  36px  53px  34px;
+	color: #b7cfe6;
+	background: rgba(31, 71, 97, 0.37);
+	font-family: sans-serif;
+}
+
+#header {
+	display: flex;
+	background: #2d2d46;
+	z-index: 0;
+}
+
+#caption {
+	position: left;
+	color: #b7cfe6;
+}
+
+
+#Card img {
+	height: 75px;
+	width: 75px;
+}
+
+#Card {
+	margin-top: 45%;
+	margin-left: 90%;
+	height:  75px;
+	width: 75px;
+	position: bottom;
+	z-index: 9999999;
+	position: fixed; 
+}
+
+.bodyExemplar img {
+	height: 200px;
+}
+
+#root {
+	width: 100%;
+	position: center;
+}
+
+.Example {
+	color: #b7cfe6;
+	background: #2e323c;
+	padding: 100px 200px;
+	display: flex;
+/*	flex-flow: row wrap;*/
+	flex-wrap: wrap;
+	z-index: 0;
+	position: absolute;
+/*	align-content: space-between;*/
+/*	justify-content: space-between;*/
+}
+

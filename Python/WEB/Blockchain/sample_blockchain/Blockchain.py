@@ -39,7 +39,7 @@ class Blockchain:
 
 
     def check_privat_key(self, private_key, public_key):
-        return blockchain_helpers.get_hash_sha256_for_text(private_key) == public_key
+        return blockchain_helpers.get_hash_sha512_for_text(private_key) == public_key
 
 
     def create_transaction(self, data):
@@ -77,8 +77,8 @@ def main():
     # blockchain.create_block()
     blockchain.create_transaction({
         'private_key' :    '0u0fc7aa7fc6f166f9abd35a443a8bd0d215e7d2003eead6659b859709e535ace7',
-        'donor_public_key' : '0de31bb726811d74166123c402b76af1d405df21ec00c67e663ba7d989b4e3a5e',
-        'repecient_public_key':  'ef5a97d79acaf341ae75b00b9b7442ece474fcef1584851da2037b67cd7fd216',
+        'donor_public_key' : 'b2ea882c1a568c965251cf5daaaf7d1d42f1787549519bec184f02b81e71240267e77fd1103518733032c0b52a992598832fcf88d679426655d68d5a074df005',
+        'repecient_public_key':  '7edcac46ae8edeb1ec2126e0f8dfb83e374e09d1d1b65a390cf0cf811bb2a2522d70edb9f9ad33d64305ea200bfccc799f29579b1cc2d90ebde0fb5ed93847ba',
         'transaction_ammount' : 0.0001,
         'transaction_fee' : 1,
 
