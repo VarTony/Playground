@@ -6,7 +6,7 @@ def get_path_to_dir_blocks():
 
 
 def get_slot_list():
-    return os.listdir(get_path_to_dir_blocks())
+    return sorted(os.listdir(get_path_to_dir_blocks()))
 
 
 
@@ -19,6 +19,7 @@ def get_last_block():
     last_slot = get_last_slot()
     block_list = os.listdir(get_path_to_dir_blocks() + '/' + last_slot) #slot_list[len(slot_list)-1]
     print(block_list)
+    block_list = sorted(block_list, key=lambda block_i: int(block_i[0:-5][-1]))
     return block_list[len(block_list) - 1]
 
 

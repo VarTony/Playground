@@ -27,6 +27,7 @@ class Blockchain:
         last_slot = blockchain_helpers.get_last_slot()
         number_of_new_block = blockchain_helpers.get_number_of_new_block()
         new_block = open('./blocks/' + last_slot + '/' + 'block_' + number_of_new_block + '.json', 'w+')
+        print(last_block)
         data = {
             "block_name": 'b_' + number_of_new_block,
             "hash_of_prev_block": self.get_hash_block(last_block),
