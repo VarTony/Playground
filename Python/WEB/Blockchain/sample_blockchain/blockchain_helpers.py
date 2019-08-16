@@ -15,12 +15,15 @@ def get_last_slot():
     return 'slot_' + str((len(slot_list)))
 
 
-def get_last_block():
+def get_block_list():
     last_slot = get_last_slot()
-    block_list = os.listdir(get_path_to_dir_blocks() + '/' + last_slot) #slot_list[len(slot_list)-1]
-    print(block_list)
+    return os.listdir(get_path_to_dir_blocks() + '/' + last_slot)
+
+
+def get_last_block():
+    block_list = get_block_list()
     block_list = sorted(block_list, key=lambda block_i: int(block_i[0:-5][-1]))
-    return block_list[len(block_list) - 1]
+    return  block_list[len(block_list) - 1] if (len(block_list) - 1) >= 0 else 0
 
 
 def get_number_of_new_block():

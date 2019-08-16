@@ -20,23 +20,39 @@ class Blockchain:
         return txid
 
 
+    def create_slot(self):
+        number_new_slot = str(len(blockchain_helpers.get_slot_list()) + 1)
+        os.makedirs('./blocks/slot_' + number_new_slot)
+        self.create_block()
+
+
+    def create_list_wallets(self):
+            wallets_list = tuple()
+            block_list = blockchain_helpers.get_block_list()
+            map(lambda: print('...'),    block_list)
+
 
 
     def create_block(self):
+        slot_list = blockchain_helpers.get_block_list()
+        if len(slot_list) >= 10: self.create_slot()
         last_block = blockchain_helpers.get_last_block()
         last_slot = blockchain_helpers.get_last_slot()
         number_of_new_block = blockchain_helpers.get_number_of_new_block()
         new_block = open('./blocks/' + last_slot + '/' + 'block_' + number_of_new_block + '.json', 'w+')
         print(last_block)
+        block_list = blockchain_helpers.get_block_list()
+        p_it_is_last_block_in_slot = len(block_list) == 10
         data = {
             "block_name": 'b_' + number_of_new_block,
-            "hash_of_prev_block": self.get_hash_block(last_block),
+            "hash_of_prev_block": self.get_hash_block(last_block) if last_block else self.get_hash_block('./blocks/' +  'slot_' + str(int(last_slot[-1]) - 1) + '/block_9'),
             "create_time": time.time(),
             "transactions": {
             }
         }
         new_block.write(json.dumps(data, indent=4))
         new_block.close()
+        if p_it_is_last_block_in_slot: self.create_list_wallets()
 
 
     def check_privat_key(self, private_key, public_key):
@@ -80,8 +96,8 @@ def main():
         'private_key' :    '0u0fc7aa7fc6f166f9abd35a443a8bd0d215e7d2003eead6659b859709e535ace7',
         'donor_public_key' : 'b2ea882c1a568c965251cf5daaaf7d1d42f1787549519bec184f02b81e71240267e77fd1103518733032c0b52a992598832fcf88d679426655d68d5a074df005',
         'repecient_public_key':  '7edcac46ae8edeb1ec2126e0f8dfb83e374e09d1d1b65a390cf0cf811bb2a2522d70edb9f9ad33d64305ea200bfccc799f29579b1cc2d90ebde0fb5ed93847ba',
-        'transaction_ammount' : 0.0001,
-        'transaction_fee' : 1,
+        'transaction_ammount' : 1,
+        'transaction_fee' : 0.00000002,
 
     })
 
