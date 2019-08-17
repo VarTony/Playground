@@ -126,7 +126,3 @@ timer();
 }
 
 export default Main_terminal_file;
-
-// render(<App/>, document.getElementById('root'));
-
-// <canvas id='canvas' ref="canvas"> </canvas>

@@ -1,8 +1,8 @@
 import React from 'react';
 import "babel-polyfill";
 import BtnTerm from './BtnTerm';
-import { mover, handlerLogs, showLastLog, keyGenerate} from './termHelpers/termHelpers';
-
+import { handlerLogs, keyGenerate} from './termHelpers/termHelpers'; //, showLastLog
+import mover from './../../../viewHelpers.js';
 
 class Term extends React.Component {
   constructor(props){
@@ -90,7 +90,7 @@ class Term extends React.Component {
     console.log(this.state);
     return(
       <div  id='term' className={this.state.visible ? 'visible':   'not_visible'}>
-        <div id='term_header'  className={this.state.chargeBattery? 'charging': 'not_charging'} onMouseDown={(e) => mover(e)}>
+        <div id='term_header'  className={this.state.chargeBattery? 'charging': 'not_charging'} onMouseDown={(e) => mover(e, '#term')}>
           <h3 id='logo_term'>Term_alpha</h3>
           <div id='term_control_block' onClick={e => e.stopPropagation()}>
             <BtnTerm  handlerBtn={this.handlerCloseBtn}>X</BtnTerm>

@@ -1,4 +1,5 @@
 import React from 'react';
+// import mover from './../../viewHelpers.js';
 // import PaintScript from '../scripts/Paint.js';
 
 let color;
@@ -13,7 +14,7 @@ class Controlers extends React.Component {
 
 	render () {
 
-			return	(<nav className='controlers'>
+			return	(<nav className='controlers' >
 						<ul className='tools ul_of_paint'
 							// onMouseDown={e => e.stopPropagation()}
 							// onMouseMove={e => e.stopPropagation()}

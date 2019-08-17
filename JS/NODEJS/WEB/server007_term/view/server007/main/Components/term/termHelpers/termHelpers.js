@@ -1,13 +1,6 @@
 import React from 'react';
 
-
 const keyGenerate = () => Math.floor(Math.random() * 80000);
-
-
-const showLastLog = () => {
-  const logFieldTerm = document.querySelector('#log_field_term');
-  logFieldTerm.scrollTop = logFieldTerm.scrollHeight;
-}
 
 
 const handlerLogs = logs => {
@@ -36,35 +29,4 @@ const handlerLogs = logs => {
 }
 
 
-const mover = e => {
-
-  e.preventDefault();
-  e.stopPropagation();
-  if(e.currentTarget !== e.target) return;
-
-  const term = document.querySelector('#term');
-  let mousePosition;
-  let offset = [term.offsetLeft - e.clientX, term.offsetTop - e.clientY ];
-  let timeOfClick = performance.now();
-  term.style.position = 'absolute';
-  moveAt(e);
-  document.body.appendChild(term);
-  term.style.zIndex = 16;
-  showLastLog();
-  function moveAt(e) {
-    mousePosition = {x : e.clientX, y : e.clientY}
-      term.style.left = (mousePosition.x + offset[0]) + 'px';
-      term.style.top  = (mousePosition.y + offset[1]) + 'px';
-
-    }
-  document.onmousemove = e => moveAt(e);
-
-  term.onmouseup = () => {
-    timeOfClick = performance.now() - timeOfClick;
-    document.onmousemove = null;
-    term.onmouseup = null;
-  }
-}
-
-
-export { mover, handlerLogs, showLastLog, keyGenerate};
+export {handlerLogs, keyGenerate};
