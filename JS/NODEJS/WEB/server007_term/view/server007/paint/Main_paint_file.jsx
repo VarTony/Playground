@@ -9,11 +9,13 @@ class Paint extends Component {
 	constructor(props) {
         super(props);
         this.state = {
-	  	color : '#2d36a5',
-	  	sizetool : 10,
-	  	tool : 'feltTip',
-	  	filldrip : false
+	  			color : '#fff',
+	  			sizetool : 5,
+	  			tool : 'pen',
+	  			filldrip : false,
+					visible: this.props.visible
 	  }
+
 	   this.takeBrushModel = this.takeBrushModel.bind(this);
 	   this.takeValues = this.takeValues.bind(this);
 	   this.takeSizetool = this.takeSizetool.bind(this);
@@ -38,18 +40,24 @@ class Paint extends Component {
         this.setState({
           [name]: value,
         });
+	}
 
+	componentWillReceiveProps(updatedProps) {
+		this.setState({
+				visible : updatedProps.visible
+		});
 	}
 
 
 	render () {
 		return (
-			<div id='paint' onMouseDown={(e) => mover(e, '#paint')} >
+			<div id='paint' className={this.state.visible ? 'visible': 'not_visible'} onMouseDown={(e) => mover(e, '#paint')}>
 				<Controlers
 					color={this.state.color}
 					takeValues={this.takeValues}
 					takeBrushModel={this.takeBrushModel}
 					takeSizetool={this.takeSizetool}
+					changePaintVisible={this.props.changePaintVisible}
 				/>
 
 				<Canvas

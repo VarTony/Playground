@@ -1,4 +1,5 @@
 import React from 'react';
+import BtnPaint from './BtnPaint'
 // import mover from './../../viewHelpers.js';
 // import PaintScript from '../scripts/Paint.js';
 
@@ -14,7 +15,8 @@ class Controlers extends React.Component {
 
 	render () {
 
-			return	(<nav className='controlers' >
+			return	(
+				<nav className='controlers' >
 						<ul className='tools ul_of_paint'
 							// onMouseDown={e => e.stopPropagation()}
 							// onMouseMove={e => e.stopPropagation()}
@@ -31,17 +33,6 @@ class Controlers extends React.Component {
 									<input type='color' onChange={(e) => this.props.takeValues(e)}  id='color' name='color' value={this.props.color} onMouseDown={e => e.stopPropagation()}
 									onMouseMove={e => e.stopPropagation()}
 									onMouseUp={e => e.stopPropagation()} />
-							</h3>
-						</li>
-						<li className='li_of_paint'>
-							<h3 className='tools_name'
-							onMouseDown={e => e.stopPropagation()}
-							onMouseMove={e => e.stopPropagation()}
-							onMouseUp={e => e.stopPropagation()}
-							>
-								<img className='icons' src='./imgs/icons/ruler.svg'/>
-								<input className='input_of_paint' type='text' id='ruler'/>
-								px
 							</h3>
 						</li>
     	 				<li className='li_of_paint'>
@@ -107,10 +98,28 @@ class Controlers extends React.Component {
         						</h3>
         					</li>
       					</ul>
-					</nav>);
+								<div id='paint_btn_block' onClick={e => e.stopPropagation()}>
+									<BtnPaint handlerBtn={this.props.changePaintVisible}>X</BtnPaint>
+									<BtnPaint handlerBtn={this.props.changePaintVisible}>-</BtnPaint>
+								</div>
+					</nav>
+				);
 	}
 
 }
 
 // export  {Controlers, color};
 export default Controlers;
+
+
+// <li className='li_of_paint'>
+// 	<h3 className='tools_name'
+// 	onMouseDown={e => e.stopPropagation()}
+// 	onMouseMove={e => e.stopPropagation()}
+// 	onMouseUp={e => e.stopPropagation()}
+// 	>
+// 		<img className='icons' src='./imgs/icons/ruler.svg'/>
+// 		<input className='input_of_paint' type='text' id='ruler'/>
+// 		px
+// 	</h3>
+// </li>

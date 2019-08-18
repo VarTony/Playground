@@ -41,7 +41,7 @@ padding: 0;
   margin-left: 25px;
 }
 
-#term_control_block{
+#term_btn_block{
   width: 3%;
   height: 100%;
   margin-top: 0.5%;
@@ -50,7 +50,7 @@ padding: 0;
 }
 
 
-.btn_term {
+.btn_contrl {
   background-color: white;
   width: 80%;
   height: 30%;

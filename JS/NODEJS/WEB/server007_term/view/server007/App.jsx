@@ -1,8 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {BrowserRouter, Route} from 'react-router-dom';
-import Main_page from './main/Main_terminal_file';
-import Paint from './paint/Main_paint_file';
+import MainPage from './Main_desktop_file';
+// import Paint from './paint/Main_paint_file';
 
 
 
@@ -11,17 +11,21 @@ class App extends React.Component {
     super(props);
   }
 
+
   render() {
-    return ( //
-        <BrowserRouter>
-          <Route path='/' component={Main_page}/>
-          <Route path='/' component={Paint}/>
-        </BrowserRouter>
-
-    );
+    return(<MainPage />);
+    // return ( //
+    //     <BrowserRouter>
+    //       <Route path='/' component={Main_page}/>
+    //       <Route path='/' component={Paint}/>
+    //     </BrowserRouter>
+    //
+    // );
   }
-
 }
+
+
+
 
 render(<App/>, document.getElementById('root'));
 

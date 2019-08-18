@@ -1,11 +1,6 @@
 
 
-const showLastLog = () => {
-  const logFieldTerm = document.querySelector('#log_field_term');
-  logFieldTerm.scrollTop = logFieldTerm.scrollHeight;
-}
-
-const mover = (e, componentName) => {
+const mover = (e, componentName, addFunc = () => console.log('Without additional functions')) => {
 
   e.preventDefault();
   e.stopPropagation();
@@ -18,7 +13,7 @@ const mover = (e, componentName) => {
   moveAt(e);
   document.body.appendChild(component);
   component.style.zIndex = 16;
-  // showLastLog();
+  addFunc()
   function moveAt(e) {
     mousePosition = {x : e.clientX, y : e.clientY}
       component.style.left = (mousePosition.x + offset[0]) + 'px';

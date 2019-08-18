@@ -2,8 +2,10 @@
 .controlers {
 
     width:100%;
-    /* background-color: #48457d33; /*#314473*/ */
+    height: 10.5%;
     position: absolute;
+    padding-right: 0;
+    background: #48457d33;
 }
 
 #ruler {
@@ -24,6 +26,16 @@
 }
 .tools {
 	width: 100%;
+}
+
+#paint_btn_block{
+  width: 2.5%;
+  height: 61%;
+  margin-top: 1%;
+  margin-right: 0%;
+  margin-left: 95.5%;
+  flex-direction: column;
+  display: flex;
 }
 
 .tools_name {
@@ -60,11 +72,14 @@ h5 {
 
 ul.tools {
   	display: inline-flex;
-  	background: #48457d33;
+  	/* background: #48457d33; */
     list-style: none;
-    width: 100%;
+    width: 80%;
     height: 70px;
     padding-left: 0;
+    padding-right: 0;
+    float: left;
+    /* margin-right: 100px; */
 }
 
 .li_of_paint {

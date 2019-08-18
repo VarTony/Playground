@@ -29,7 +29,7 @@ class Blockchain:
     def create_list_wallets(self):
             wallets_list = tuple()
             block_list = blockchain_helpers.get_block_list()
-            map(lambda: print('...'),    block_list)
+            map(lambda x : print(x, '...'),    block_list)
 
 
 
