@@ -58,6 +58,48 @@ SELECT name
     WHERE rep_office IS NULL;
 
 
+--Example-9
+--Отсортровать список по регионам и городам. 
+--Первый указанный столбец в предложении ORDER BY является старшим ключом.
+
+SELECT region, city, sales  
+    FROM offices
+    ORDER BY region, city;
+
+
+--Example-10
+--Сортировка по несуществующему столбцу
+
+--I
+
+SELECT region, city, (sales - target)  
+    FROM offices
+    ORDER BY 3, city DESC;
+
+--II
+
+SELECT region, city, (sales - target)  
+    FROM offices
+    ORDER BY (sales - target), city DESC;
+
+--III
+
+SELECT region, city, (sales - target) AS difference 
+    FROM offices
+    ORDER BY difference DESC;
+
+
+--Example-11
+--Вывести список офисов, отсортированный в алфавитном порядке по названиям регионов,
+--а в каждом регионе - по разности междфактическим и плановым объемами продаж  в порядке убывания. 
+
+SELECT city, region, (sales - target) AS difference
+    FROM offices
+    ORDER BY region ASC, difference DESC;
+
+
+
+
 
 
 
