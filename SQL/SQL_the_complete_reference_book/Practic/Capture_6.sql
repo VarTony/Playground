@@ -91,13 +91,33 @@ SELECT region, city, (sales - target) AS difference
 
 --Example-11
 --Вывести список офисов, отсортированный в алфавитном порядке по названиям регионов,
---а в каждом регионе - по разности междфактическим и плановым объемами продаж  в порядке убывания. 
+--а в каждом регионе - по разности между фактическим и плановым объемами продаж в порядке убывания. 
 
-SELECT city, region, (sales - target) AS difference
+SELECT city, region, (sales - target) AS difference 
     FROM offices
     ORDER BY region ASC, difference DESC;
 
 
+--Example-12
+--UNION
+
+SELECT DISTINCT mfr, product
+    FROM orders
+ WHERE amount > 30000 
+ UNION ALL
+SELECT mfr_id, product_id
+    FROM products
+ WHERE price > 2000.00
+ ORDER BY 1, 2;
+
+--Примичание  по умолчанию SELECT ипользует инструкцию - ALL, а UNION - DISTINCT.
+
+--ALL: выводит все строки.
+--DISTINCT исключает повторение. 
+--Запрос ALL выполняется быстрее, так как нет постфильтрации данных. 
+
+--A UNION (B UNION C) <-> (A UNION B) UNION C, etc equals.
+--A UNION ALL (B UNION C) <-> (A UNION ALL B) UNION C, not equals.
 
 
 
