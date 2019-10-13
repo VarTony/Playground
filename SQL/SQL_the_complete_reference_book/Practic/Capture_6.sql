@@ -113,7 +113,7 @@ SELECT mfr_id, product_id
 --Примичание  по умолчанию SELECT ипользует инструкцию - ALL, а UNION - DISTINCT.
 
 --ALL: выводит все строки.
---DISTINCT исключает повторение. 
+--DISTINCT: исключает повторение. 
 --Запрос ALL выполняется быстрее, так как нет постфильтрации данных. 
 
 --A UNION (B UNION C) <-> (A UNION B) UNION C, etc equals.
