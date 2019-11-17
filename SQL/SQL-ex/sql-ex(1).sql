@@ -151,8 +151,6 @@ ON (pc.model > pc2.model) AND (pc.ram = pc2.ram)  AND (pc.speed = pc2.speed)
 ORDER BY pc2.model, pc.model ASC, pc.speed, pc.ram;
 
 
-
-
 /*
 XIII
 Задание: 17 (Serge I: 2003-02-03)
@@ -163,8 +161,6 @@ XIII
 SELECT DISTINCT 'Laptop', model, speed 
 FROM laptop 
 WHERE speed < ALL(SELECT speed FROM pc);
-
-
 
 
 /*
@@ -178,7 +174,7 @@ INNER JOIN printer
  ON (product.model = printer.model)
  AND (printer.price = (SELECT MIN(price) FROM printer WHERE color = 'y'
 ))
-WHERE color = 'y'
+WHERE color = 'y';
 
 
 
