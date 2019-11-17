@@ -134,3 +134,54 @@ maker NOT IN (
 );
 
 
+/*
+XII
+Задание: 16 (Serge I: 2003-02-03)
+Найдите пары моделей PC, имеющих одинаковые скорость и RAM.
+В результате каждая пара указывается только один раз, т.е. (i,j), но не (j,i), 
+
+Порядок вывода: модель с большим номером, модель с меньшим номером, скорость и RAM.
+*/
+
+SELECT DISTINCT pc.model, pc2.model, pc.speed, pc.ram
+  FROM pc INNER JOIN
+(SELECT model, ram, speed 
+  FROM pc) AS pc2
+ON (pc.model > pc2.model) AND (pc.ram = pc2.ram)  AND (pc.speed = pc2.speed)
+ORDER BY pc2.model, pc.model ASC, pc.speed, pc.ram;
+
+
+
+
+/*
+XIII
+Задание: 17 (Serge I: 2003-02-03)
+Найдите модели ПК-блокнотов, скорость которых меньше скорости любого из ПК. 
+Вывести: type, model, speed
+*/
+
+SELECT DISTINCT 'Laptop', model, speed 
+FROM laptop 
+WHERE speed < ALL(SELECT speed FROM pc);
+
+
+
+
+/*
+XIV
+Задание: 18 (Serge I: 2003-02-03)
+Найдите производителей самых дешевых цветных принтеров. Вывести: maker, price
+*/
+
+SELECT DISTINCT product.maker, printer.price FROM product
+INNER JOIN printer 
+ ON (product.model = printer.model)
+ AND (printer.price = (SELECT MIN(price) FROM printer WHERE color = 'y'
+))
+WHERE color = 'y'
+
+
+
+
+
+
