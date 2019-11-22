@@ -37,7 +37,7 @@ app.get('/',  (req, res) => {
 	let cookie = req.headers.cookie;
 	if(!req.headers.cookie) {
 		cookie = newUserCreator.createNewUserId();
-		newUserCreator.createNewUser(req, res, cookie);
+		newUserCreator.createNewUserDir(req, res, cookie);
 	}
 	else {
 		cookie = cookie.split('=')[1].split(':')[1];

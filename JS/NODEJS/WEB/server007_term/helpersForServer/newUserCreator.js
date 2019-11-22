@@ -29,7 +29,7 @@ const recursiveCopyFiles = async (dirname, newUserDir) => {
 	return;
 }
 
-const createNewUser = (req, res, userId) => {
+const createNewUserDir = (req, res, userId) => {
   fs.mkdir(path.join(__dirname, `../users/user:${userId}|120`), err => {
 		 if(err)	{
 			 console.error(err);
@@ -40,6 +40,6 @@ const createNewUser = (req, res, userId) => {
 	 });
 }
 
-module.exports.createNewUser = createNewUser;
+module.exports.createNewUserDir = createNewUserDir;
 module.exports.createNewUserId = createNewUserId;
 module.exports.sortFilesSync = sortFilesSync;
