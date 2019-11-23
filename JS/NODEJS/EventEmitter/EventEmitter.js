@@ -10,7 +10,7 @@ class eventEmitter {
 	}
 
 	emit(event, data) {
-		if(this.events.event) this.events.event(data); 
+		if(this.events.event) return this.events.event(data); 
 	}
 
 }
