@@ -6,7 +6,7 @@ const lambda = degree => x => (x ** (degree - 1)) * x;
 
 const exponentiationDiff = (x, degree) => diff(x, dx1, lambda(degree));
 
-const y1 =   exponentiationDiff(2, 5);
+const y1 = exponentiationDiff(2, 5);
 const y2 = 5 * (2 ** 4);
 
 console.log(y1, y2);
