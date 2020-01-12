@@ -1,4 +1,4 @@
-const testData = '2412 7 8 9 121 50 -18 37 1231 1 31 212 38 25'.split(' ');
+let testData = '2412 7 8 9 121 50 -18 37 1231 1 31 212 38 25'.split(' ');
 testData = testData.map(char => +char);
 
 const qsort = list => {
@@ -10,6 +10,6 @@ const qsort = list => {
   return [...qsort(less), pivot, ...qsort(greater)];
 }
 
-let sortedData = qsort(testData);
+const sortedData = qsort(testData);
 console.log('Data : ', testData);
 console.log('Sorted_data : ', sortedData);
