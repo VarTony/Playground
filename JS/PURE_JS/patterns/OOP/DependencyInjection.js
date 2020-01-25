@@ -1,4 +1,5 @@
-class DependencyInc {
+
+class DependencyInjector {
 
   constructor() {
     this.registry = [];
@@ -12,7 +13,13 @@ class DependencyInc {
  resolve(name) {
     if(this.registry[name]) return this.registry[name]();
 
-    else throw new Error('Нет такого решения.')   
+    else throw new Error('Нет такой зависимости.')   
+  } 
+
+  inject(someClass, type) {
+   console.log(type, this.resolve(type));
+   const exemplar = new someClass(this.resolve(type));
+   return exemplar;
   }
 
  registered(name) {
@@ -22,45 +29,36 @@ class DependencyInc {
 
 
 
+class DbConnector {
+    connection() {
+      return 'Database is connected'
+    }
+}
+
+
+
 class IClass {
-  constructor() {
+  constructor(connector) {
     this.preview = 'I`m a Class';
-    this.db;
-    this.config;
-  }
-
-  setDB(db) {
-    this.db=db;
-  }
-
-  setConfig(config) {
-    this.config=config;
+    this.db = connector.connection();
   }
 
   getDB() {
     console.log(this.db);
   }
 
-  getConfig() {
-    console.log(this.config);
-  }
 }
 
 
 
-const dependencyInc = new DependencyInc();
-
+const dependencyInc = new DependencyInjector();
 
 dependencyInc.registered('something');
-// dependencyInc.resolve('enybody');
 dependencyInc.register('IClass', () => {
-  const iClass = new IClass();
-  iClass.setDB('moonDb every night');
-  iClass.setConfig('port: 1023');
-  return iClass;
+  return new DbConnector();
 });
 
-const iClass1 = dependencyInc.resolve('IClass');
 
+
+const iClass1 = dependencyInc.inject(IClass, 'IClass');
 iClass1.getDB();
-iClass1.getConfig();
