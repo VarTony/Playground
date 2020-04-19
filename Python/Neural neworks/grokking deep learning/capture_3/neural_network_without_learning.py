@@ -36,7 +36,7 @@ def ele_mul(inputs, weightMatrix):
 
 
 def neural_network_without_learning(input, weight):
-  hid = ele_mul(input, weights[0])
+  hid = ele_mul(input, weight[0])
   print(hid)
   return ele_mul(hid, weight[1])
 

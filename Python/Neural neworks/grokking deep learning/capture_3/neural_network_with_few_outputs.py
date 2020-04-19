@@ -7,8 +7,6 @@ def append (list, elem1, elem2):
 def ele_mul(input, weight):
   return functools.reduce(lambda acc, elem: append(acc, elem, input) , weight, list())
 
-
-
 def neural_network_with_few_outputs(input, weight):
   return ele_mul(input, weight)
 
