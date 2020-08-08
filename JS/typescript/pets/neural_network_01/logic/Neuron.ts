@@ -5,7 +5,7 @@ export class Neuron {
     
     public weights: number[] = [];
     public neuronsType: neuroTypes;
-    private outputs: number[];
+    public output: number;
     
     constructor(inputsCount: number, neuronType: neuroTypes = neuroTypes.input) {
       let i: number = 0;
@@ -26,6 +26,8 @@ export class Neuron {
           }
         );
         const output: number = ActivationFuncs.sigmoid(sum); 
+        this.output = output;
+
         return output;
     }
   
