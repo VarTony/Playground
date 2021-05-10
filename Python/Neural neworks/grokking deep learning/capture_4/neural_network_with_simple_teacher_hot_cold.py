@@ -25,7 +25,8 @@ def neural_network_with_simple_teacher(input, weight, goal):
 
 input = 0.5
 weight = 0.5
-goal = 0.81009
+goal = 0.8
+
 
 
 result = neural_network_with_simple_teacher(input, weight, goal)

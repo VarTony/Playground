@@ -11,4 +11,3 @@ for iteration in range(100):
   weight = weight - direction_and_amount
   
   print('Error: ' + str(error) + 'Pred: ' + str(pred))
- 
