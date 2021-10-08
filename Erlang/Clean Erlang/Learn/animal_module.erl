@@ -1,10 +1,10 @@
 -module(animal_module).
--export([what_tell_animal/1]).
+-export([what_animal_sounds/1]).
 
-what_tell_animal(Animal) -> 
-	Answer = if Animal == dog -> "bark";
+what_animal_sounds(Animal) ->
+	Answer = if Animal == dog -> "woof";
 				Animal == cat -> "meow";
 				Animal == cow -> "mooo";
 				true -> "I don`t know who this is"
 			end,
-	[Animal, " talk " ++ Answer ++ "."].
+	[Animal, " goes " ++ Answer ++ "."].
