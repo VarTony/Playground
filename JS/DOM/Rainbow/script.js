@@ -1,20 +1,13 @@
-
-
-
-
 const doc = document.body;
 
-
-
-let rand =  0;
+let rand, randString;
 i = 10000;
 const text = [];
 const p = [];
 const div = [];
 while(i > 0) {
-	rand = Math.floor(Math.random() * (12131217 - 0)) + 0;
 	i--;
-	text.push(document.createTextNode(`${rand.toString(16)}`));
+	text.push(document.createTextNode('#808080'));
 	p.push(document.createElement('p'));
 	div.push(document.createElement('div'));
 
@@ -32,7 +25,9 @@ const divs = document.querySelectorAll('div');
 divs.forEach(e => e.onclick = f);
 function f() { 
 	rand = Math.floor(Math.random() * (12131217 - 0)) + 0;
-	this.style.backgroundColor = `#${rand.toString(16)}`
+	randString = `#${rand.toString(16)}`;
+	this.innerHTML = randString;
+	this.style.backgroundColor = randString; 
 };
 
 

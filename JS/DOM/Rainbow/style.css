@@ -1,4 +1,6 @@
 div {
-
-	background-color: grey;
+	text-align: center;
+	background-color: #808080;
+	font-family: Georgia, 'Times New Roman';
+	font-weight: lighter;
 }
