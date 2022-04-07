@@ -11,6 +11,7 @@ const logElems = (...elems) => elems.map(elem => {
   return elem;
 })
 
-
 wrapper(logElems, concatElems, sumElems)
  (1, 'something', 'somebody', '55', NaN, 11);
+
+ // Паттерн позволяющий пропускать данные через список из комбинаций 3 разных функций.
