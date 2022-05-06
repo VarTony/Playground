@@ -8,8 +8,6 @@
     const power = nPower > 0 
       ? nPower
       : -nPower;
-      
-    console.log(power);
   
     return (1 / (x ** power));
  }
