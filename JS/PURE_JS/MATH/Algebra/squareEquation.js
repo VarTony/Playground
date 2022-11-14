@@ -22,12 +22,13 @@ a | x^2 +- bx + (b/2)^2 = +-с + (b/2)^2
 
 
 const squareEquation = (a, p, q, fix = 1) => {
-    
+
+  if(a === 0) return 0;
+
   let b = p / a;
   let c = q / a;
   let x1, x2;
 
-  if(a === 0) return 0;
 
   const bDivided = b/2;
   const rightSide = -c + bDivided**2;
