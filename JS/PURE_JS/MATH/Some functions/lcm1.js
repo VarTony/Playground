@@ -2,9 +2,9 @@
 // Наименьшее общее кратное;
 
 
-const parser => (strNumbers) => strNumbers.split(',');
+const parser = (strNumbers) => strNumbers.split(',');
 
-const addNumbers => (numbers = '7,5,4') => parser(numbers); 
+const addNumbers = (numbers = '7,5,4') => parser(numbers); 
 
 const numbers = addNumbers();
 
