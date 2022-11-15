@@ -13,3 +13,5 @@ const linearEquation = (a, ...elems) => {
 
 // Для 15x - 8 + 10 = 0
 linearEquation(15, -8, 10);
+
+export { linearEquation };
