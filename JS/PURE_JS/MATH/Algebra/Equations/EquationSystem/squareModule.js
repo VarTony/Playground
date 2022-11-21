@@ -2,17 +2,19 @@
 
 /* Вспомогательные функции */
 
-// Процедура для решений квадратных уравнений через дискиминант.
-import squareEquationViaD from '../squareEquationViaD'; 
+// Процедура для решений квадратных уравнений через дискриминант.
+import squareEquationViaD from './squareEquationViaD'; 
 
 
 // Находит по паре найденых корней [y], квадру [x] корней.
 const findXsForPairY = (a, b, c, pairValues) => {
     const xRoots = pairValues.reduce((xRoots, y, i) => {
-  
-      const nameForPairX = `xs_for_y${i + 1}`;  // Наименование [x]`ов для конкретного значения [y].
-      const { result, message } = squareEquationViaD(a, (b * y), c); // Передаем процедуре квадратных уравнений в том числе домноженный y на коэфициэнт b.
-      xRoots[nameForPairX] = result  // Если в множестве действительных чисел нет корней([x]) для данного уравнения, возвращаем сообщение об этом.
+      // Наименование пары [x]`ов для конкретного значения [y] ->
+      const nameForPairX = `xs_for_y${i + 1}`;  
+      // Передаем процедуре квадратных уравнений в том числе домноженный y на коэфициэнт b ->
+      const { result, message } = squareEquationViaD(a, (b * y), c);
+      // Если в множестве действительных чисел нет корней([x]) для данного уравнения, возвращаем сообщение об этом -> 
+      xRoots[nameForPairX] = result  
         ? result
         : message;
   
@@ -25,7 +27,7 @@ const findXsForPairY = (a, b, c, pairValues) => {
   };
 
 
-/* Основная */
+/* Квадратный модуль для подстановки в систему уравнений */
 const squareModule = (rawParmas, primaryX, combainedCoefY) => {
   
   const [a1, a2, b2, c1, c2] = rawParmas;
