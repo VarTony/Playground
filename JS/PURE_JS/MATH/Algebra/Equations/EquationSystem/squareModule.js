@@ -29,19 +29,9 @@ const findXsForPairY = (a, b, c, pairValues) => {
 
 /* Квадратный модуль для подстановки в систему уравнений */
 const squareModule = (rawParmas, primaryX, combainedCoefY) => {
+  const [a2, b2, c2] = rawParmas;
+  if (combainedCoefY === 0) return { x: undefined, y: undefined, answer2: `Нет корней` }
   
-  const [a1, a2, b2, c1, c2] = rawParmas;
-
-  // ? Вероятный результат для первого уравнения с 1 неизвестным; ->
-  if (combainedCoefY === 0) {
-    const xRoots = squareEquationViaD(a1, 0, c1);
-
-    return {
-      x: xRoots.result, y: combainedCoefY,
-      answer2: `Результат второго уравнения [${ xRoots.result.x1 } || ${ xRoots.result.x2 }] = ${ -c2 };`
-    }
-  }
-
   const pairY = squareEquationViaD(combainedCoefY, (a2 * primaryX), c2, 'y');
   const quartetX = findXsForPairY(a2, b2, c2, Object.values(pairY.result));
 

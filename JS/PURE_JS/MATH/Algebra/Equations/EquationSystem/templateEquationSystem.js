@@ -23,9 +23,9 @@ const templatEquationSystem = (equation1, equation2, explicitForm = 1, moduleOfE
   const y1 = (-b1 / a1) * a2; 
   const combainedCoefY = y1 + b2;
 
-  const roots = moduleOfEquationSystem([a1, a2, b2, -c1, -c2, y1], primaryX, combainedCoefY  );
+  const roots = moduleOfEquationSystem([a2, b2, -c2, y1], primaryX, combainedCoefY);
 
-return roots;
+  return roots;
 
 }
 
