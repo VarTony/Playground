@@ -2,8 +2,8 @@
 
 /*
  * Типовые комментарии.
-(1) - Параметры подобраны в соответствии с формулой суммы АФ.
-(2) - Параметры подобраны в соответствии с формулой последнего члена АФ.
+(1) - Параметры подобраны в соответствии с формулой суммы АП.
+(2) - Параметры подобраны в соответствии с формулой последнего члена АП.
 */
 
 import { linearEquation } from '../Equations/linearEquation'
@@ -12,7 +12,7 @@ import { templatEquationSystem } from '../Equations/EquationSystem/templateEquat
 import { L, S } from './linearProgression'; 
 
 
-// Проверяет валидность членов арифметической прогрессии ->
+// Проверяет валидность известных членов арифметической прогрессии ->
 const membersValidator = (...members) => {
     const report = members.reduce( (result, element) => {
       result = (!isNaN(element) && (element || element === 0)) && result;
@@ -21,7 +21,8 @@ const membersValidator = (...members) => {
   return report;
   }
   
-  // Находит сумму прогрессии.
+
+  // Находит сумму(s) АП.
   const s_finder = data => {
     const { a, d, n } = data;
     const l = data.l ? data.l : L(a, d, n);
@@ -31,7 +32,7 @@ const membersValidator = (...members) => {
   }
   
   
-  // Находит l по 3 переменным
+  // Находит последний(l) член АП.
   const l_finder = data => {
     const { a, d, n, s } = data;
     
@@ -48,7 +49,7 @@ const membersValidator = (...members) => {
   }
   
   
-  // Находит разность арифметрической прогрессии.
+  // Находит разность(d) АП.
   const d_finder = data => {
       const { a, n, l, s } = data;
   
@@ -59,7 +60,7 @@ const membersValidator = (...members) => {
   };
   
   
-  // Находит a ->
+  // Находит первый член(a) АП.
   const a_finder = data => {
     const { d, n, l, s } = data;
     
@@ -74,8 +75,9 @@ const membersValidator = (...members) => {
     }
     return { result: undefined, explanation: 'Не достаточно данных' };
   }
-    
-  // Находит n  ->
+   
+  
+  // Находит ограничение(n) АП.
   const n_finder = data => { 
     const { a, d, l, s } = data;
   
@@ -85,6 +87,7 @@ const membersValidator = (...members) => {
     if(membersValidator(a, d, s)) {
         const roots = squareEquationViaD(d/2, a/2,  -s).result
         const { x1, x2 } = roots;
+        
         return { result: x1 > x2 ? x1 : x2 };
     }
     
@@ -92,7 +95,7 @@ const membersValidator = (...members) => {
   };
   
   
-  // Ищет все члены арифметической прогрессии, по 3 значениям.
+  // Ищет любые два неизвестных Аф, по 3 известным значениям.
   const finderDispatcher = (data, imaginCount = 0) => {
     const keys = Object.keys(data);
     if(keys.length < 3) return 'Недостаточно данных';
