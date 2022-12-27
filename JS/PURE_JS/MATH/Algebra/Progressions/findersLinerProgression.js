@@ -82,7 +82,7 @@ const membersValidator = (...members) => {
     const { a, d, l, s } = data;
   
     if(membersValidator(a, d, l)) return { result: linearEquation(d, a, -l) } // (2)*
-    if(membersValidator(d, l, s)) return { result: squareEquationViaD((-1/d + l/d)/2, l/2*(-1/d + l/d), -s).result.x1 } // Параметры вручную подобраны пока нет универсальноц системы второй степени.
+    if(membersValidator(d, l, s)) return { result: squareEquationViaD((-1/d + l/d)/2, l/2*(-1/d + l/d), -s).result.x1 } // Параметры подобраны вручную пока нет универсальной системы второй степени.
     if(membersValidator(a, l, s)) return { result: linearEquation((a + l)/2 , -s) }// (1)*
     if(membersValidator(a, d, s)) {
         const roots = squareEquationViaD(d/2, a/2,  -s).result
@@ -95,7 +95,7 @@ const membersValidator = (...members) => {
   };
   
   
-  // Ищет любые два неизвестных Аф, по 3 известным значениям.
+  // Ищет любые два неизвестных АП, по 3 известным значениям.
   const finderDispatcher = (data, imaginCount = 0) => {
     const keys = Object.keys(data);
     if(keys.length < 3) return 'Недостаточно данных';
@@ -124,4 +124,4 @@ console.log(finderDispatcher({ s: 3, l: 5, d: 3 }));
   
 console.log(S({ a: 5, l: 3, b: 30 }));
 // Beta ( Частично протестирована )
-export { l_finder, b_finder, a_finder, n_finder, s_finder };
+export { l_finder, d_finder, a_finder, n_finder, s_finder };
