@@ -2,7 +2,7 @@
 import { avarage, getRandomInt } from '.';
 
 
-// σ^2|D = (∑(x-μ)^2)/n: Дисперсия
+// σ^2|D = (∑(x-μ)^2)/n : Дисперсия
 const dispersion = list => {
 
     const n = list.length; 
