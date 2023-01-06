@@ -11,3 +11,5 @@
   
     return (1 / (x ** power));
  }
+
+ export default negativePower;
