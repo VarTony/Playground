@@ -13,7 +13,6 @@ type - {
     } Задает тип матрицы   
 */
 
-
 const matrixGenerator = (i, j, type = 'ordinary') => {
 
     const elemsRange = { zero: [0, 0], E: [1, 1], ordinary: [-150, 255] }[type];
@@ -34,8 +33,8 @@ const matrixGenerator = (i, j, type = 'ordinary') => {
   }
   
   
-  // Генератор квадратной матрицы
-  const squareMatrixGenerator = (n, type = 'ordinary') => matrixGenerator(n, n, type);
+// Генератор квадратной матрицы
+const squareMatrixGenerator = (n, type = 'ordinary') => matrixGenerator(n, n, type);
 
 exports [ matrixGenerator, squareMatrixGenerator ];
 
