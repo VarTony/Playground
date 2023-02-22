@@ -16,14 +16,14 @@ type - {
 const matrixGenerator = (i, j, type = 'ordinary') => {
     
     const elemsRange = { zero: [0, 0], E: [1, 1], ordinary: [-150, 255] }[type];
-    const matrixTamplate = new Array(j).fill(null); // Создается пустой массив заданого размера
+    const matrixTemplate = new Array(j).fill(null); // Создается пустой массив заданого размера
   
-    const matrix = matrixTamplate.map(() => {
-        const vectorTamplate = new Array(i).fill(0); // Создается пустой вложенный массив заданого размера
+    const matrix = matrixTemplate.map(() => {
+        const vectorTemplate = new Array(i).fill(elemsRange); // Создается прото массив для вложения заданого размера
         
-        if(['E', 'zero'].includes(type)) return vectorTamplate
+        if(['E', 'zero'].includes(type)) return vectorTemplate
   
-        const vector = vectorTamplate.map(elem => getRandomInt(...elemsRange));
+        const vector = vectorTemplate.map(() => getRandomInt(...elemsRange));
         
         return vector;
     })
