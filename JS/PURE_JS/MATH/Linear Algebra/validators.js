@@ -6,7 +6,7 @@ const detectorMatrixOrVector = x => (x[0] && !x[0][0]) ? 'vector': 'matrix ';
 const checkMatrixForSum = (A1, A2) => {    
     if(A1.length !== A2.length) return  {
          result: false, 
-         message: `Матрицы имеют не оддинаковый размер столбцов A1:${A1.length}, A2:${A1.length};`
+         message: `Матрицы имеют не одинаковый размер столбцов A1:${A1.length}, A2:${A1.length};`
     }
 
     // detectorMatrixOrVector(A1.[A1.length - 1])
@@ -16,4 +16,10 @@ const checkMatrixForSum = (A1, A2) => {
 }
 
 
-exports [ checkMatrixForSum, detectorMatrixOrVector ];
+//Сравнивает длину двух векторов
+const checkLengthTwoVectors = (v1, v2) =>  v1.length === v2.length
+ ? { result: true, message: 'OK' }    
+ : { result: false, message: 'Ошибка: Векторы имеют разную длину - перемножение невозможно' }; 
+
+
+exports [ checkMatrixForSum, detectorMatrixOrVector, checkLengthTwoVectors ];

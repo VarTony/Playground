@@ -1,3 +1,7 @@
-import { detectorMatrixOrVector, checkMatrixForSum } from './validators';
+import { 
+    detectorMatrixOrVector,
+    checkMatrixForSum,
+    checkLengthTwoVectors 
+} from './validators';
 
-exports [ detectorMatrixOrVector, checkMatrixForSum  ];
+export { detectorMatrixOrVector, checkMatrixForSum,  checkLengthTwoVectors };
