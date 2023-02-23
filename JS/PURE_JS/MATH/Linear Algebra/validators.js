@@ -1,25 +1,29 @@
 
+
+//Определение матрица или вектор
 const detectorMatrixOrVector = x => (x[0] && !x[0][0]) ? 'vector': 'matrix ';  
 
 
-// Сравнивает соотношения матриц для сложения
-const checkMatrixForSum = (A1, A2) => {    
-    if(A1.length !== A2.length) return  {
-         result: false, 
-         message: `Матрицы имеют не одинаковый размер столбцов A1:${A1.length}, A2:${A1.length};`
-    }
+// Сравнение типов матриц
+const comparisonTwoMatrixType = (A1, A2) => {
+    const typeOfA1 = detectorMatrixOrVector(A1);
+    const typeOfA2 = detectorMatrixOrVector(A2);
 
-    // detectorMatrixOrVector(A1.[A1.length - 1])
-    // if(A1[A1.length - 1].length !== A2[A2.length - 1].length) return false
-
-    return true;
-}
+    return typeOfA1 === typeOfA2 
+        ? { result: true, message: 'OK' }
+        : { result: false, message: 'Эта операция не возможна для матриц разных размеров' };
+};
 
 
-//Сравнивает длину двух векторов
-const checkLengthTwoVectors = (v1, v2) =>  v1.length === v2.length
+// Сравнение длин двух векторов
+const comparisonTwoLength = (v1, v2, value = 'Векторы' ) =>  v1.length === v2.length
  ? { result: true, message: 'OK' }    
- : { result: false, message: 'Ошибка: Векторы имеют разную длину - перемножение невозможно' }; 
+ : { result: false, message: `Ошибка: ${ value } имеют разную длину - данная операция невозможна` }; 
 
 
-exports [ checkMatrixForSum, detectorMatrixOrVector, checkLengthTwoVectors ];
+ 
+exports [ 
+    detectorMatrixOrVector,
+    comparisonTwoLength, 
+    comparisonTwoMatrixType
+];

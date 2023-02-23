@@ -1,7 +1,13 @@
+//Validation export
+
 import { 
     detectorMatrixOrVector,
-    checkMatrixForSum,
-    checkLengthTwoVectors 
+    comparisonTwoLength,
+    comparisonTwoMatrixType
 } from './validators';
 
-export { detectorMatrixOrVector, checkMatrixForSum,  checkLengthTwoVectors };
+export { 
+    detectorMatrixOrVector,
+    comparisonTwoLength, 
+    comparisonTwoMatrixType 
+};

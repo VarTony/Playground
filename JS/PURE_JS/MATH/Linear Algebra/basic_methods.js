@@ -1,7 +1,7 @@
 import { 
     detectorMatrixOrVector,
-    checkMatrixForSum, 
-    checkLengthTwoVectors
+    comparisonTwoLength,
+    comparisonTwoMatrixType
 } from './exports';
 
 
@@ -42,22 +42,31 @@ const vectorSum = (v1, v2) => v1.map((a, i) => a + v2[i])
     |___/ Opertation ----> ( V1 * V2 )
 */
 const vectorToVector = (v1, v2) => {
-    if( !checkLengthTwoVectors ) return checkLengthTwoVectors.message;
+    const sameLength = comparisonTwoLength(v1, v2);
+    if(!sameLength.result) return sameLength.message;
     
     return v1.map((a, i) => a * v2[i]) 
 }
 
 
 /* Сложение матриц
-    A1 - [ v ϵ A, (𐤀a ϵ v: a ϵ R)| 𐤀v := {a1, ..., an} ]: Матрица 1
-    A2 - [ v ϵ A, (𐤀a ϵ v: a ϵ R)| 𐤀v := {a1, ..., an} ]: Матрица 2
+    A1 - [ v ϵ A, (𐤀a ϵ v: a ϵ R)| 𐤀v := {a1, ..., an} & 𐤀A := {v1, .... vn }  ]: Матрица 1
+    A2 - [ v ϵ A, (𐤀a ϵ v: a ϵ R)| 𐤀v := {a1, ..., an} & 𐤀A := {v1, .... vn }  ]: Матрица 2
+    |
+    |___/ Opertation ----> ( A1 + A2 | V1 + V2 ) 
+
 */
 const matrixSum = (A1, A2) => {
-    const validatedSize = checkMatrixForSum(A1, A2);
+    const validatedSize = comparisonTwoLength(A1, A2, 'Матрицы');
+    const validatedType = comparisonTwoMatrixType(A1, A2);
+    const detectType = detectorMatrixOrVector(A1);
+
     if(!validatedSize.result) return validatedSize.message;
+    if(!validatedType.result) return validatedType.message;
+    if(detectType === 'vector') return vectorSum(A1, A2);
 
+    return A1.map( (v, i) => vectorSum(v, A2[i]))
 }
-
 
 
 /* Умножение матриц
@@ -66,12 +75,12 @@ const matrixSum = (A1, A2) => {
     |
     |___/ Opertation ----> ( A1 * A2 )
 */
-
 const matrixToMatrix = (A1, A2) => {
+    const sameSizeLineAndColumn = 
+     comparisonTwoLength(A1[0], A2, 'Длина строки 1 матрицы и высота столбцов 2')
 
-    if (A1[1].length !== A2.length)
-      return new Error('Эти матрицы нельзя перемножить');
-  
+    if ( !sameSizeLineAndColumn.result) return sameSizeLineAndColumn.message;
+   
     return A1.map(vector => {
       let columnNum = 0;
   
@@ -86,7 +95,6 @@ const matrixToMatrix = (A1, A2) => {
       return vector;
     })
   }
-
 
 
   exports [ 
