@@ -152,22 +152,20 @@ const matrixToMatrix = (A1, A2) => {
     const sameSizeLineAndColumn = 
      comparisonTwoLength(A1[0], A2, 'Длина строки 1 матрицы и высота столбцов 2')
 
-    if ( !sameSizeLineAndColumn.result) return sameSizeLineAndColumn.message;
+    if (!sameSizeLineAndColumn.result) return sameSizeLineAndColumn.message;
    
     return A1.map(vector => {
-      let columnNum = 0;
-  
-      while (columnNum < vector.length) {
-        vector[columnNum] = vector.reduce((sumOfProducts, a, lineNum) => {
-          sumOfProducts += a * A2[lineNum][columnNum];
+      const scalarVector = [];
+
+      vector.forEach((a, columnNum) => { 
+        scalarVector[columnNum] = vector.reduce((sumOfProducts, a, rowNum) => {
+          sumOfProducts += a * A2[rowNum][columnNum];
           return sumOfProducts;
         }, 0)
-        columnNum++;
-      }
-  
-      return vector;
-    })
-  }
+      })
+      return scalarVector;
+  })
+}
 
 
   exports [ 
