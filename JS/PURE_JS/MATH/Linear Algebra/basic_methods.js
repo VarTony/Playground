@@ -6,7 +6,6 @@ import {
 
 
 
-
 /* Транспонирование вектора (Внутреняя функция)
     Сигнатура:
     v - [ 𐤀a ϵ R| a1, ..., an ]: Вектор
@@ -34,7 +33,7 @@ const matrixT = (A, newMatrix = [], iOfColumn = 0) => {
           
     return iOfColumn === A[0].length 
      ? newMatrix
-     : transposited([...newMatrix, newColumn], ++iOfColumn)
+     : matrixT(A, [...newMatrix, newColumn], ++iOfColumn)
   }
 
 
@@ -45,7 +44,6 @@ const matrixT = (A, newMatrix = [], iOfColumn = 0) => {
 const matrixTransposition = A => detectorMatrixOrVector(A) === 'vector'
     ? vectorT(A)
     : matrixT(A)
-
 
 
 /* Умножение вектора на число
@@ -123,7 +121,6 @@ const matrixSum = (A1, A2) => {
 }
 
 
-
 /* Разница матриц
     Сигнатура:
     A1 - [ v ϵ A, (𐤀a ϵ v: a ϵ R)| 𐤀v := {a1, ..., an} & 𐤀A := {v1, .... vn }  ]: Матрица 1
@@ -142,7 +139,6 @@ const matrixDiff = (A1, A2) => {
 
     return A1.map( (v, i) => vectorDiff(v, A2[i]))
 }
-
 
 
 /* Умножение матриц
