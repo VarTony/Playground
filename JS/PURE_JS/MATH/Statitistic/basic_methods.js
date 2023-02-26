@@ -16,18 +16,9 @@ const median = (list, n = (list.length), m = Math.ceil(n/2)) => (n%2 === 0)
 
 // Подсчет сложного процента
 const compInterest = (amount, percent, period) => {
-
     const percentCoef = percent * 0.01;
-    let total = amount
-    let increased = 0;
-    let i = 0
-    
-    while(i < period) {
-        increased = total * percentCoef
-        total += increased;
-        
-        i++;
-    }
+    const total = amount * (1 + percentCoef)**period;
+    const increased = total - amount;
 
     return { 
         amount, percent, period,
