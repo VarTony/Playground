@@ -1,8 +1,11 @@
 import { getRandomInt } from './getRandomInt';
 import { negativePower } from './negativePower';
+import { factorial } from './factorial';
 
 
-exports [ 
+
+export { 
     getRandomInt,
-    negativePower
- ];
+    negativePower,
+    factorial
+  };

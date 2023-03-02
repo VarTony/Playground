@@ -31,4 +31,5 @@ const fastFact = n => {
     return facTree(2, n);
   }
   
+  export { fastFact as factorial };
   
