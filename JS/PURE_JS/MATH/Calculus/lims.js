@@ -5,12 +5,13 @@
 
 /* Критерий Коши, позволяет определять точное зночение предела.
     В качестве аргументов принимает два поздних значения последовательности
-    и сравнивает их разницу с ε.
+    и сравнивает их разницу с ε, если разница меньше значения эпсилон,
+    то можно определить предел.
 */
 const сauchyСriterion = (x1, x2) => {
-    const residual = Math.abs(x1 - x2);
+    const difference = Math.abs(x1 - x2);
     
-    if(residual < epsilon) return residual;
+    if(difference < epsilon) return residual;
     
     return false;
   }
