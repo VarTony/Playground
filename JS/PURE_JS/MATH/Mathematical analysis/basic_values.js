@@ -1,0 +1,1 @@
+const epsilon = 1e-300;
