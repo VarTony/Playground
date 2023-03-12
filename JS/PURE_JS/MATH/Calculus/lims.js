@@ -11,7 +11,7 @@
 const сauchyСriterion = (x1, x2) => {
     const difference = Math.abs(x1 - x2);
     
-    if(difference < epsilon) return residual;
+    if(difference < epsilon) return difference;
     
     return false;
   }
