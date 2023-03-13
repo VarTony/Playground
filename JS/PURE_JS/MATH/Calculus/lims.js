@@ -8,13 +8,18 @@
     и сравнивает их разницу с ε, если разница меньше значения эпсилон,
     то можно определить предел.
 */
-const сauchyСriterion = (x1, x2) => {
-    const difference = Math.abs(x1 - x2);
+const сauchyСriterion = (x1, x2) => Math.abs(x1 - x2) < epsilon;
+
+
+// Процедура поиска предела
+const findLim = (x1, x2, seqType) => {    
     
-    if(difference < epsilon) return difference;
+  if(сauchyСriterion(x1, x2)) return Math.abs(x1 - x2);
     
-    return false;
-  }
+  return seqType === 'increasing' 
+   ? infinity 
+   : -infinity;
+}
     
 
   // Определяет тип изменения функции
@@ -38,8 +43,8 @@ const сauchyСriterion = (x1, x2) => {
     if(type === 'indefined') return { type, lim: 'Not found' }
     
     const lim = {
-      increasing: сauchyСriterion(func(1e+31), func(1e+33)),
-      decreasing: сauchyСriterion(func(1e+31), func(1e+33)),
+      increasing: findLim(func(1e+31), func(1e+33), type),
+      decreasing: findLim(func(1e+31), func(1e+33), type),
       nonIncreasing: func(1e+33),
       nonDecreasing: func(1e+33)
     }[type];
