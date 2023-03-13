@@ -27,8 +27,9 @@ const findLim = (x1, x2, seqType) => {
       const n1 = func(1);
       const n2 = func(10 / 1e-30); 
       const n3 = func(10 / 1e-32);
+      const expCondition = (n2 === Infinity) && (n3 === Infinity);
   
-      if((n1 < n2) && (n2 < n3)) return { type: 'increasing' };
+      if((n1 < n2) && (n2 < n3) || expCondition) return { type: 'increasing' };
       if((n1 > n2) && (n2 > n3)) return { type: 'decreasing' };
       if((n1 >= n2) && (n2 >= n3)) return { type: 'nonIncreasing' };
       if((n1 <= n2) && (n2 <= n3)) return { type: 'nonDecreasing' };
