@@ -23,37 +23,37 @@ const findLim = (x1, x2, seqType) => {
     
 
   // Определяет тип изменения функции
-  const SequeTypeDeterm = func => {
-      const n1 = func(1);
-      const n2 = func(10 / 1e-30); 
-      const n3 = func(10 / 1e-32);
-      const expCondition = (n2 === Infinity) && (n3 === Infinity);
+const SequeTypeDeterm = func => {
+  const n1 = func(1);
+  const n2 = func(10 / 1e-30); 
+  const n3 = func(10 / 1e-32);
+  const expCondition = (n2 === Infinity) && (n3 === Infinity);
   
-      if((n1 < n2) && (n2 < n3) || expCondition) return { type: 'increasing' };
-      if((n1 > n2) && (n2 > n3)) return { type: 'decreasing' };
-      if((n1 >= n2) && (n2 >= n3)) return { type: 'nonIncreasing' };
-      if((n1 <= n2) && (n2 <= n3)) return { type: 'nonDecreasing' };
+  if((n1 < n2) && (n2 < n3) || expCondition) return { type: 'increasing' };
+  if((n1 > n2) && (n2 > n3)) return { type: 'decreasing' };
+  if((n1 >= n2) && (n2 >= n3)) return { type: 'nonIncreasing' };
+  if((n1 <= n2) && (n2 <= n3)) return { type: 'nonDecreasing' };
   
-      return { type: 'indefined' }
-  }
+  return { type: 'indefined' }
+}
   
-  // По типу изменения функции находит ее придел; 
-  const checkLimitOfFunc = func => {
-    const type = SequeTypeDeterm(func).type;
+// По типу изменения функции находит ее придел; 
+const checkLimitOfFunc = func => {
+  const type = SequeTypeDeterm(func).type;
     
-    if(type === 'indefined') return { type, lim: 'Not found' }
+  if(type === 'indefined') return { type, lim: 'Not found' }
     
-    const lim = {
-      increasing: findLim(func(1e+31), func(1e+33), type),
-      decreasing: findLim(func(1e+31), func(1e+33), type),
-      nonIncreasing: func(1e+33),
-      nonDecreasing: func(1e+33)
-    }[type];
+  const lim = {
+    increasing: findLim(func(1e+31), func(1e+33), type),
+    decreasing: findLim(func(1e+31), func(1e+33), type),
+    nonIncreasing: func(1e+33),
+    nonDecreasing: func(1e+33)
+  }[type];
   
-    return  { type,  lim };
-  } 
+  return  { type,  lim };
+} 
 
-  export { checkLimitOfFunc }
+export { checkLimitOfFunc }
   
   
   
