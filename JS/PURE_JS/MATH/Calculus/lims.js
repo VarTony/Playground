@@ -17,8 +17,8 @@ const findLim = (x1, x2, seqType) => {
   if(сauchyСriterion(x1, x2)) return Math.abs(x1 - x2);
     
   return seqType === 'increasing' 
-   ? infinity 
-   : -infinity;
+   ? Infinity  
+   : -Infinity;
 }
     
 
@@ -52,7 +52,7 @@ const findLim = (x1, x2, seqType) => {
     return  { type,  lim };
   } 
 
-//   export {  }
+  export { checkLimitOfFunc }
   
   
   
