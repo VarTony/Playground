@@ -10,3 +10,5 @@ export {
     factorial,
     listToSet
   };
+
+  // CTRL-A + (CTRL-K/CTRL-F)
