@@ -20,7 +20,6 @@ const isNaturalLim = (lim, delta = 0.1) =>
 // Процедура поиска предела
 const findLim = (x1, x2, seqType) => {
 
-  console.log(+x2.toFixed(1));
   if (сauchyСriterion(x1, x2)) return isNaturalLim(x2)
     ? +x2.toFixed(1)
     : +x2.toFixed(10)
