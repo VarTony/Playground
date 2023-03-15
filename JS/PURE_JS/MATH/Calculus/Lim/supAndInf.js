@@ -2,16 +2,23 @@ import { listToSet } from "../../Some functions/exports";
 
 
 // Верхняя грань (Преобразует список в множество)
-const sup = X => Math.max(listToSet(X));
+const sup = X => Math.max(X);
 
 
 // Нижняя грань (Преобразует список в множество)
-const inf = X => Math.min(listToSet(X));
+const inf = X => Math.min(X);
 
 
-/* Находит супремум и инфимум (верхнюю и нижнюю грань) числового множества,
+/*  Находит супремум и инфимум (верхнюю и нижнюю грань) числового множества,
     по умолчанию считает что множество закрытое
+    Сигнатура:
+     X: Потенциальное множество
+     isList: По умолчанию считает, что первый аргумент множество, а не список. 
  */
-const sideDefiner = set => ({ infimum: inf(set), supremum: sup(set) })
+const sideDefiner = (X, isSet = true) => {
+    const set = isSet ? X : listToSet(X);
+    
+    return ({ infimum: inf(set), supremum: sup(set) })
+} 
 
 export { sideDefiner };
