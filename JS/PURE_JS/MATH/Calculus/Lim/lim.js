@@ -1,5 +1,8 @@
 // -------Alpha--------> (1 + (1 / x)) ** x ) is work
 
+import { сauchyСriterion } from '../exports';
+
+
 // Определяет: lim ϵ N
 const isNaturalLim = (lim, delta = 0.1) =>
   Math.abs((Math.round(lim) - delta) - lim) < delta
@@ -32,14 +35,14 @@ const SeqTypeDeterm = func => {
   if ((n1 >= n2) && (n2 >= n3)) return { type: 'nonIncreasing' };
   if ((n1 <= n2) && (n2 <= n3)) return { type: 'nonDecreasing' };
 
-  return { type: 'indefined' }
+  return { type: 'undefined' }
 }
 
 // По типу изменения функции находит ее придел; 
 const checkLimitOfFunc = func => {
   const type = SeqTypeDeterm(func).type;
 
-  if (type === 'indefined') return { type, lim: 'Not found' }
+  if (type === 'undefined') return { type, lim: 'Not found' }
 
   const lim = {
     increasing: findLim(func(1e+10), func(10 / 1e-10 + 1), type),
