@@ -1,4 +1,10 @@
-import { epsilon } from './basic_values';
+import { epsilon, O } from './basic_values';
 import { sideDefiner } from './Lim/supAndInf';
+import { сauchyСriterion } from './Lim/сauchyСriterion';
 
-export { epsilon, sideDefiner };
+export { 
+ epsilon,
+ O,
+ sideDefiner,
+ сauchyСriterion     
+};
