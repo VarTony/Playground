@@ -40,7 +40,7 @@ const collector = polyMap => {
         : '+' + String(value) + key
     }
   
-    return polynom.replace('EMPTY', '');
+    return polynom.replace(/^\+|[A-Z]/g, '');
   };
 
 
