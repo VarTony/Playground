@@ -35,7 +35,7 @@ const collector = polyMap => {
       if (value === 0) continue;
       if (value === 1) value = '';
       
-      polynom += value < 0
+      polynom += value < 0 && value !== ''
         ? String(value) + key
         : '+' + String(value) + key
     }
