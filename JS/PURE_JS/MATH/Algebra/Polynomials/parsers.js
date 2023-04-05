@@ -1,4 +1,47 @@
 
+/* (Beta) Парсер для одночленов (Работает с целыми степенями)
+    Сигнатура:
+     monom - String -> Одночлен записанный строкой (Пример: '-15biba^-18')
+
+     return - Object -> Пример: 
+      { 
+        symbols: 'biba',
+        coefficient: -15,
+        powers: { b: 2, i: 1, a: -15 }
+      }
+P.S Складывает степени, если переменные одинаковы
+
+*/
+const monomParser = monom => {
+  const symbols = monom.replace(/[\+-]|\d|\^/g, '');
+  const coefficient = monom.replace(/([a-z]*(\^[\+-]\d*)?)/g, '');
+  const powers = monom
+    .replace(/([\+-]?([a-z]\^\-){1}\d+)/g, ' $1')
+    .split(' ')
+    .reduce((powersMap, chunk) => {
+      if(chunk.includes('^')) {
+        const value = +chunk.slice(2);
+        const key = chunk[0];
+        
+        powersMap[key]  = value;     
+      }
+      else chunk.replace(/[\+-]|\d/g, '')
+        .split('')
+        .forEach(key => powersMap[key] ? powersMap[key] += 1 : powersMap[key] = 1 );
+
+      return powersMap;
+    }, {})
+  
+  const signCoeff = monom[0] === '-' ? '-' : '';
+
+  return {
+    symbols: (symbols !== '' ? symbols : 'EMPTY'),
+    coefficient: (coefficient !== '' ? +coefficient : +(signCoeff + '1')),
+    powers
+  }
+}
+
+
 /*  Парсер для полиномов первой степени.
     Сигнатура:
      polynom - String -> Полином в виде строки

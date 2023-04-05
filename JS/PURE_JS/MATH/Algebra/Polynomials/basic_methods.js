@@ -6,7 +6,7 @@ import { parser, collector } from './exports';
     Сигнатура:
      polynom1 - String -> Полином записанный в форме строки.
      polynom2 - String -> Полином записанный в форме строки.
-     sum - Boolean -> Флаг по умолчанию (true)-складывает, (false)-вычитает.
+     sum - Boolean -> Флаг, по умолчанию: (true)-складывать, (false)-вычитать.
 */
 const algSumator = (polynom1, polynom2, sum = true) => {
     const pMap1 = parser(polynom1);
