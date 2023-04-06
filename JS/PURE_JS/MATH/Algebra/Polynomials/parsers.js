@@ -1,13 +1,51 @@
+const getMonomsPowers = monom => monom
+    .replace(/([\+-]?([a-z]\^\-){1}\d+)/g, ' $1')
+    .split(' ')
+    .reduce((powersMap, chunk) => {
+      if (chunk.includes('^')) {
+        const value = +chunk.slice(2);
+        const key = chunk[0];
+
+        powersMap[key] = value;
+      }
+      else chunk.replace(/[\+-]|\d/g, '')
+        .split('')
+        .forEach(key => powersMap[key] ? powersMap[key] += 1 : powersMap[key] = 1);
+
+      return powersMap;
+    }, {})
+  
+
+
+const getMonomCoefficient = monom => {
+  const coefficient = monom.match(/^([\+-]?\d*)/g)[0];
+  
+  const isOnlySign = /^[\+-]$/.test(coefficient);
+  const isCoefEmpty =  coefficient.trim() === '';
+
+  return isOnlySign || isCoefEmpty
+    ? +(coefficient + 1) 
+    : +coefficient;
+}
+
+
+const getVariablesFromPowerKeys = powers => {
+  const isVars =  Object.keys(powers).join(' ');
+  return isVars !== '' ? isVars : 'EMPTY';
+}
+
+
+
 
 /* (Beta) Парсер для одночленов (Работает с целыми степенями)
     Сигнатура:
-     monom - String -> Одночлен записанный строкой (Пример: '-15biba^-18')
+     monom - String -> Одночлен записанный строкой (Пример: '-15biba^-25')
 
      return - Object -> Пример: 
       { 
         symbols: 'biba',
         coefficient: -15,
-        powers: { b: 2, i: 1, a: -15 }
+        powers: { b: 2, i: 1, a: -25 }
       }
 P.S Складывает степени, если переменные одинаковы
 
