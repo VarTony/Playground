@@ -7,12 +7,14 @@
 P.S Складывает степени одинаковых переменных
 */
 const getMonomsPowers = monom => monom
-  .replace(/([\+-]?([a-z]\^\-?){1}\d+)/g, ' $1')
-  .split(' ')
+  .split(/([a-z]\^?\-?\d+)/g)
   .reduce((powersMap, chunk) => {
     if (chunk.includes('^')) {
-      const value = +chunk.slice(2);
-      const key = chunk[0];
+      const splited = chunk.split('^');
+      const key = splited[0];
+      const value = powersMap[key] 
+        ? (powersMap[key] + +splited[1]) 
+        : +splited[1];
 
       powersMap[key] = value;
     }
