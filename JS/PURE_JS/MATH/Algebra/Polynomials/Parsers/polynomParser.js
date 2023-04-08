@@ -8,7 +8,7 @@ import { monomParser } from "./exports";
 const polyParser = polynom => {
     const neatPolynom = polynom.trim().toLowerCase();
     const monomsList = neatPolynom
-     .replace(/(?<!\^)[\+\-]{1}((?=\d+)|(?=[a-z]+))/g, ' $1')
+     .replace(/(?<!\^)([\+\-]{1})/g, ' $1') // Находит знак алгебраической суммы, не являющийся знаком степени/
      .split(' ');
     const ParsedMonomsList = monomsList.map(monom => monomParser(monom));
   
