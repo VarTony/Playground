@@ -45,4 +45,4 @@ const polynomAlgSumator = (polynom1, polynom2, sum = true) => {
   return algSumOfMonoms;  //constructPolynom
 }
 
-export { algSumator };
+export { polynomAlgSumator };
