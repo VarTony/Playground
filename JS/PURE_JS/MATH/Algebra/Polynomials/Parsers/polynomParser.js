@@ -8,8 +8,8 @@ import { monomParser } from "./exports";
 const polyParser = polynom => {
     const neatPolynom = polynom.trim().toLowerCase();
     const monomsList = neatPolynom
-      .replace(/[\+-](\d[a-z]\^[-]?\d)*/g, ' $1')
-      .split(' ');
+     .replace(/(?<!\^)[\+\-]{1}((?=\d+)|(?=[a-z]+))/g, ' $1')
+     .split(' ');
     const ParsedMonomsList = monomsList.map(monom => monomParser(monom));
   
     return ParsedMonomsList;
