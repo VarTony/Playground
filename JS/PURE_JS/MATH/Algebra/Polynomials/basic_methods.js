@@ -1,7 +1,7 @@
 import { polyParser, polyAssembler } from './exports';
 
 
-/* Вспомогательная функция складывающая 2 распаршенных одночлена
+/* Вспомогательная функция складывающая 2 разложенных одночлена
   Сигнатура:
     monSet1 - Object -> { variables: String, coefficient: Number, powers: { key_n:  Number_n } }
     monSet2 - Object -> { variables: String, coefficient: Number, powers: { key_n:  Number_n } }
