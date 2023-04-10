@@ -1,4 +1,4 @@
-import { parser, collector } from './parsers';
-import { algSumator } from './basic_methods';
+import { polyParser, collector } from './Parsers/polynomParser';
+import { polynomAlgSumator } from './basic_methods';
 
-export { parser, collector, algSumator };
+export { polyParser, collector, polynomAlgSumator };

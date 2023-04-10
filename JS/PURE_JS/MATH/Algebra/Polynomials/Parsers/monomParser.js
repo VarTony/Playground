@@ -12,10 +12,9 @@ const getMonomsPowers = monom => monom
     if (chunk.includes('^')) {
       const splited = chunk.split('^');
       const key = splited[0];
-      const value = powersMap[key] 
-        ? (powersMap[key] + +splited[1]) 
+      const value = powersMap[key]
+        ? (powersMap[key] + +splited[1])
         : +splited[1];
-
       powersMap[key] = value;
     }
     else chunk.replace(/[\+-]|\d/g, '')
@@ -52,8 +51,8 @@ const getMonomCoefficient = monom => {
      return - String -> Пример: symbols: 'a'
 */
 const getVariablesFromPowerKeys = powers => {
-  const isVars =  Object.keys(powers).join(' ');
-  return isVars !== '' ? isVars : 'EMPTY';
+  const isVars = Object.keys(powers);
+  return isVars.length >= 1 ? isVars : ['EMPTY'];
 }
 
 

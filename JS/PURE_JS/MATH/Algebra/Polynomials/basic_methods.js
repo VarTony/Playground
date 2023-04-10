@@ -1,4 +1,4 @@
-import { parser, collector } from './exports';
+import { polyParser, polyAssembler } from './exports';
 
 
 /* Вспомогательная функция складывающая 2 распаршенных одночлена
@@ -10,10 +10,12 @@ const mergeTwoMonomsSet = (monSet1, monSet2) => ({
   variables: monSet1.variables,
   coefficient: (monSet1.coefficient + monSet2.coefficient),
   powers: monSet1.variables
-    .reduce((powers, varbl) => {
-        powers[varbl] = Math.max(
-          monSet1.powers[varbl],
-          monSet2.powers[varbl]
+    .reduce((powers, variable) => {
+      if (variable === 'EMPTY') return powers;
+
+        powers[variable] = Math.max(
+          monSet1.powers[variable],
+          monSet2.powers[variable]
          );
       return powers;
     }, {})
@@ -26,7 +28,7 @@ const mergeTwoMonomsSet = (monSet1, monSet2) => ({
      polynom2 - String -> Полином записанный в форме строки.
      sum - Boolean -> Флаг, по умолчанию: (true)-складывать, (false)-вычитать.
 
-     return: 
+     return - String -> Результат сложения в форме строки
 */
 const polynomAlgSumator = (polynom1, polynom2, sum = true) => {
   const monomList1 = polyParser(polynom1);
@@ -35,14 +37,24 @@ const polynomAlgSumator = (polynom1, polynom2, sum = true) => {
 
   const algSumOfMonoms = mainMonomsList.reduce((acc, monomSet) => {
     const variables = monomSet.variables.join(' ');
-    if (acc[variables])
-      acc[variables] = mergeTwoMonomsSet(acc[variables], monomSet)
+    if (acc[variables]) {
+      
+      const mergedMonoms = mergeTwoMonomsSet(acc[variables], monomSet);
+      if (mergedMonoms.coefficient === 0) return acc;
+      
+      acc[variables] = mergedMonoms;
+    }
     else acc[variables] = monomSet;
 
     return acc;
   }, {});
 
-  return algSumOfMonoms;  //constructPolynom
+  const listSumsofMonoms = Object.values(algSumOfMonoms);
+  const strOfMonomsSum = polyAssembler(listSumsofMonoms);
+
+  return strOfMonomsSum; 
 }
+
+
 
 export { polynomAlgSumator };
