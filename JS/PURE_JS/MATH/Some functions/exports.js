@@ -3,6 +3,7 @@ import { negativePower } from './negativePower';
 import { factorial } from './factorial';
 import { listToSet } from './listToSet';
 import { heterogramCreator } from './heterogramCreator';
+import { changeSing } from './changeSing';
 
 
 export { 
@@ -10,7 +11,8 @@ export {
     getRandomInt,
     negativePower,
     factorial,
-    listToSet
+    listToSet,
+    changeSing
   };
 
   // CTRL-A + (CTRL-K/CTRL-F)

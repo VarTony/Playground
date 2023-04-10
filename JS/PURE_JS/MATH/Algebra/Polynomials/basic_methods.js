@@ -1,4 +1,5 @@
 import { polyParser, polyAssembler } from './exports';
+import { changeSing } from '../../Some functions/changeSing';
 
 
 /* Вспомогательная функция складывающая 2 разложенных одночлена
@@ -6,9 +7,9 @@ import { polyParser, polyAssembler } from './exports';
     monSet1 - Object -> { variables: String, coefficient: Number, powers: { key_n:  Number_n } }
     monSet2 - Object -> { variables: String, coefficient: Number, powers: { key_n:  Number_n } }
 */
-const mergeTwoMonomsSet = (monSet1, monSet2) => ({
+const mergeTwoMonomsSet = (monSet1, monSet2, isSub) => ({
   variables: monSet1.variables,
-  coefficient: (monSet1.coefficient + monSet2.coefficient),
+  coefficient: (monSet1.coefficient + changeSing(monSet2.coefficient, isSub)),
   powers: monSet1.variables
     .reduce((powers, variable) => {
       if (variable === 'EMPTY') return powers;
@@ -26,11 +27,11 @@ const mergeTwoMonomsSet = (monSet1, monSet2) => ({
     Сигнатура:
      polynom1 - String -> Полином записанный в форме строки.
      polynom2 - String -> Полином записанный в форме строки.
-     sum - Boolean -> Флаг, по умолчанию: (true)-складывать, (false)-вычитать.
+     isSub - Boolean -> Флаг, по умолчанию: (false)-складывать, (true)-вычитать.
 
      return - String -> Результат сложения в форме строки
 */
-const polynomAlgSumator = (polynom1, polynom2, sum = true) => {
+const polynomAlgSumator = (polynom1, polynom2, isSub = false) => {
   const monomList1 = polyParser(polynom1);
   const monomList2 = polyParser(polynom2);
   const mainMonomsList = [...monomList1, ...monomList2];
@@ -39,7 +40,7 @@ const polynomAlgSumator = (polynom1, polynom2, sum = true) => {
     const variables = monomSet.variables.join(' ');
     if (acc[variables]) {
       
-      const mergedMonoms = mergeTwoMonomsSet(acc[variables], monomSet);
+      const mergedMonoms = mergeTwoMonomsSet(acc[variables], monomSet, isSub);
       if (mergedMonoms.coefficient === 0) return acc;
       
       acc[variables] = mergedMonoms;
