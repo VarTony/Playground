@@ -8,15 +8,16 @@ import { monomParser } from "./exports";
     return - String -> Одночлен с возведенным в свою степень коэффициентом
 */
 const powerHandler = monom => {
-    if (/\d+\^\d+/.test(monom)) {
+    if (/\d+\^\d+[a-z]*/.test(monom)) {
       const splited = monom.split('^');
       const base = splited[0];
-      const power = splited[1];
+      const power = splited[1].replace(/[a-z]/g, '');
+      const vars = splited[1].replace(/\d/g, '');
   
-      return String((+base) ** (+power));
+      return ((+base) ** (+power)) + vars;
     }
     return monom;
-  }
+  } 
 
 
 /*  Парсер для полиномов первой степени.
