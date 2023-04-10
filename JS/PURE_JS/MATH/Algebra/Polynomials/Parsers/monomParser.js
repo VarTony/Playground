@@ -56,6 +56,26 @@ const getVariablesFromPowerKeys = powers => {
 }
 
 
+/* Вспомогательная функция возводить числовой коэфф. в степень
+    Сигнатура:
+     monom - String -> Одночлен в виде строки
+
+    return - String -> Одночлен с возведенным в "свою" степень коэффициентом
+*/
+const coeffPowerHandler = monom => {
+  if (/\d+\^\d+[a-z]*/.test(monom)) {
+    const splited = monom.split('^');
+    const base = splited[0];
+    const power = splited[1].replace(/[a-z]/g, '');
+    const vars = splited[1].replace(/\d/g, '');
+    const rest = `^${splited.slice(2).join('^')}`;
+
+    return ((+base) ** (+power)) + vars + rest;
+  }
+  return monom;
+}
+
+
 /* (Beta) Парсер для одночленов (Работает с только целыми степенями)
     Сигнатура:
      monom - String -> Одночлен записанный строкой (Пример: '-15biba^-25')
@@ -69,16 +89,17 @@ const getVariablesFromPowerKeys = powers => {
 P.S Складывает степени, если переменные одинаковы
 */
 const monomParser = monom => {
-  const powers = getMonomsPowers(monom);
-  const coefficient = getMonomCoefficient(monom);
-  const variables =  getVariablesFromPowerKeys(powers);
+  const handledMonom = coeffPowerHandler(monom);
+  const powers = getMonomsPowers(handledMonom);
+  const coefficient = getMonomCoefficient(handledMonom);
+  const variables = getVariablesFromPowerKeys(powers);
 
   return {
     variables,
     coefficient,
     powers
   }
-};
+}
 
 
 export { monomParser };
