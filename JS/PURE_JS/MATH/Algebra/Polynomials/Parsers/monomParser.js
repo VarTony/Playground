@@ -62,15 +62,17 @@ const getVariablesFromPowerKeys = powers => {
 
     return - String -> Одночлен с возведенным в "свою" степень коэффициентом
 */
-const coeffPowerHandler = monom => {
+const powerCoeffHandler = monom => {
   if (/\d+\^\d+[a-z]*/.test(monom)) {
     const splited = monom.split('^');
-    const base = splited[0];
-    const power = splited[1].replace(/[a-z]/g, '');
+    const powered = splited[0] ** (splited[1].replace(/[a-z]/g, ''));
+    
     const vars = splited[1].replace(/\d/g, '');
-    const rest = `^${splited.slice(2).join('^')}`;
-
-    return ((+base) ** (+power)) + vars + rest;
+    const rest = splited.slice(2).join('^')
+    const tail = vars + (rest.length !== 0 ? `^${rest}` : '');
+    
+    const hanled = (powered + tail);
+    return hanled;
   }
   return monom;
 }
@@ -89,7 +91,7 @@ const coeffPowerHandler = monom => {
 P.S Складывает степени, если переменные одинаковы
 */
 const monomParser = monom => {
-  const handledMonom = coeffPowerHandler(monom);
+  const handledMonom = powerCoeffHandler(monom);
   const powers = getMonomsPowers(handledMonom);
   const coefficient = getMonomCoefficient(handledMonom);
   const variables = getVariablesFromPowerKeys(powers);
