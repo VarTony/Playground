@@ -1,7 +1,12 @@
 
+// Структура данных - Стэк:
+
 function Stack(list) {
   this.stack = [...list];
 };
+
+
+// Извлекает элемент из конца стэка (списка):
 
 Stack.prototype.getOutput = function() {
   const lastIndex = this.stack.length - 1;
@@ -12,11 +17,16 @@ Stack.prototype.getOutput = function() {
 };
 
 
+// Добавляет элемент в конец стэка (списка):
+
 Stack.prototype.setInput = function(inputData) {
 
   this.stack = [...this.stack, inputData];
 
 };
+
+
+// Блок мануального тестирования:
 
 const stack1 = new Stack([1,2,3,4,5,6,7,8,9,'acasc', 12]);
 

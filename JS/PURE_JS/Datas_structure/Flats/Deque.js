@@ -6,28 +6,28 @@ function Deque(list) {
 
 
 
-// Проверяет пуст ли дэк(список):
+// Проверяет пуст ли дэк (список):
 
 Deque.prototype.empty = function() {
   return this.deque.length > 0;
 };
 
 
-// Добавляет элемент в конец списка:
+// Добавляет элемент в конец дэка (списка):
 
 Deque.prototype.pushBack = function(value) {
   this.deque = [...this.deque, value];
 };
 
 
-// Добавляет элемент в начало списка:
+// Добавляет элемент в начало дэка (списка):
 
 Deque.prototype.pushFront = function(value) {
   this.deque = [value, ...this.deque];
 };
 
 
-// Извлекает элемент из конца списка:
+// Извлекает элемент из конца дэка (списка):
 
 Deque.prototype.popBack = function() {
   const lastIndex = this.deque.length - 1;
@@ -38,7 +38,7 @@ Deque.prototype.popBack = function() {
 };
 
 
-// Извлекает элемент из начала списка:
+// Извлекает элемент из начала дэка (списка):
 
 Deque.prototype.popFront = function() {
   const lengthDeque = this.deque.length;
