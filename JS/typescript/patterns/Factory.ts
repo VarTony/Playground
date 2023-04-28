@@ -1,5 +1,7 @@
 // Паттерн фабрика(Factory)  
 
+type brandOfAircon = 'Gree' | 'Green' | 'Electrolux' | 'LG';
+
 interface Aircon {
     brand: string;
     power: number;
@@ -32,16 +34,16 @@ interface Aircon {
   
   class GreenAircon extends Aircon {}
   
-  class GreeAircon {};
+  class GreeAircon extends Aircon {};
   
   
   class GreeFactory {
-    public static createAircon(brand: string, power: number, color: string, inverter: boolean) {
+    public static createAircon(brand: brandOfAircon, power: number, color: string, inverter: boolean) {
       return {
-        'Gree': new GreeAircon(power, color, inverter, 'Gree'),
-        'Green': new GreenAircon(power, color, inverter, 'Green'),
-        'LG': new LGAircon(power, color, inverter, 'LG'),
-        'Electrolux': new ElectroluxAircon(power, color, inverter, 'Electrolux')
+        'Gree': new GreeAircon(power, color, inverter, brand),
+        'Green': new GreenAircon(power, color, inverter, brand),
+        'LG': new LGAircon(power, color, inverter, brand),
+        'Electrolux': new ElectroluxAircon(power, color, inverter, brand)
       }[brand]
     }
   }
