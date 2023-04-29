@@ -1,4 +1,7 @@
-// Паттерн фабрика(Factory)  
+/* Фабричный метод(Factory) — порождающий паттерн проектирования, 
+  который определяет общий интерфейс для создания объектов в суперклассе, 
+  позволяя подклассам изменять тип создаваемых объектов.
+*/
 
 type brandOfAircon = 'Gree' | 'Green' | 'Electrolux' | 'LG';
 
@@ -40,12 +43,13 @@ interface Aircon {
   class GreeFactory {
     public static createAircon(brand: brandOfAircon, power: number, color: string, inverter: boolean) {
       return {
-        'Gree': new GreeAircon(power, color, inverter, brand),
-        'Green': new GreenAircon(power, color, inverter, brand),
-        'LG': new LGAircon(power, color, inverter, brand),
-        'Electrolux': new ElectroluxAircon(power, color, inverter, brand)
+        Gree: new GreeAircon(power, color, inverter, brand),
+        Green: new GreenAircon(power, color, inverter, brand),
+        LG: new LGAircon(power, color, inverter, brand),
+        Electrolux: new ElectroluxAircon(power, color, inverter, brand)
       }[brand]
     }
   }
-  
+
+  // Создает на фабрике экземпляр нужного бренда
   const lb15ProL: Aircon = GreeFactory.createAircon('Electrolux', 87, 'Yellow', true);
