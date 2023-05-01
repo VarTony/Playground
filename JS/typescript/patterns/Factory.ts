@@ -5,7 +5,7 @@
 
 type brandOfAircon = 'Gree' | 'Green' | 'Electrolux' | 'LG';
 
-interface Aircon {
+interface IAircon {
     brand: string;
     power: number;
     color: string;
@@ -41,7 +41,7 @@ interface Aircon {
   
   
   class GreeFactory {
-    public static createAircon(brand: brandOfAircon, power: number, color: string, inverter: boolean) {
+    public static createAircon(brand: brandOfAircon, power: number, color: string, inverter: boolean): IAircon {
       return {
         Gree: new GreeAircon(power, color, inverter, brand),
         Green: new GreenAircon(power, color, inverter, brand),
@@ -52,4 +52,4 @@ interface Aircon {
   }
 
   // Создает на фабрике экземпляр нужного бренда
-  const lb15ProL: Aircon = GreeFactory.createAircon('Electrolux', 87, 'Yellow', true);
+  const lb15ProL: IAircon = GreeFactory.createAircon('Electrolux', 87, 'Yellow', true);
