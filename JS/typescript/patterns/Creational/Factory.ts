@@ -1,6 +1,7 @@
-/* Фабричный метод(Factory) — порождающий паттерн проектирования, 
-  который определяет общий интерфейс для создания объектов в суперклассе, 
-  позволяя подклассам изменять тип создаваемых объектов.
+/*
+  *  Фабричный метод(Factory) — порождающий паттерн проектирования, 
+  *   который определяет общий интерфейс для создания объектов в суперклассе, 
+  *   позволяя подклассам изменять тип создаваемых объектов.
 */
 
 type brandOfAircon = 'Gree' | 'Green' | 'Electrolux' | 'LG';
@@ -31,11 +32,11 @@ interface IAircon {
   }
   
   
-  class ElectroluxAircon extends Aircon {}
+  class ElectroluxAircon extends Aircon {};
   
-  class LGAircon extends Aircon {}
+  class LGAircon extends Aircon {};
   
-  class GreenAircon extends Aircon {}
+  class GreenAircon extends Aircon {};
   
   class GreeAircon extends Aircon {};
   
@@ -47,7 +48,7 @@ interface IAircon {
         Green: new GreenAircon(power, color, inverter, brand),
         LG: new LGAircon(power, color, inverter, brand),
         Electrolux: new ElectroluxAircon(power, color, inverter, brand)
-      }[brand]
+      }[brand];
     }
   }
 
