@@ -4,6 +4,7 @@
   * конфиг-файлу с идемпотентными данными.
 */
 
+
 class Singleton {
     private static _config = {
       ip: '192.168.0.1',

@@ -4,6 +4,7 @@
   *   позволяя подклассам изменять тип создаваемых объектов.
 */
 
+
 type brandOfAircon = 'Gree' | 'Green' | 'Electrolux' | 'LG';
 
 interface IAircon {

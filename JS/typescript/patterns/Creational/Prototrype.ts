@@ -8,6 +8,7 @@
   * конфликт/ы.
  */
 
+ 
  interface anyObject {
     [key: string]: any;
  }
