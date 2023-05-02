@@ -11,7 +11,7 @@ class Singleton {
     }
   
     public static getConfig() {
-      return { ...this._config }; // Деструктуризация защищает поля объект от изменений;
+      return { ...this._config }; // Защищает поля изначального объекта от изменений;
     }
   }
   
