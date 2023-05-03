@@ -1,9 +1,10 @@
 /**
- * Паттерн Адаптер - Используется для например для адаптации новыъ библиотек под
+ * Паттерн Адаптер - Используется, например, для адаптации новых библиотек под
  * интерфейсы старого проекта.
  */
 
 
+//Интерфейс цели
 interface ITarget {
     native: string;
     stringInArray(string: string): [];
@@ -11,12 +12,12 @@ interface ITarget {
   }
   
   
-  // Цель мимикрии
+  //Цель мимикрии
   class Target {
     public native: string = '15ab3c85';
 
-    public stringInArray(str: string) {
-      const arr: [] = [];
+    public stringInArray(str: string): string[] {
+      const arr: string[] = [];
       for(let i: number = 0; i < str.length - 1; i++) {
         arr[i] = str[i];
       }
@@ -28,9 +29,9 @@ interface ITarget {
       }
   }
   
-  // Адаптируемый класс
+  //Адаптируемый класс
   class Adaptee {
-    public stringInList(string: string) {
+    public stringInList(string: string): string[] {
       return string.split('');
     }
   }
@@ -50,7 +51,7 @@ interface ITarget {
     }
   }
   
-  // Использование
+  //Использование
   const targ: ITarget = new Adapter(new Adaptee());
   
   console.log(targ.stringInArray('123, 543'));
