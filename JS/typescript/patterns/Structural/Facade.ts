@@ -103,7 +103,7 @@ class PCI {
   
   
   // Facade
-  class Computer {
+  class PC {
     private static initialData: any;
     private static numsDevices: {};
     
@@ -121,5 +121,7 @@ class PCI {
     // ...
   }
   
-  
-  Computer.on();
+  // В данном случае приводится пример с условным PC как фасадом и его (условным) механизмом работы 
+  // с сервисами и устройствами занятыми на моменте запуска машины (Жесткий диск (initialData) и излишняя детальность опущены). 
+
+  PC.on();
