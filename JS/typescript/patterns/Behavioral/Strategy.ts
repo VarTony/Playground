@@ -10,6 +10,10 @@ interface Constructable<T> {
     new(...args: any) : T;
 }
 
+
+/**
+ * Основной класс
+ */
 class Duck {
     quackBehavior: QuackBehavior;
     flyBehavior: FlyBehavior;
