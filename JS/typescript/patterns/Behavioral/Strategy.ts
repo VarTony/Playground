@@ -14,7 +14,6 @@ class Duck {
     quackBehavior: QuackBehavior;
     flyBehavior: FlyBehavior;
     
-    // public abstract display(): void;
     
     public performFly(): void {
       this.flyBehavior.fly();
@@ -115,10 +114,6 @@ class Duck {
       this.setQuack(Squeak);
       this.setFly(FlyWithWings);
     }
-    
-    // public display(): void {
-    //   console.log('I`m duck from a lake.');
-    // }
   }
   
   
@@ -128,10 +123,6 @@ class Duck {
       this.setQuack(Silence);
       this.setFly(FlyNoWay);
     }
-    
-    // public display(): void {
-    //   console.log('I’m a model duck');
-    // }
   }
   
   
@@ -141,10 +132,6 @@ class Duck {
       this.setQuack(Quack);
       this.setFly(FlyRocketPowered);
     }
-    
-    // public display(): void {
-    //   console.log('I’m a robo-duck');
-    // }
   }
   
 
