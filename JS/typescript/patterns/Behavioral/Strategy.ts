@@ -6,7 +6,7 @@
  */
 
 // Костыль
-interface Constructable<T> {
+interface IConstructable<T> {
     new(...args: any) : T;
 }
 
@@ -15,8 +15,8 @@ interface Constructable<T> {
  * Основной класс
  */
 class Duck {
-    quackBehavior: QuackBehavior;
-    flyBehavior: FlyBehavior;
+    quackBehavior: IQuackBehavior;
+    flyBehavior: IFlyBehavior;
     
     
     public performFly(): void {
@@ -27,11 +27,11 @@ class Duck {
       this.quackBehavior.quack();
     }
   
-    public setQuack(Quack: Constructable<QuackBehavior>): void {
+    public setQuack(Quack: IConstructable<IQuackBehavior>): void {
         this.quackBehavior = new Quack();
     }
   
-    public setFly(Fly: Constructable<FlyBehavior>): void {
+    public setFly(Fly: IConstructable<IFlyBehavior>): void {
       this.flyBehavior = new Fly();
     }
     
@@ -45,26 +45,26 @@ class Duck {
   /** 
   * Реализация полета и его видов;
   */
-  interface FlyBehavior {
+  interface IFlyBehavior {
     fly(): void;
   }
   
   
-  class FlyWithWings implements FlyBehavior {
+  class FlyWithWings implements IFlyBehavior {
     public fly(): void {
       console.log('I’m flying!!');
     }
   }
   
   
-  class FlyNoWay implements FlyBehavior {
+  class FlyNoWay implements IFlyBehavior {
     public fly(): void {
       console.log('I can’t fly');
     }
   }
   
   
-  class FlyRocketPowered implements FlyBehavior {
+  class FlyRocketPowered implements IFlyBehavior {
     public fly(): void {
       console.log('I’m flying with a rocket!');
     }
@@ -75,33 +75,33 @@ class Duck {
   /** 
   * Реализация кряканья и его видов;
   */
-  interface QuackBehavior {
+  interface IQuackBehavior {
     quack(): void;
   }
   
   
-  class Quack implements QuackBehavior {
+  class Quack implements IQuackBehavior {
     public quack(): void {
       console.log('Quaaaaaaaack!!!');
     }
   }
   
   
-  class MuteQuack implements QuackBehavior {
+  class MuteQuack implements IQuackBehavior {
     public quack(): void {
       console.log('<< Silence >>');
     }
   }
   
   
-  class Squeak implements QuackBehavior {
+  class Squeak implements IQuackBehavior {
     public quack(): void {
       console.log('Squeak');
     }
   }
   
   
-  class Silence implements QuackBehavior {
+  class Silence implements IQuackBehavior {
     public quack(): void {
         console.log('...');
     }
