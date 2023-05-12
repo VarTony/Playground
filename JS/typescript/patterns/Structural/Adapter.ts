@@ -1,19 +1,24 @@
 /**
  * Паттерн Адаптер - Используется, например, для адаптации новых библиотек под
  * интерфейсы старого проекта.
+ * Адаптирует целевой интерфейс под используемый.
  */
 
 
-//Интерфейс цели
+/**
+ * Интерфейс цели
+ */
 interface ITarget {
     native: string;
-    stringInArray(string: string): [];
+    stringInArray(string: string): string[];
     getNative(): string;
   }
   
   
-  //Цель мимикрии
-  class Target {
+  /**
+   * Цель мимикрии
+   */
+  class Target implements ITarget {
     public native: string = '15ab3c85';
 
     public stringInArray(str: string): string[] {
@@ -29,7 +34,11 @@ interface ITarget {
       }
   }
   
-  //Адаптируемый класс
+
+
+  /**
+   * Адаптируемый класс
+   */
   class Adaptee {
     public stringInList(string: string): string[] {
       return string.split('');
@@ -46,12 +55,17 @@ interface ITarget {
       this.adaptee = adaptee
     }
     
+    // Переопределяет цулевой метод под новую реализацию
     public stringInArray(string: string) {
       return this.adaptee.stringInList(string);
     }
   }
   
-  //Использование
+
+
+  /**
+   * Экземпляры и тестирование 
+   */
   const targ: ITarget = new Adapter(new Adaptee());
   
   console.log(targ.stringInArray('123, 543'));
