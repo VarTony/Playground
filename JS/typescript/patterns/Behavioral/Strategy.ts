@@ -12,7 +12,7 @@ interface IConstructable<T> {
 
 
 /**
- * Основной класс
+ * Основной класс:
  */
 class Duck {
     quackBehavior: IQuackBehavior;
@@ -43,7 +43,7 @@ class Duck {
   
   
   /** 
-  * Реализация полета и его видов;
+  * Реализация полета и его видов:
   */
   interface IFlyBehavior {
     fly(): void;
@@ -73,7 +73,7 @@ class Duck {
   
   
   /** 
-  * Реализация кряканья и его видов;
+  * Реализация кряканья и его видов:
   */
   interface IQuackBehavior {
     quack(): void;
@@ -141,7 +141,7 @@ class Duck {
 
 
   /**
-   * Экземпляры и тестирование 
+   * Экземпляры и тестирование:
    */
   const myMallardDuck: Duck = new MallardDuck();
   myMallardDuck.performQuack(); // Squeak
