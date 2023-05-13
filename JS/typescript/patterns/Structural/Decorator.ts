@@ -59,7 +59,7 @@ class ServoDrivesUpgrade extends ExoskeletonDecorator {
   private loadCapacityUpgrade: string = '8kg';
   private energyConsum: string = '~9100 mAh';
   
-    // Примешивает к базовой логике свое дополнение;
+  // Примешивает к базовой логике свое дополнение;
   public getParametrs(): string {
     return `
       ${super.getParametrs()}
