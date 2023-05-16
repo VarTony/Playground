@@ -9,7 +9,7 @@
  */
 
  
- interface anyObject {
+ interface IAnyObject {
     [key: string]: any;
  }
 
@@ -28,7 +28,7 @@ class Config {
   }
   
   class CloneFactory {
-    public static getClone(prototype: {}): anyObject {
+    public static getClone(prototype: {}): IAnyObject {
       return { ...prototype }
     }
   }
