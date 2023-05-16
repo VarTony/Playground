@@ -3,8 +3,8 @@ const chilpProcess = require('node:child_process');
 
 /**
  * 
- * @param {*} filename 
- * @param {*} funcName 
+ * @param { string } filename 
+ * @param { string } funcName 
  * 
  * Записывает в создаваемые файлы байткод иследуемых функций:
  */
