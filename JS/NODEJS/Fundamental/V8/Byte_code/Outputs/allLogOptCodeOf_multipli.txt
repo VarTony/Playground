@@ -1,0 +1,146 @@
+--- Raw source ---
+(a, b) => a * b;
+
+--- Optimized code ---
+optimization_id = 0
+source_position = 17
+kind = TURBOFAN
+name = multipli
+stack_slots = 6
+compiler = turbofan
+address = 0x109dc8001
+
+Instructions (size = 284)
+0x109dc8060     0  f85c0050       ldur x16, [x2, #-64]
+0x109dc8064     4  b840f210       ldur w16, [x16, #15]
+0x109dc8068     8  36000070       tbz w16, #0, #+0xc (addr 0x109dc8074)
+0x109dc806c     c  580006f1       ldr x17, pc+220 (addr 0x0000000109dc8148)
+0x109dc8070    10  d61f0220       br x17
+0x109dc8074    14  a9bf7bfd       stp fp, lr, [sp, #-16]!
+0x109dc8078    18  910003fd       mov fp, sp
+0x109dc807c    1c  a9be03ff       stp xzr, x0, [sp, #-32]!
+0x109dc8080    20  a9016fe1       stp x1, cp, [sp, #16]
+0x109dc8084    24  f8520342       ldur x2, [x26, #-224]
+0x109dc8088    28  f90003fb       str cp, [sp]
+0x109dc808c    2c  eb2263ff       cmp sp, x2
+0x109dc8090    30  54000309       b.ls #+0x60 (addr 0x109dc80f0)
+0x109dc8094    34  f9401fe2       ldr x2, [sp, #56]
+0x109dc8098    38  7200005f       tst w2, #0x1
+0x109dc809c    3c  54000661       b.ne #+0xcc (addr 0x109dc8168)
+0x109dc80a0    40  f94023e3       ldr x3, [sp, #64]
+0x109dc80a4    44  9360fc64       asr x4, x3, #32
+0x109dc80a8    48  9360fc45       asr x5, x2, #32
+0x109dc80ac    4c  7200007f       tst w3, #0x1
+0x109dc80b0    50  540005e1       b.ne #+0xbc (addr 0x109dc816c)
+0x109dc80b4    54  9b247ca6       smull x6, w5, w4
+0x109dc80b8    58  eb26c0df       cmp x6, w6, sxtw
+0x109dc80bc    5c  540005a1       b.ne #+0xb4 (addr 0x109dc8170)
+0x109dc80c0    60  34000306       cbz w6, #+0x60 (addr 0x109dc8120)
+0x109dc80c4    64  d3607cc0       lsl x0, x6, #32
+0x109dc80c8    68  f85e83a3       ldur x3, [fp, #-24]
+0x109dc80cc    6c  910003bf       mov sp, fp
+0x109dc80d0    70  a8c17bfd       ldp fp, lr, [sp], #16
+0x109dc80d4    74  f1000c7f       cmp x3, #0x3 (3)
+0x109dc80d8    78  5400004a       b.ge #+0x8 (addr 0x109dc80e0)
+0x109dc80dc    7c  d2800063       movz x3, #0x3
+0x109dc80e0    80  91000470       add x16, x3, #0x1 (1)
+0x109dc80e4    84  927ffa10       and x16, x16, #0xfffffffffffffffe
+0x109dc80e8    88  8b306fff       add sp, sp, x16, lsl #3
+0x109dc80ec    8c  d65f03c0       ret
+0x109dc80f0    90  d2c00802       movz x2, #0x4000000000
+0x109dc80f4    94  d10043ff       sub sp, sp, #0x10 (16)
+0x109dc80f8    98  f90007ff       str xzr, [sp, #8]
+0x109dc80fc    9c  f90003e2       str x2, [sp]
+0x109dc8100    a0  d2958781       movz x1, #0xac3c
+0x109dc8104    a4  f2a09e41       movk x1, #0x4f2, lsl #16
+0x109dc8108    a8  f2c00021       movk x1, #0x1, lsl #32
+0x109dc810c    ac  d2800020       movz x0, #0x1
+0x109dc8110    b0  5800019b       ldr cp, pc+48 (addr 0x0000000109dc8140)    ;; object: 0x30e086d01151 <NativeContext[271]>
+0x109dc8114    b4  580001f0       ldr x16, pc+60 (addr 0x0000000109dc8150)
+0x109dc8118    b8  d63f0200       blr x16
+0x109dc811c    bc  17ffffde       b #-0x88 (addr 0x109dc8094)
+0x109dc8120    c0  2a0400a4       orr w4, w5, w4
+0x109dc8124    c4  7100009f       cmp w4, #0x0 (0)
+0x109dc8128    c8  5400026b       b.lt #+0x4c (addr 0x109dc8174)
+0x109dc812c    cc  17ffffe6       b #-0x68 (addr 0x109dc80c4)
+0x109dc8130    d0  d503201f       nop
+0x109dc8134    d4  5800011f       constant pool begin (num_const = 8)    ;; constant pool
+0x109dc8138    d8  d63f03e0       constant
+0x109dc813c    dc  d503201f       constant
+0x109dc8140    e0  86d01151       constant
+0x109dc8144    e4  000030e0       constant
+0x109dc8148    e8  052015e0       constant
+0x109dc814c    ec  00000001       constant
+0x109dc8150    f0  05274fe0       constant
+0x109dc8154    f4  00000001       constant
+0x109dc8158    f8  f8540350       ldur x16, [x26, #-192]
+0x109dc815c    fc  d61f0200       br x16
+0x109dc8160   100  f8548350       ldur x16, [x26, #-184]
+0x109dc8164   104  d61f0200       br x16
+0x109dc8168   108  97fffffc       bl #-0x10 (addr 0x109dc8158)    ;; debug: deopt position, script offset '1d'
+                                                             ;; debug: deopt position, inlining id 'ffffffff'
+                                                             ;; debug: deopt reason 'not a Smi'
+                                                             ;; debug: deopt index 0
+0x109dc816c   10c  97fffffb       bl #-0x14 (addr 0x109dc8158)    ;; debug: deopt position, script offset '1d'
+                                                             ;; debug: deopt position, inlining id 'ffffffff'
+                                                             ;; debug: deopt reason 'not a Smi'
+                                                             ;; debug: deopt index 1
+0x109dc8170   110  97fffffa       bl #-0x18 (addr 0x109dc8158)    ;; debug: deopt position, script offset '1d'
+                                                             ;; debug: deopt position, inlining id 'ffffffff'
+                                                             ;; debug: deopt reason 'overflow'
+                                                             ;; debug: deopt index 2
+0x109dc8174   114  97fffff9       bl #-0x1c (addr 0x109dc8158)    ;; debug: deopt position, script offset '1d'
+                                                             ;; debug: deopt position, inlining id 'ffffffff'
+                                                             ;; debug: deopt reason 'minus zero'
+                                                             ;; debug: deopt index 3
+0x109dc8178   118  97fffffa       bl #-0x18 (addr 0x109dc8160)    ;; debug: deopt position, script offset '11'
+                                                             ;; debug: deopt position, inlining id 'ffffffff'
+                                                             ;; debug: deopt reason '(unknown)'
+                                                             ;; debug: deopt index 4
+
+Source positions:
+ pc offset  position
+         0        17
+        34        29
+        64        32
+        90        17
+        c0        29
+
+Inlined functions (count = 0)
+
+Deoptimization Input Data (deopt points = 5)
+ index  bytecode-offset    pc
+     0                2    NA 
+     1                2    NA 
+     2                2    NA 
+     3                2    NA 
+     4               -1    bc 
+
+Safepoints (entries = 1, byte size = 14)
+0x109dc811c     bc  slots (sp->fp): 10000000  deopt      4 trampoline:    118
+
+RelocInfo (size = 72)
+0x109dc8110  full embedded object  (0x30e086d01151 <NativeContext[10f]>)
+0x109dc8134  constant pool (size 24)
+0x109dc8168  deopt script offset  (1d)
+0x109dc8168  deopt inlining id  (ffffffffffffffff)
+0x109dc8168  deopt reason  (not a Smi)
+0x109dc8168  deopt index
+0x109dc816c  deopt script offset  (1d)
+0x109dc816c  deopt inlining id  (ffffffffffffffff)
+0x109dc816c  deopt reason  (not a Smi)
+0x109dc816c  deopt index
+0x109dc8170  deopt script offset  (1d)
+0x109dc8170  deopt inlining id  (ffffffffffffffff)
+0x109dc8170  deopt reason  (overflow)
+0x109dc8170  deopt index
+0x109dc8174  deopt script offset  (1d)
+0x109dc8174  deopt inlining id  (ffffffffffffffff)
+0x109dc8174  deopt reason  (minus zero)
+0x109dc8174  deopt index
+0x109dc8178  deopt script offset  (11)
+0x109dc8178  deopt inlining id  (ffffffffffffffff)
+0x109dc8178  deopt reason  ((unknown))
+0x109dc8178  deopt index
+
+--- End code ---
