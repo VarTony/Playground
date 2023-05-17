@@ -13,8 +13,8 @@ const outputFileName = `Outputs/${ prefixFilename + funcName }.txt`
 chilpProcess.exec(
     `${ nodeComand }${ funcName } ./${ filename } > ${ outputFileName }`, 
     (_, stdout, err) => !err 
-    ? console.log( `\b Answer writed in ${ outputFileName } file \n` )
-    : console.log(`Error: ${ err } \n`)
+     ? console.log( `\b Answer writed in ${ outputFileName } file \n` )
+     : console.log(`Error: ${ err } \n`)
     );
 }
 
