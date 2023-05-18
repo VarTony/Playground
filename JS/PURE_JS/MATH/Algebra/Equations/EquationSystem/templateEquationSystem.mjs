@@ -1,5 +1,5 @@
 //Загрузка модулей.
-import { squareModule, linearModule } from './'
+import { linearModule } from './exports.mjs'
 
 
 // Общая процедура для систкм квадратных уравнений с двумя неизвестными.

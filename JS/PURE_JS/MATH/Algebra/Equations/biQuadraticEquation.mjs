@@ -1,7 +1,7 @@
 /* Вспомогательные функции */
 
 // Процедура для решений квадратных уравнений через дискиминант.
-import squareEquationViaD from './squareEquationViaD'; 
+import squareEquationViaD from './exports.mjs'; 
 
 //Ковертирует результат в мнимые значения.
 const imaginaryNumbersConverter = (num) => `${ Math.abs(num) }i`;

@@ -3,7 +3,7 @@
 /* Вспомогательные функции */
 
 // Процедура для решений квадратных уравнений через дискриминант.
-import squareEquationViaD from '../squareEquationViaD'; 
+import squareEquationViaD from '../exports.mjs'; 
 
 
 // Находит по паре найденых корней [y], квадру [x] корней.
