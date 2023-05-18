@@ -1,2 +1,10 @@
 import { avarage, median, compInterest } from './basic_methods';
-export { avarage, median, compInterest };
+import { sampleGenerator, getRandomInt } from './sample_generator.mjs';
+
+export { 
+    avarage,
+    median,
+    compInterest,
+    sampleGenerator,
+    getRandomInt
+};

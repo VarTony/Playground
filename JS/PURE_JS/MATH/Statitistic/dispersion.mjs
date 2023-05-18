@@ -1,5 +1,5 @@
 
-import { avarage, getRandomInt } from '.';
+import { avarage } from './exports.mjs';
 
 
 // σ^2|D = (∑(x-μ)^2)/n : Дисперсия
@@ -17,4 +17,4 @@ const dispersion = list => {
 };
 
 
-exports [ dispersion ];
+export { dispersion };

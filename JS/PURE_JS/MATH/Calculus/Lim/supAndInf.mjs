@@ -1,4 +1,4 @@
-import { listToSet } from "../../Some functions/exports";
+import { listToSet } from "../../Some functions/exports.mjs";
 
 
 // Верхняя грань (Преобразует список в множество)

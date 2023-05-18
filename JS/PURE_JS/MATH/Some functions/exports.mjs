@@ -1,9 +1,9 @@
-import { getRandomInt } from './getRandomInt';
-import { negativePower } from './negativePower';
-import { factorial } from './factorial';
-import { listToSet } from './listToSet';
-import { heterogramCreator } from './heterogramCreator';
-import { changeSing } from './changeSing';
+import { getRandomInt } from './getRandomInt.mjs';
+import { negativePower } from './negativePower.mjs';
+import { factorial } from './factorial.mjs';
+import { listToSet } from './listToSet.mjs';
+import { heterogramCreator } from './heterogramCreator.mjs';
+import { changeSing } from './changeSing.mjs';
 
 
 export { 

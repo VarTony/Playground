@@ -1,4 +1,4 @@
-const { dx1, diff, square } = require('./diff.mjs'); 
+import { dx1, diff } from ('./diff.mjs'); 
 
 //(x^n)` = (n * x^n-1);
 

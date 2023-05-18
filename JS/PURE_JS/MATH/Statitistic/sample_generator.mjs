@@ -18,4 +18,4 @@ const sampleGenerator = (n = 30, range = [ 120, 150 ]) => {
 }
 
 
-exports [ getRandomInt ];
+export { getRandomInt, sampleGenerator };

@@ -1,4 +1,4 @@
-const { dx1, diff, square } = require('./diff.mjs'); 
+const { dx1, diff } = require('./diff.mjs'); 
 
 
 const exponentiation = (value, degree) => value ** degree;

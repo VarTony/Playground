@@ -1,5 +1,3 @@
-import sampleGenerator from './sample_generator';
-
 
 // μ - Среднее африфметическое;
 const avarage = (list, n = (list.length)) => list.reduce((sum, elem) => {

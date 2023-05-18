@@ -2,7 +2,7 @@ import {
     detectorMatrixOrVector,
     comparisonTwoLength,
     comparisonTwoMatrixType
-} from './exports';
+} from './exports.mjs';
 
 
 

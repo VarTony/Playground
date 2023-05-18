@@ -4,7 +4,7 @@ import {
     detectorMatrixOrVector,
     comparisonTwoLength,
     comparisonTwoMatrixType
-} from './validators';
+} from './validators.mjs';
 
 export { 
     detectorMatrixOrVector,
