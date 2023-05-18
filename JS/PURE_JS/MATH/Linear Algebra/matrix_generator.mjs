@@ -1,5 +1,5 @@
 
-import  { getRandomInt } from '../Some functions.exports.mjs';
+import  { getRandomInt } from '../Some functions/exports.mjs';
 
 /* Генератор матриц 
 Сигнатура:
