@@ -1,4 +1,4 @@
-import { monomParser } from "./exports";
+import { monomParser } from "./exports.mjs";
 
 
 /*  Парсер для полиномов первой степени.

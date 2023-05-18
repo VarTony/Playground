@@ -1,4 +1,4 @@
-import { linearEquation } from "./"
+import { linearEquation } from "../linearEquation.mjs"
 
 // Модуль для решения системы из двух линейных уравнений с двумя неизвестными.
 

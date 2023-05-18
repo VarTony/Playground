@@ -1,4 +1,5 @@
-import { polyParser, polyAssembler } from './exports';
+// Стоит переписать реализацию полином парсера через АСТ деревья
+import { polyParser, polyAssembler } from './exports.mjs'; 
 import { changeSing } from '../../Some functions/changeSing';
 
 
