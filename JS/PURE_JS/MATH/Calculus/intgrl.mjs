@@ -1,4 +1,4 @@
-import {diff, dx1, dx2, square} from 'diff';
+import { diff, dx1, dx2, square } from 'diff';
 
 const intgrl = (xs, xf = xs + 1, lim = 1e3, dx = (xf - xs) / lim, output = 0, dxxx = dx) => 
   	0 <= lim 

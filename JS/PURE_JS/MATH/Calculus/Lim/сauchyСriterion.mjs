@@ -1,4 +1,4 @@
-import { epsilon } from '../exports'
+import { epsilon } from '../exports.mjs'
 
 
 /* Критерий Коши, позволяет определять точное значение предела.

@@ -1,6 +1,6 @@
 // -------Alpha--------> (1 + (1 / x)) ** x ) is work
 
-import { сauchyСriterion } from '../exports';
+import { сauchyСriterion } from '../exports.mjs';
 
 
 // Определяет: lim ϵ N
