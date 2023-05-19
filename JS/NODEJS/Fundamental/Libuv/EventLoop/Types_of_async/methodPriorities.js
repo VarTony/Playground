@@ -17,25 +17,25 @@ const fs = require('node:fs');
  */
 
 // SetTimeout имеют более высокий приоритет в очереди.
-setTimeout(() => console.log('callback #1 setTimeout 0'), 0); // VI
+setTimeout(() => console.log('callback #1 setTimeout 0'), 0); // VIII
 
-setTimeout(() => console.log('callback #2 setTimeout 0'), 0); // VII
+setTimeout(() => console.log('callback #2 setTimeout 0'), 0); // IX
 
-setTimeout(() => console.log('callback #3 setTimeout 1'), 1); // VIII
+setTimeout(() => console.log('callback #3 setTimeout 1'), 1); // X
 
-setTimeout(() => console.log('callback #4 setTimeout 1'), 1); // IX
+setTimeout(() => console.log('callback #4 setTimeout 1'), 1); // XI
 
 
 // SetInterval вторые по приоритету исполнения.
 const t7 = setInterval(() => {
     clearInterval(t7);
     console.log('callback #7 setInterval 0');
-  }, 0);                                                       // X
+  }, 0);                                                       // XII
 
 const t8 = setInterval(() => {
     clearInterval(t8);
     console.log('callback #8 setInterval 0');
-  }, 0);                                                       // XI
+  }, 0);                                                       // XIII
 
 
 
@@ -61,7 +61,7 @@ sleep(2000);                                                   // I
  * 
  * Сборщик мусора
  */
-//gc()  // Был бы между XI - XII
+//gc()  // Был бы между XIII - XIV
 
 
 
@@ -73,9 +73,9 @@ sleep(2000);                                                   // I
  * В данном случае выполнятся после setImmediate, по причине что сами процессы 
  *  выполняются дольше, и попадут в очередь на более поздней итерации EventLoop.S
  */
-fs.readFile('./a-eventloop.txt', 'utf8', () => console.log('callback #13 readFile')); // XIII
+fs.readFile('./a-eventloop.txt', 'utf8', () => console.log('callback #13 readFile')); // XV
   
-fs.readFile('./a-eventloop.tx', 'utf8', () => console.log('callback #14 readFile')); // XIV
+fs.readFile('./a-eventloop.tx', 'utf8', () => console.log('callback #14 readFile')); // XVI
 
 
 /**
@@ -83,15 +83,15 @@ fs.readFile('./a-eventloop.tx', 'utf8', () => console.log('callback #14 readFile
  * 
  * SetImmediate
  */
-setImmediate(() => console.log('callback #5 setImmediate'));  //  XII
+setImmediate(() => console.log('callback #5 setImmediate'));  //  XIV
 
 
 /**
  * Микротаски, пройдут вне очереди в слудущем событийном цикле.
  */
-process.nextTick(() => console.log('callback #9 process.nextTick')); // IV
+process.nextTick(() => console.log('callback #9 process.nextTick')); //  VI
 
-process.nextTick(() => console.log('callback #10 process.nextTick')); // V
+process.nextTick(() => console.log('callback #10 process.nextTick')); // VII
   
 
 /**
@@ -101,3 +101,22 @@ process.nextTick(() => console.log('callback #10 process.nextTick')); // V
 ((callback) => callback())(() => console.log('callback #11 callback')); // II
 
 ((callback) => callback())(() => console.log('callback #12 callback')); // III
+
+
+/**
+ * V8 microtask queue
+ * 
+ * Очередь микро задач не находится в матрице libuv 
+ *  исполняется полностью перед любыми колбеками макротаск,
+ *  в случае существования наполнения
+ * 
+ *  Предполоэительно async функции имеют более высокий приоритет на выполнение
+ *  хотя по сути должно просто являться синтаксических подсластителем промисов. 
+ *  
+ */
+const microTask_1 = new Promise((res, rej) => (res() || rej()))
+  .then(() => console.log('callback #13 promise'));                              // V
+
+
+const microTask_2 = async () => console.log('callback #14 promise')
+microTask_2();                                                                  // IV
