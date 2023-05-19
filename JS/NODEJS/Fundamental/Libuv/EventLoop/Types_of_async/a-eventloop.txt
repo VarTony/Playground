@@ -1,21 +1,26 @@
 
-      ┌───────────────────────┐
-   ┌─>│        timers         │  setTimeout, setInterval
+
+      ┌───────────────────────┐                                   ┌───────────────────────┐
+               LIBUV                                                         V8
+           Callback Queue                                              Que Microtasks
+      └──────────┬────────────┘                                   └──────────────────────┬┘
+      ┌───────────────────────┐                                                          │ Execute after 
+   ┌─>│        timers         │  setTimeout, setInterval.                                │ every macro                 
+   │  └──────────┬────────────┘                                <─────────────────────────│ task.
+   │  ┌──────────┴────────────┐                                            
+   │  │     I/O callbacks     │  callback except close and timers.
    │  └──────────┬────────────┘
    │  ┌──────────┴────────────┐
-   │  │     I/O callbacks     │  callback except close and timers
-   │  └──────────┬────────────┘
-   │  ┌──────────┴────────────┐
-   │  │     idle, prepare     │  internal use
+   │  │     idle, prepare     │  internal use.
    │  └──────────┬────────────┘      ┌───────────────┐
    │  ┌──────────┴────────────┐      │   incoming:   │
    │  │         poll          │<─────┤  connections, │
    │  └──────────┬────────────┘      │   data, etc.  │
    │  ┌──────────┴────────────┐      └───────────────┘
-   │  │        check          │  setImmediate
+   │  │        check          │  setImmediate.
    │  └──────────┬────────────┘
    │  ┌──────────┴────────────┐
-   └──┤    close callbacks    │  .on('close', ...)
+   └──┤    close callbacks    │  .on('close', ...).
       └───────────────────────┘
 
     Copyright (c) Node contributors
