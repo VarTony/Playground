@@ -1,7 +1,7 @@
 
 
 /**
- * Версия на прототипах:
+ * Версия на основе прототипа:
  */
 const ProtoEventEmitter = function() {
     this.events = {}; // hash of array of function
@@ -30,7 +30,7 @@ const ProtoEventEmitter = function() {
 
 
   /**
-   * Версия на классах:
+   * Версия на основе класса:
    */
   class EventEmiter {
     #events;
@@ -51,6 +51,5 @@ const ProtoEventEmitter = function() {
         const event = this.events[name];
         if (!event) return;
         for (const fn of event) fn(...data);
-
     }
   }
