@@ -4,7 +4,7 @@
                LIBUV                                                         V8
            Callback Queue                                              Que Microtasks
       └──────────┬────────────┘                                   └──────────────────────┬┘
-      ┌───────────────────────┐                                                          │ Execute after 
+      ┌───────────────────────┐                                                          │ Execute before 
    ┌─>│        timers         │  setTimeout, setInterval.                                │ every macro                 
    │  └──────────┬────────────┘                                <─────────────────────────│ task.
    │  ┌──────────┴────────────┐                                            
