@@ -52,6 +52,6 @@ process.on('unhandledRejection', err => {
     console.table(listOfPromiseErrs);
 });
 
-// Обработка списка ошибок
+// Обработка списка ошибок, выполнится сразу как только появятся свободные ресурсы:
 const executeErrorsHandler = timersWrapper(errorsHandler, 1000);
 executeErrorsHandler();
