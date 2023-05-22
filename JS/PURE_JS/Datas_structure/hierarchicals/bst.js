@@ -15,9 +15,6 @@
  *          список всех элементов дерева.(К-Рекурсия)
  *      getTree(void) - Возвращает полную копию дерева, в его текущем состоянии.
  */
-
-
-
 const BST = () => {
     const tree = {};
     
@@ -64,7 +61,7 @@ const BST = () => {
   
     
     const getTree = () => ({ ...tree });
-  
+
     return { 
       setData,
       getData,
