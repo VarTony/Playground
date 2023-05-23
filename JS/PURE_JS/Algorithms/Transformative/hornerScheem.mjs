@@ -1,5 +1,7 @@
-// Данный набор процедур, преобразует десятичные числа в иную позиционую систему счислений в диапозоне от 2 до 20;
-
+/**
+ * Cхема Горнера - Данный набор процедур, преобразует десятичные числа 
+ *  в иную позиционую систему счислений в диапозоне от 2 до 20;
+ */ 
 
 // Набор дополнительных символов из древне греческого алфавита;
 const additionalChars = ['α','β','γ','δ','ε','ζ','η','θ','ί','κ'];
@@ -19,14 +21,14 @@ const finalConcatList = ( list, finalChar ) =>
 // Квантор ошибки.
 const warner = () => {
     console.warn(
-        'Функция не расчитана для работы с системами счислений более 20 и менее 2'
+        'Программа не расчитана для работы с системами счислений более 20 и менее 2'
      );
     throw Error(system);
 }
 
 
 // Основная функция преобразования;
-const numSystemConverter = ( num, system, remainders = [] ) => {
+const hornerScheem = ( num, system, remainders = [] ) => {
   
   if( system > 20 || system < 2 ) return warner();
 
@@ -39,7 +41,7 @@ const numSystemConverter = ( num, system, remainders = [] ) => {
   const remainder = num % system;
   const dividedNum = ( num - remainder ) / system;
   
-  return numSystemConverter( 
+  return hornerScheem( 
     dividedNum,
     system,
     [ 
@@ -49,8 +51,10 @@ const numSystemConverter = ( num, system, remainders = [] ) => {
   );
 }
 
-console.log( numSystemConverter(47135, 14) ); // β6231
-console.log( numSystemConverter(27, 2) ); // 11011
+
+// Блок тестирования и реализации
+console.log( hornerScheem(47135, 14) ); // β6231
+console.log( hornerScheem(27, 2) ); // 11011
 
 
 // P.S. Потенциально может работать с каким угодно большим натуральным основанием, 
