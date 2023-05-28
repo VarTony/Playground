@@ -29,12 +29,12 @@ setTimeout(() => console.log('callback #4 setTimeout 1'), 1); // XI
 // SetInterval вторые по приоритету исполнения.
 const t7 = setInterval(() => {
     clearInterval(t7);
-    console.log('callback #7 setInterval 0');
+    console.log('callback #5 setInterval 0');
   }, 0);                                                       // XII
 
 const t8 = setInterval(() => {
     clearInterval(t8);
-    console.log('callback #8 setInterval 0');
+    console.log('callback #6 setInterval 0');
   }, 0);                                                       // XIII
 
 
@@ -73,9 +73,9 @@ sleep(2000);                                                   // I
  * В данном случае выполнятся после setImmediate, по причине что сами процессы 
  *  выполняются дольше, и попадут в очередь на более поздней итерации EventLoop.S
  */
-fs.readFile('./a-eventloop.txt', 'utf8', () => console.log('callback #13 readFile')); // XV
+fs.readFile('./a-eventloop.txt', 'utf8', () => console.log('callback #7 readFile')); // XV
   
-fs.readFile('./a-eventloop.tx', 'utf8', () => console.log('callback #14 readFile')); // XVI
+fs.readFile('./a-eventloop.tx', 'utf8', () => console.log('callback #8 readFile')); // XVI
 
 
 /**
@@ -83,24 +83,25 @@ fs.readFile('./a-eventloop.tx', 'utf8', () => console.log('callback #14 readFile
  * 
  * SetImmediate
  */
-setImmediate(() => console.log('callback #5 setImmediate'));  //  XIV
+setImmediate(() => console.log('callback #9 setImmediate'));  //  XIV
 
 
 /**
- * Микротаски, пройдут вне очереди в слудущем событийном цикле.
+ * Микротаски, пройдут вне очереди в следущем событийном цикле.
+ * Имеют более высокий приоритет, чем 'обещания', но меньший чем async колбеки.
  */
-process.nextTick(() => console.log('callback #9 process.nextTick')); //  VI
+process.nextTick(() => console.log('callback #10 process.nextTick')); //  V
 
-process.nextTick(() => console.log('callback #10 process.nextTick')); // VII
+process.nextTick(() => console.log('callback #11 process.nextTick')); // VI
   
 
 /**
  * Обычный вызов callback функций, поэтому исполнятся сразу после sleep
  *  в основном процессе.
  */
-((callback) => callback())(() => console.log('callback #11 callback')); // II
+((callback) => callback())(() => console.log('callback #12 callback')); // II
 
-((callback) => callback())(() => console.log('callback #12 callback')); // III
+((callback) => callback())(() => console.log('callback #13 callback')); // III
 
 
 /**
@@ -110,13 +111,13 @@ process.nextTick(() => console.log('callback #10 process.nextTick')); // VII
  *  исполняется полностью перед любыми колбеками макротаск,
  *  в случае существования наполнения
  * 
- *  Предполоэительно async функции имеют более высокий приоритет на выполнение
+ *  Предположительно async функции имеют более высокий приоритет на выполнение
  *  (хотя по сути должно просто являться синтаксических подсластителем промисов). 
  *  
  */
-const microTask_1 = new Promise((res, rej) => (res() || rej()))
-  .then(() => console.log('callback #13 promise'));                              // V
+const microTask_01 = new Promise(res => res())
+  .then(() => console.log('callback #14 promise'));                              // VII
 
 
-const microTask_2 = async () => console.log('callback #14 promise')
+const microTask_2 = async () => console.log('callback #15 promise')
 microTask_2();                                                                  // IV
