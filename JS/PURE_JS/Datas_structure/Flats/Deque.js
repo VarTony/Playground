@@ -1,5 +1,4 @@
 // Структура данных - Дэк:
-
 function Deque(list) {
   this.deque = [...list];
 };
@@ -7,28 +6,24 @@ function Deque(list) {
 
 
 // Проверяет пуст ли дэк (список):
-
 Deque.prototype.empty = function() {
   return this.deque.length > 0;
 };
 
 
 // Добавляет элемент в конец дэка (списка):
-
 Deque.prototype.pushBack = function(value) {
   this.deque = [...this.deque, value];
 };
 
 
 // Добавляет элемент в начало дэка (списка):
-
 Deque.prototype.pushFront = function(value) {
   this.deque = [value, ...this.deque];
 };
 
 
 // Извлекает элемент из конца дэка (списка):
-
 Deque.prototype.popBack = function() {
   const lastIndex = this.deque.length - 1;
   const lastElement = this.deque[lastIndex];
@@ -39,7 +34,6 @@ Deque.prototype.popBack = function() {
 
 
 // Извлекает элемент из начала дэка (списка):
-
 Deque.prototype.popFront = function() {
   const lengthDeque = this.deque.length;
   const firstElement = this.deque[0];
@@ -51,7 +45,6 @@ Deque.prototype.popFront = function() {
 
 
 // Блок мануального тестирования:
-
 const deque1 = new Deque([1,2,3,4,5,6,7,8,9,0, 'sacasca', 'deque']);
 console.log(deque1);
 console.log(deque1.empty());
