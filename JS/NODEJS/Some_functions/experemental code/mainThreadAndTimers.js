@@ -6,10 +6,7 @@ setTimeout(() => console.log('timer1'), 10);
 setTimeout(() => console.log('timer2'), 20);
 
 
-
-
 const first = () => {
-	
 	while(i < 250) {
 		i += 0.0005 ;
 		console.log(i);
@@ -23,6 +20,7 @@ const first = () => {
 	console.log('First');
 }
 
+
 const second = () => {
 	while(i < 250) {
 		i += 0.0005 ;
@@ -35,7 +33,6 @@ const second = () => {
 		console.log(i);
 	}
 	console.log('second');
-
 }
 
 

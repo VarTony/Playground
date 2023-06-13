@@ -1,7 +1,7 @@
 // Тестовое задание skillbox.
 
 
-// Написать преобразователь функцию которая на вход получает список объекто { id: number },
+// Написать преобразовательную функцию, которая на вход получает список объектов вида - { id: number },
 //  а возвращает ассоциативный массив, в котором key это id из объекта входящего списка, а value
 //  объект из входящего списка.
 const f = list => list.reduce(
@@ -22,7 +22,7 @@ const promiseTestList = [ ...Array(15).keys() ]
     );
 
 
-// Реализация кастомного Promise.all:
+// Реализация кастомного аналога Promise.all:
 const promiseAll = async promiseList => {
     const resultList = [];
     await promiseList.map((promise) => {
@@ -35,4 +35,4 @@ const promiseAll = async promiseList => {
 const customResult = list => console.log('Custom result: ', list);
 
 promiseAll(promiseTestList)
-    .then(list => customResult(list)) //  Output: * Список вернувшихся из промисов данных * 
+    .then(list => customResult(list)) //  Output: * Список взятых из промисов данных * 

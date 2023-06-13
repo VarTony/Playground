@@ -110,7 +110,7 @@ SELECT mfr_id, product_id
  WHERE price > 2000.00
  ORDER BY 1, 2;
 
---Примичание  по умолчанию SELECT ипользует инструкцию - ALL, а UNION - DISTINCT.
+--Примичание по умолчанию SELECT ипользует инструкцию - ALL, а UNION - DISTINCT.
 
 --ALL: выводит все строки.
 --DISTINCT: исключает повторение. 

@@ -3,7 +3,9 @@ const fs = require('fs');
 const pwd = require('./pwd');
 
 
-const creatorPath = userName =>  pwd.read()(userName) === '.'? path.join(__dirname,  `../../users/${searchUserDir(userName)}`):  path.join(__dirname, `../../users/${searchUserDir(userName)}/${pwd.read()(userName)}`);
+const creatorPath = userName =>  pwd.read()(userName) === '.'
+  ? path.join(__dirname,  `../../users/${searchUserDir(userName)}`)
+  : path.join(__dirname, `../../users/${searchUserDir(userName)}/${pwd.read()(userName)}`);
 
 
 const getUserString = (userName, req, res) => {
