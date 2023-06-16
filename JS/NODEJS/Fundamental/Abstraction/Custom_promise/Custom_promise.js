@@ -1,27 +1,23 @@
 class CustomPromise {
-    constructor(cb){
-        this.cb = cb;
+    constructor(executor){
+        executor(value => { this.hidden = value });
+        this.callbacks = [];
     }
 
-    resolve(data) {
-        this.then(data);
+    resolve() {
+        const [ cb, ...cbs ] = this.callbacks;
+        let result = cb(this.hidden);
+        cbs.forEach(cb => {  result = cb(result) });
+
+        return result;
     }
 
-    reject(err) {
-        this.catch(err);
+    then(cb) {
+        this.callbacks.push(cb);
+        this.resolve();
+
+        return this;
     }
 
-    then(data) {
-        const res = cb => cb(data);
-        return res;
-
-        // cb(new CustomPromise(this.cb));
-    }
-
-    catch(err) {
-        const rej = cb => cb(err);
-        return rej;
-        
-        // cb(new CustomPromise);
-    }
+    catch(cb) {}
 }
