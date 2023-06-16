@@ -3,7 +3,6 @@
  */
 const clojEventEmiter = () => {
     const events = {};
-
     // Вешает на события функции:
     const on = (name, fn) => {
         const isEvent = Boolean(events.name);
@@ -11,15 +10,12 @@ const clojEventEmiter = () => {
         if (isEvent) events[name].push(fn);
         else events[name] = [ fn ];
     }
-
     // Обрабатывает событие пропуская аргументы через все обработчики:
     const emit = (name, ...data) => {
         const isEvent = Boolean(events.name);
-
         if(isEvent) events[name].forEach(fn => fn(...data));
         return;
     }
-
     return { on, emit }
 }
 
