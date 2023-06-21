@@ -13,31 +13,26 @@ class CustomPromise {
     constructor(executor) {
       this.callbacks = [];
       this.executorState = STATE.PENDING;
-      this.callbacksState = STATE.PENDING;
-      this.callbackState = STATE.FULFILLED;
+      this.callbackState = STATE.PENDING;
 
       executor(this.resolve.bind(this));
     }
-  
 
-    /**
-     * Определяет является ли функция ассинхронной
-     * 
-     * @param { Function } cb 
-     * @returns 
-     */
-    _isAsyncCallback(cb) {
-        return cb.constructor.name === 'AsyncFunction';
-    }
-
-
-    /**
-     * Создает отложеный вызов для следующего цикла петли событий.
-     */
-    _callbacksDispather(data = this.promiseData) {
-      setImmediate(() => { this._queueResolver(data) });
-    }
     
+    /**
+     * Записывает результат выполнения executor(a) и 
+     * иницирует запуск диспечера очереди колбеков.
+     * 
+     * @param {*} data 
+     */
+    resolve(data) {
+      this.promiseData = typeof data === 'object' ? { ...data } : data; 
+      this.executorState = STATE.FULFILLED;
+      this.callbackState = STATE.FULFILLED;
+    
+      this._callbacksDispather();
+    }
+
 
     /**
      * Проверяет завершеность исполнения executor(a),
@@ -55,15 +50,21 @@ class CustomPromise {
 
 
     /**
-     * Записывает результат выполнения executor(a) и 
-     * иницирует запуск диспечера очереди колбеков.
-     * 
-     * @param {*} data 
+     * Создает отложеный вызов для следующего цикла петли событий.
      */
-    resolve(data) {
-      this.promiseData = typeof data === 'object' ? { ...data } : data; 
-      this.executorState = STATE.FULFILLED;
-      this._callbacksDispather();
+    _callbacksDispather(data = this.promiseData) {
+      setImmediate(() => { this._queueResolver(data) });
+    }
+
+
+    /**
+     * Определяет является ли функция ассинхронной
+     * 
+     * @param { Function } cb 
+     * @returns 
+     */
+    _isAsyncCallback(cb) {
+      return cb.constructor.name === 'AsyncFunction';
     }
 
 
@@ -75,13 +76,13 @@ class CustomPromise {
      */
     _queueResolver(data) {
       if (!this.callbacks.length) {
-        this.callbacksState = STATE.FULFILLED;
+        this.callbackState = STATE.FULFILLED;
         return;
       }
       const [ cb, ...cbs ] = this.callbacks;
     
       if (this._isAsyncCallback(cb)) {
-        if(this.callbackState === STATE.FULFILLED) cb(data)
+        if(this.callbacksState === STATE.FULFILLED) cb(data)
           .then(result => { 
             this.callbacks = cbs;
             this.callbackState = STATE.FULFILLED;
@@ -89,7 +90,7 @@ class CustomPromise {
           });
       // Если callback является асинхронным создает отложенный рекурсивный вызов, 
       // через метод посредник.
-      this.callbackState = STATE.PENDING;
+      this.callbacksState = STATE.PENDING;
       return this._callbacksDispather(data);
       }
       else { 
@@ -110,7 +111,6 @@ class CustomPromise {
      */
     then(cb) {
       this.callbacks.push(cb);
-      this.callbacksState = STATE.PENDING;
       this._observer();
       return this;
     }
