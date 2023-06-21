@@ -9,7 +9,6 @@ const STATE = {
 }
 
 
-
 class CustomPromise {
     constructor(executor) {
       this.callbacks = [];
