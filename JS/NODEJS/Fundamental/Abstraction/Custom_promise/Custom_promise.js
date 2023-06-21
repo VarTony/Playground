@@ -1,4 +1,5 @@
-// Реализация кастомной 'лайт' версии промиса, для лучшего понимания его функционирования;
+// Реализация кастомной 'лайт' версии промиса, для лучшего понимания функционирования нативной версии;
+// В данный момент не поддерживает ослеживание новой цепочки событий(Воспринимает цепочки как одну)
 
 
 const STATE = {
@@ -13,7 +14,8 @@ class CustomPromise {
     constructor(executor) {
       this.callbacks = [];
       this.executorState = STATE.PENDING;
-      this.cbState = STATE.PENDING;
+      this.callbacksState = STATE.PENDING;
+      this.callbackState = STATE.FULFILLED;
 
       executor(this.resolve.bind(this));
     }
@@ -31,10 +33,10 @@ class CustomPromise {
 
 
     /**
-     * Создает отложеный вызов в начале следующего цикла петли событий.
+     * Создает отложеный вызов для следующего цикла петли событий.
      */
     _callbacksDispather(data = this.promiseData) {
-      process.nextTick(() => { this._queueResolver(data) });
+      setImmediate(() => { this._queueResolver(data) });
     }
     
 
@@ -47,7 +49,7 @@ class CustomPromise {
      * @returns 
      */
     _observer() {
-      return executorState !== STATE.FULFILLED
+      return this.executorState !== STATE.FULFILLED
         ? process.nextTick(() => this._observer())
         : this._callbacksDispather();
     }
@@ -74,23 +76,28 @@ class CustomPromise {
      */
     _queueResolver(data) {
       if (!this.callbacks.length) {
-        this.cbState = STATE.FULFILLED;
+        this.callbacksState = STATE.FULFILLED;
         return;
       }
       const [ cb, ...cbs ] = this.callbacks;
     
       if (this._isAsyncCallback(cb)) {
-        cb(data).then(result => { 
-          this.callbacks = cbs;
-          this.queueResolver(result);
-      });
+        if(this.callbackState === STATE.FULFILLED) cb(data)
+          .then(result => { 
+            this.callbacks = cbs;
+            this.callbackState = STATE.FULFILLED;
+            this._queueResolver(result);
+          });
       // Если callback является асинхронным создает отложенный рекурсивный вызов, 
       // через метод посредник.
+      this.callbackState = STATE.PENDING;
       return this._callbacksDispather(data);
       }
       else { 
+        const resultOfCb = cb(data);
         this.callbacks = cbs;
-        return this.queueResolver(cb(data));
+        this.callbackState = STATE.FULFILLED;
+        return this._queueResolver(resultOfCb);
       }
     }
   
@@ -104,7 +111,7 @@ class CustomPromise {
      */
     then(cb) {
       this.callbacks.push(cb);
-      this.cbState = STATE.PENDING;
+      this.callbacksState = STATE.PENDING;
       this._observer();
       return this;
     }
