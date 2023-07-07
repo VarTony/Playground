@@ -6,6 +6,7 @@
     носит больше просветительский характер.
 */
 
+
 type ACCESS = { publicKey: string, name: string };
 
 
