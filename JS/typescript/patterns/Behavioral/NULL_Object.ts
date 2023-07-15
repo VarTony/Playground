@@ -46,7 +46,6 @@ class Guest {
  const user2 = access2? new User(access2): new Guest();
  
  // .... Где-то в коде 
- 
 user1.getUserName();
 user2.getUserName(); // Заглушка отработает и вернет guest;
 
