@@ -8,6 +8,4 @@ export class Topology {
         this.outputCount = oCount;
         this.hiddenCount = [ ...hCount ];
     }
-
-
 }
