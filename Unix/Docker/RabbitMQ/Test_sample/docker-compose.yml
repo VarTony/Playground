@@ -1,6 +1,6 @@
-secrets:
+services:
   rabbitmq:
-    image: rabbitmq:3.10.7-managemnet
+    image: rabbitmq:3.10.7-management
     hostname: rabbitmq_test_sample
     restart: always
     environment: 
