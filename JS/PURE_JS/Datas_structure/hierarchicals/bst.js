@@ -117,4 +117,6 @@ const BST = () => {
   console.log(myTree.getSmaller()); // 10.
   console.log(myTree.getTree()); // Копия дерева.
   console.log(myTree.inOrder()); //[ 10, 25, 33, 50, 61, 75, 100, 125 ]
+  console.log(myTree.getAllBranches()); // [ [ 75, 25, 10 ], [ 75, 25, 50, 33 ], ..., [ 75, 125, 100 ] ];
+  console.log(myTree.getDeep()); // 4
   
