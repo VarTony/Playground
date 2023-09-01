@@ -12,7 +12,7 @@
  *      getBiggest(void) - Нахождение наибольшего элемента в структуре.(Л-Рекурсия)
  *      getSmaller(void) - Нахождение наименьшего элемента в структуре.(Л-Рекурсия)
  *      inOrder(void) - Возвращает отсортированный в порядке возрастания 
- *          список всех элементов дерева.(К-Рекурсия)
+ *          список всех элементов дерева.(К-Рекурсия, Центрированный обход в глубину)
  *      getTree(void) - Возвращает полную копию дерева, в его текущем состоянии.
  *      getAllBranches(void) - Нахождение всех ветвей дерева(От корня до листового узла).(К-Рекурсия)
         getDeep(void) - Нахождение глубины дерева(Колличество узлов самой длиной ветви).
@@ -21,9 +21,13 @@
 const BST = () => {
     const tree = {};
     
+    // Внутрений метод определяющий является ли узел пустым
+    const _isEmptyNode = node => node.data === undefined;
+    
+    // Добавление нового элемента в дерево.(Л-Рекурсия)
     const setData = (num, t=tree) => {
     if(t.data === num) return { ...tree };  
-    if(t.data === undefined) {
+    if(_isEmptyNode(t)) {
         t.left = {};
         t.right = {};
         t.data = num;
@@ -33,46 +37,25 @@ const BST = () => {
       if(num > t.data) return setData(num, t.right);
     }
     
-    
+    // Поиск и проверка содержания заданного элемента.(Л-Рекурсия)
     const getData = (num, t=tree) => {
-      if(t.data === undefined) return null;
+      if(_isEmptyNode(t)) return null;
       if(t.data === num) return t.data;
       if(t.data < num) return getData(num, t.right);
       if(t.data > num) return getData(num, t.left);
     }
-    
-
-    const _isEmptyNode = node => node.data === undefined;
-
-
-    const _getAllBranches = (bst, path = []) => {
-      if (_isEmptyNode(bst)) return [];
-      const road = [ ...path, bst.data ];
-      if (_isEmptyNode(bst.left) && _isEmptyNode(bst.right)) return [ road ];
   
-      return [ 
-          ..._getAllBranches(bst.left, road),
-          ..._getAllBranches(bst.right, road)
-      ]
-    }
-
-    const getAllBranches = () => _getAllBranches(tree);
-
-
-    const getDeep = () => getAllBranches()
-      .reduce((deep, branch) => branch.length > deep ? branch.length : deep, 0);
-  
-
+    // Нахождение наибольшего элемента в структуре.
     const getBiggest = (t=tree) => (t.right.data !== undefined)
       ? getBiggest(t.right)
       : t.data;
   
-    
+    // Нахождение наименьшего элемента в структуре.
     const getSmaller = (t=tree) => (t.left.data !== undefined) 
       ? getSmaller(t.left)
       : t.data;
   
-    
+    // Возвращает отсортированный в порядке возрастания список всех элементов дерева.
     const inOrder = (list=[], t={...tree}) => {
       if(t.data === undefined) return [...list];
       if(t.left.data === undefined) return [...list, t.data];
@@ -84,8 +67,27 @@ const BST = () => {
       ];
     }
   
-    
+    // Возвращает полную копию дерева, в его текущем состоянии.
     const getTree = () => ({ ...tree });
+
+    // Внутрений метод для нахождения всех ветвей дерева(От корня до листового узла).
+    const _getAllBranches = (t, path = []) => {
+      if (_isEmptyNode(t)) return [];
+      const road = [ ...path, t.data ];
+      if (_isEmptyNode(t.left) && _isEmptyNode(t.right)) return [ road ];
+  
+      return [ 
+          ..._getAllBranches(t.left, road),
+          ..._getAllBranches(t.right, road)
+      ]
+    }
+
+    // Нахождение всех ветвей дерева(От корня до листового узла).
+    const getAllBranches = () => _getAllBranches(tree);
+
+    // Нахождение глубины дерева(Колличество узлов самой длиной ветви).
+    const getDeep = () => getAllBranches()
+      .reduce((deep, branch) => branch.length > deep ? branch.length : deep, 0);
 
     return { 
       setData,
