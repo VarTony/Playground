@@ -9,7 +9,7 @@ const colorMap = {
     white: '\x1b[37m',
   };
 
-type LogColors = keyof typeof colorMap
+type LogColors = keyof typeof colorMap;
 
 // Скрипт обертка для окрашивания текста в логах.
 const colorToLog = (text: string, color: LogColors = 'white') => 
