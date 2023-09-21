@@ -11,7 +11,7 @@ const colorMap = {
 
 type LogColors = keyof typeof colorMap
 
-  // Скрипт обертка для окрашивания текста в логах.
+// Скрипт обертка для окрашивания текста в логах.
 const colorToLog = (text: string, color: LogColors = 'white') => 
     `${colorMap[color]}${text}\x1b[0m`;
 
