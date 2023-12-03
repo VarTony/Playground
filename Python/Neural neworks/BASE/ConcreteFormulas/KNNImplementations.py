@@ -11,6 +11,11 @@ def sumOfSquares(numList):
 def sqrt(num):
     return num ** 0.5
 
+# Подсчет полных квадратов встречающихся в диапозоне от 1 до n 
+# (пока не используется, сохранил как хороший пример оптимизации вычислений)
+def countSquares(n):
+    return int(sqrt(n))
+
 
 """
     Вычисляет Евклидово расстояние между двумя точками в n-мерном пространстве.
@@ -24,7 +29,7 @@ def euclideanDistance(point_1, point_2):
     for i in range(len(point_1)):
         distance += (point_1[i] - point_2[i]) ** 2
 
-    return distance ** 0.5
+    return sqrt(distance)
 
 
 """  
