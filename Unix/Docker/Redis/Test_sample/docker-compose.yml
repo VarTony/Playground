@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:6.2.13
+    container_name: redis_container
+    ports:
+      - "6380:6379"
+    networks:
+      - bosco-docker
+
+networks:
+  bosco-docker:
+    external: true
