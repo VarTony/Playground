@@ -18,11 +18,41 @@
  */
 const binarySearchRecursive = (list, target, i = 0) => {
     if (!list.length) return undefined;
-    if (list.length === 1) return { i, target };
-    const j = (list.length);
+    const j = list.length;
     let mid = Math.floor((j - 1) / 2);
   
     if (target === list[mid]) return { i: i + mid, target }
     if (target < list[mid]) return binarySearchRecursive(list.slice(0, mid), target, i)
     if (target > list[mid]) return binarySearchRecursive(list.slice(mid + 1, j), target, (++i + mid))
 }
+
+
+/**
+ * Версия алгоритма бинарного поиска в отсортированном массиве основаная на итерациях цикла, - возвращает объект с индексом и значением первого вхождения.
+ * 
+ * Этот алгоритм находит целевое значение в отсортированном массиве, используя итеративный бинарный поиск.
+ * Если целевое значение найдено, возвращается объект с индексом и значением. Если значение не найдено, возвращается `undefined`.
+ * 
+ * Сложность по времени:
+ * - Худший случай: O(log n), где n - количество элементов в массиве. Это связано с тем, что алгоритм делит размер диапазона пополам на каждом шаге.
+ * - Лучший случай: O(1), если целевое значение найдено в середине массива на первом шаге.
+ * 
+ * Сложность по памяти:
+ * - O(1), так как алгоритм использует только фиксированное количество переменных и не требует дополнительной памяти для хранения состояния.
+ * 
+ * @param {Array} list - Отсортированный массив, в котором выполняется поиск.
+ * @param {*} target - Значение, которое нужно найти в массиве.
+ * @returns {Object|undefined} - Объект с индексом и значением первого найденного совпадения, или `undefined`, если значение не найдено.
+ */
+const binarySearch_2 = (list, target) => {
+    let low = 0;
+    let high = list.length - 1;
+  
+    while (low <= high) {
+      const mid = Math.floor((low + high) / 2);
+  
+      if (target === list[mid]) return { i: mid, target };
+      if (target < list[mid]) high = mid - 1;
+      else low = mid + 1;
+    }
+  }
