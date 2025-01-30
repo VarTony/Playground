@@ -10,6 +10,8 @@ interface User {
     name: "Alice"
   };
   
+
+
   // Required<T> - Делает все свойства обязательными
   // Концепция: Полная функция в математике, которая определена для всех входных значений
   interface UserOptional {
@@ -22,6 +24,8 @@ interface User {
     name: "Alice"
   };
   
+
+
   // Readonly<T> - Делает все свойства только для чтения
   // Концепция: Имутабельность (неизменяемые объекты)
   const user: Readonly<User> = {
@@ -31,7 +35,9 @@ interface User {
   };
   
   // user.name = "Alice"; // Ошибка: нельзя изменять свойства
-  
+
+
+
   // Record<K, T> - Создает тип объекта с ключами типа K и значениями типа T
   // Концепция: Функция отображения, которая сопоставляет ключи значениями
   const users: Record<number, string> = {
@@ -46,6 +52,8 @@ interface User {
     name: "Alice"
   };
   
+
+
   // Omit<T, K> - Исключает указанные свойства
   // Концепция: Противоположность Pick - исключение данных
   const omittedUser: Omit<User, 'email'> = {
@@ -53,22 +61,30 @@ interface User {
     name: "Alice"
   };
   
+
+
   // Exclude<T, U> - Исключает из T те типы, которые могут быть присвоены типу U
   // Концепция: Множества и операции над ними, вычитание подмножеств
   type Primitive = string | number | boolean;
   type NonString = Exclude<Primitive, string>;
   // NonString = number | boolean
   
+
+
   // Extract<T, U> - Извлекает из T только те типы, которые могут быть присвоены типу U
   // Концепция: Пересечение множеств
   type OnlyString = Extract<Primitive, string>;
   // OnlyString = string
   
+
+
   // NonNullable<T> - Удаляет из T null и undefined
   // Концепция: Опциональные типы и их ограничения
   type NonNull = NonNullable<string | number | undefined>;
   // NonNull = string | number
   
+
+
   // ReturnType<T> - Возвращает тип значения, возвращаемого функцией
   // Концепция: Отображение (функции как отображения между типами)
   function getUser() {
@@ -77,6 +93,8 @@ interface User {
   type UserReturnType = ReturnType<typeof getUser>;
   // UserReturnType = { id: number; name: string; }
   
+
+
   // InstanceType<T> - Возвращает тип экземпляра класса
   // Концепция: Инстанцирование классов в ООП
   class UserClass {
@@ -86,6 +104,8 @@ interface User {
   type UserInstance = InstanceType<typeof UserClass>;
   // UserInstance = UserClass
   
+
+
   // Parameters<T> - Возвращает типы параметров функции как кортеж
   // Концепция: Аргументы функций как параметры отображения
   function add(a: number, b: number): number {
@@ -94,11 +114,15 @@ interface User {
   type AddParams = Parameters<typeof add>;
   // AddParams = [number, number]
   
+
+
   // ConstructorParameters<T> - Возвращает типы параметров конструктора класса
   // Концепция: Конструкторы как отображения для создания объектов
   type UserConstructorParams = ConstructorParameters<typeof UserClass>;
   // UserConstructorParams = []
   
+
+
   // ThisType<T> - Определяет тип контекста `this` для объекта
   // Концепция: Лексическое окружение и контекст вызова
   type ObjectDescriptor<D, M> = {

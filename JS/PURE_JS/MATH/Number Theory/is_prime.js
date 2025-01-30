@@ -15,6 +15,8 @@
  * @returns {boolean} - Возвращает true, если число простое, иначе false.
  */
 const isPrime = (n) => {
+    if(n < 2) return false;
+
     const nSqrt = Math.sqrt(n);
     let divider = 2;
     

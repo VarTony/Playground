@@ -86,3 +86,64 @@ fn main() {
 }
 
 
+
+
+// Задачи:
+
+// Перевод градусов Цельсия в градуса Фарингейта
+fn celsius_to_fahrenheit(celsius: f32) -> f32 { 
+  (celsius * (9/5) as f32) + 32 as f32 
+}
+
+
+// Рекурсивный вариант поиска в ряду Фибоначчи числа
+fn fibbonachi(n: u32) -> u32 {
+  if n == 0 { return 0 };
+  if n <= 2 { return 1 };
+
+  return fibbonachi(n-1) + fibbonachi(n-2);
+  
+}
+
+
+// Подгрузка модулей для иттеративной версии
+use num_bigint::BigUint;
+use num_traits::One;
+use std::time::Instant;
+
+
+// Иттеративный вариант поиска в ряду Фибоначчи числа
+fn fibboiter(n: u32) -> BigUint {
+  let mut a = BigUint::from(0u32);
+  let mut b = BigUint::from(0u32);
+  let mut c = BigUint::one();
+  for _i in 0..n {
+    let temp = a.clone();
+    a = b.clone();
+    b = c.clone();
+    c = &temp + &b;
+  }
+  return c;
+}
+
+
+// Алгоритм поиска основанный на формуле Бине, из-за дискретности вычеслений наименее точный (квадратный корень из 5)
+fn fib_bine(n: u32) -> BigUint {
+    let sqrt5 = 5.0f64.sqrt();
+    let phi = (1.0 + sqrt5) / 2.0;
+    let psi = (1.0 - sqrt5) / 2.0;
+
+    let fib_value = (phi.powi(n as i32) - psi.powi(n as i32)) / sqrt5;
+    let rounded = fib_value.round();
+
+    BigUint::from(rounded as u64)  // Convert to BigUint
+}
+
+fn main() {
+  println!("It is fahrenheit: {}",  celsius_to_fahrenheit(419.5));
+  println!("Fibbonachi for 25: {}", fibbonachi(25));
+  let start = Instant::now();
+  println!("Fibbonachi bine for 250000: {}", fibboiter(250000));
+  let duration = start.elapsed();
+  println!("Время выполнения: {:?}", duration);
+}
