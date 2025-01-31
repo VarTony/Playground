@@ -205,7 +205,6 @@ fn first_word(s: &String) -> &str {
 
     for (i, &item) in bytes.iter().enumerate() {
         if item == b' ' {
-            // Что происходит:
             // - Нашли индекс пробела, возвращаем срез от 0 до i.
             return &s[0..i];
         }
