@@ -1,0 +1,13 @@
+# --- Rust build ---
+**/target/
+
+# --- Cargo lock ---
+# Для библиотек 
+**/Cargo.lock
+
+# Файлы редакторов/IDE
+*.swp
+*.swo
+*.idea
+*.vscode
+.DS_Store

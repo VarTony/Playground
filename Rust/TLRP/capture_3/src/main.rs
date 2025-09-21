@@ -68,6 +68,7 @@ fn example_for_tuple(tup: (u16, u16)) -> (i32, i32) {
     let res_y: i32 = y.into();
 
     (res_x, res_y)
+}
 
 
 fn main() {
@@ -139,11 +140,11 @@ fn fib_bine(n: u32) -> BigUint {
     BigUint::from(rounded as u64)  // Convert to BigUint
 }
 
-fn main() {
-  println!("It is fahrenheit: {}",  celsius_to_fahrenheit(419.5));
-  println!("Fibbonachi for 25: {}", fibbonachi(25));
-  let start = Instant::now();
-  println!("Fibbonachi bine for 250000: {}", fibboiter(250000));
-  let duration = start.elapsed();
-  println!("Время выполнения: {:?}", duration);
-}
+// fn main() {
+//   println!("It is fahrenheit: {}",  celsius_to_fahrenheit(419.5));
+//   println!("Fibbonachi for 25: {}", fibbonachi(25));
+//   let start = Instant::now();
+//   println!("Fibbonachi bine for 250000: {}", fibboiter(250000));
+//   let duration = start.elapsed();
+//   println!("Время выполнения: {:?}", duration);
+// }
