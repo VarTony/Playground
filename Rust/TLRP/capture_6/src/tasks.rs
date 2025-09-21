@@ -124,8 +124,13 @@ enum Symbol {
 }
 
 fn from_code(code: u32) -> Option<Symbol> {
-    // твой код
-    unimplemented!()
+    match code {
+        1..=26 => Some(Symbol::Letter((b'z' - (code - 1) as u8) as char)),
+        27 => Some(Symbol::Exclamation),
+        28 => Some(Symbol::Question),
+        29 => Some(Symbol::Space),
+        _ => None
+    }
 }
 
 
@@ -140,9 +145,21 @@ fn from_code(code: u32) -> Option<Symbol> {
 //
 // Цель: связать всё вместе — парсинг, `Option`, собственный enum и сборка строки.
 // ------------------------------------------------------------
-fn switcher(xs: Vec<&str>) -> String {
-    // твой код
-    unimplemented!()
+fn switcher(codes: Vec<&str>) -> String {
+    let mut result: Vec<char> = Vec::new();
+
+    for item in codes {
+      let code = item.parse::<u32>().unwrap();
+
+      result.push(match code {
+        1..=26 => (b'z' - (code - 1) as u8) as char,
+        27 => '!',
+        28 => '?',
+        29 => ' ',
+        _ => unreachable!(),
+      })
+    }
+    result.into_iter().collect()
 }
 
 
