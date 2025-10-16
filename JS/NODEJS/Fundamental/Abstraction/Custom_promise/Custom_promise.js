@@ -1,117 +1,176 @@
-// Реализация кастомной 'лайт' версии промиса, для лучшего понимания функционирования нативной версии;
-// В данный момент не поддерживает ослеживание новой цепочки событий(Воспринимает цепочки как одну)
-
+// ===============================
+// УЧЕБНАЯ РЕАЛИЗАЦИЯ PROMISE
+// ===============================
+//
+// Задача: понять механику состояний, then/catch, цепочек и асинхронного запуска.
+//
+// Поддержка:
+//  - new CustomPromise((resolve, reject) => { ... })
+//  - .then(onFulfilled, onRejected)
+//  - .catch(onRejected)
+//  - .finally(onFinally)
+//  - CustomPromise.resolve / reject
+//
+// Ограничения:
+//  - не реализованы thenable-объекты по спецификации
+//  - не реализованы race / all / allSettled
+//  - без особых оптимизаций
+//
 
 const STATE = {
-  PENDING: 'PENDING',
-  FULFILLED: 'FULFILLED',
-  REJECTED: 'REJECTED',
+  PENDING: "PENDING",
+  FULFILLED: "FULFILLED",
+  REJECTED: "REJECTED",
+};
+
+class CustomPromise {
+  constructor(executor) {
+    this.state = STATE.PENDING;   // начальное состояние
+    this.value;                   // значение для resolve
+    this.reason;                  // причина для reject
+
+    // Очереди колбэков для then/catch (потому что промис может зарезолвиться позже)
+    this.onFulfilledCallbacks = [];
+    this.onRejectedCallbacks = [];
+
+    // Оборачиваем resolve/reject
+    const resolve = (value) => {
+      if (this.state !== STATE.PENDING) return; // промис может завершиться только 1 раз
+      this.state = STATE.FULFILLED;
+      this.value = value;
+
+      // асинхронный запуск: колбэки должны вызываться только после окончания текущего стека 
+      // (ранее для отправки в очередь микро задач использовался NextTick)
+      queueMicrotask(() => {
+        this.onFulfilledCallbacks.forEach((cb) => cb(value));
+      });
+    };
+
+    const reject = (reason) => {
+      if (this.state !== STATE.PENDING) return;
+      this.state = STATE.REJECTED;
+      this.reason = reason;
+
+      queueMicrotask(() => {
+        if (this.onRejectedCallbacks.length === 0) {
+          // если нет обработчиков — то, как в нативном Promise: "UnhandledPromiseRejection"
+          console.error("Unhandled rejection:", reason);
+        }
+        this.onRejectedCallbacks.forEach((cb) => cb(reason));
+      });
+    };
+
+    // Сразу запускаем executor
+    try {
+      executor(resolve, reject);
+    } catch (err) {
+      reject(err);
+    }
+  }
+
+  // then возвращает НОВЫЙ промис (это ключевое отличие от простых реализаций)
+  then(onFulfilled, onRejected) {
+    return new CustomPromise((resolve, reject) => {
+      const fulfilledTask = (value) => {
+        try {
+          if (typeof onFulfilled === "function") {
+            const result = onFulfilled(value);
+            // если обработчик вернул промис — ждём его
+            result instanceof CustomPromise
+              ? result.then(resolve, reject)
+              : resolve(result);
+          } else {
+            // если обработчик не передан — пробрасываем значение дальше
+            resolve(value);
+          }
+        } catch (err) {
+          reject(err);
+        }
+      };
+
+      const rejectedTask = (reason) => {
+        try {
+          if (typeof onRejected === "function") {
+            const result = onRejected(reason);
+            result instanceof CustomPromise
+              ? result.then(resolve, reject)
+              : resolve(result); // обратим внимание: resolve, а не reject — чтобы работало восстановление в catch
+          } else {
+            reject(reason);
+          }
+        } catch (err) {
+          reject(err);
+        }
+      };
+
+      // Если промис ещё в ожидании → пушим колбэки в очередь
+      if (this.state === STATE.PENDING) {
+        this.onFulfilledCallbacks.push(fulfilledTask);
+        this.onRejectedCallbacks.push(rejectedTask);
+      }
+
+      // Если уже fulfilled → вызываем обработчик асинхронно
+      if (this.state === STATE.FULFILLED) {
+        queueMicrotask(() => fulfilledTask(this.value));
+      }
+
+      // Если уже rejected → аналогично
+      if (this.state === STATE.REJECTED) {
+        queueMicrotask(() => rejectedTask(this.reason));
+      }
+    });
+  }
+
+  catch(onRejected) {
+    return this.then(null, onRejected);
+  }
+
+  finally(onFinally) {
+    return this.then(
+      (value) => {
+        onFinally && onFinally();
+        return value; // пробрасываем значение дальше
+      },
+      (reason) => {
+        onFinally && onFinally();
+        throw reason; // пробрасываем ошибку дальше
+      }
+    );
+  }
+
+  // статические методы
+  static resolve(value) {
+    return new CustomPromise((resolve) => resolve(value));
+  }
+
+  static reject(reason) {
+    return new CustomPromise((_, reject) => reject(reason));
+  }
 }
 
 
-class CustomPromise {
-    constructor(executor) {
-      this.callbacks = [];
-      this.executorState = STATE.PENDING;
-      this.callbackState = STATE.PENDING;
 
-      executor(this.resolve.bind(this));
-    }
+// =============================== ТЕСТЫ ===============================
 
-    
-    /**
-     * Записывает результат выполнения executor(a) и 
-     * иницирует запуск диспечера очереди колбеков.
-     * 
-     * @param {*} data 
-     */
-    resolve(data) {
-      this.promiseData = typeof data === 'object' ? { ...data } : data; 
-      this.executorState = STATE.FULFILLED;
-      this.callbackState = STATE.FULFILLED;
-    
-      this._callbacksDispather();
-    }
+// 1. Простая цепочка
+CustomPromise.resolve(1)
+  .then((x) => x + 1)
+  .then((y) => {
+    console.log("Result:", y); // 2
+    return y * 10;
+  })
+  .then((z) => console.log("Next:", z)); // 20
 
+// 2. Ошибка и восстановление
+CustomPromise.reject("fail")
+  .then(() => console.log("не дойдёт"))
+  .catch((err) => {
+    console.error("Caught:", err); // "fail"
+    return 42; // восстановление
+  })
+  .then((x) => console.log("Recovered:", x)); // 42
 
-    /**
-     * Проверяет завершеность исполнения executor(a),
-     *  если видит состояние ожидания, создает запланированный самовызов
-     *  в начале слудующего цикла event loop, если состояние 'FULFILLED',
-     *  вызывает диспетчера очереди обратных вызовов.
-     * 
-     * @returns 
-     */
-    _observer() {
-      return this.executorState !== STATE.FULFILLED
-        ? process.nextTick(() => this._observer())
-        : this._callbacksDispather();
-    }
-
-
-    /**
-     * Создает отложеный вызов для следующего цикла петли событий.
-     */
-    _callbacksDispather(data = this.promiseData) {
-      setImmediate(() => { this._queueResolver(data) });
-    }
-
-
-    /**
-     * Определяет является ли функция ассинхронной
-     * 
-     * @param { Function } cb 
-     * @returns 
-     */
-    _isAsyncCallback(cb) {
-      return cb.constructor.name === 'AsyncFunction';
-    }
-
-
-    /**
-     * Обработывает по цепочке в хронологическом порядке переданные функции обратного вызова.
-     * 
-     * @param {*} data 
-     * @returns 
-     */
-    _queueResolver(data) {
-      if (!this.callbacks.length) {
-        this.callbackState = STATE.FULFILLED;
-        return;
-      }
-      const [ cb, ...cbs ] = this.callbacks;
-    
-      if (this._isAsyncCallback(cb)) {
-        if(this.callbacksState === STATE.FULFILLED) cb(data)
-          .then(result => { 
-            this.callbacks = cbs;
-            this.callbackState = STATE.FULFILLED;
-            this._queueResolver(result);
-          });
-      // Если callback является асинхронным создает отложенный рекурсивный вызов, 
-      // через метод посредник.
-      this.callbacksState = STATE.PENDING;
-      return this._callbacksDispather(data);
-      }
-      else { 
-        const resultOfCb = cb(data);
-        this.callbacks = cbs;
-        this.callbackState = STATE.FULFILLED;
-        return this._queueResolver(resultOfCb);
-      }
-    }
-  
-
-    /**
-     * Метод добавляет функцию обратного вызова в список колбеков
-     * и запускает наблюдателя для дальнейшией обработки формируемой очереди.
-     * 
-     * @param {Function} cb 
-     * @returns 
-     */
-    then(cb) {
-      this.callbacks.push(cb);
-      this._observer();
-      return this;
-    }
-  }
+// 3. Finally
+CustomPromise.resolve("ok")
+  .finally(() => console.log("Cleanup")) // вызовется всегда
+  .then((v) => console.log("Value:", v)); // "ok"
